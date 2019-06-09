@@ -1,0 +1,340 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Page Title START -->
+    <div class="page-title-section" style="background-image: url(http://via.placeholder.com/1520x290);">
+        <div class="container">
+            <h1>A propos de nous</h1>
+            <ul>
+                <li><a href="{{ path('default') }}">Accueil</a></li>
+                <li><a href="{{ path('about') }}">A propos</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page Title END -->
+
+
+    <!-- Info & Feature Section START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <img src="http://via.placeholder.com/555x370" class="rounded-border shadow-primary" alt="img">
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="pl-30-md">
+                        <div class="section-heading">
+                            <h4>Welcome To Our Consulting Agency</h4>
+                        </div>
+                        <div class="section-heading-line-left"></div>
+                        <div class="text-content-big mt-20">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                        <div class="row mt-20">
+                            <div class="col-md-6">
+                                <ul class="primary-list">
+                                    <li><i class="fa fa-caret-right"></i>Immigration consultant, Information</li>
+                                    <li><i class="fa fa-caret-right"></i>Consultant pharmacist Creative</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="primary-list">
+                                    <li><i class="fa fa-caret-right"></i>Immigration consultant, Information</li>
+                                    <li><i class="fa fa-caret-right"></i>Consultant pharmacist Creative</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-35">
+                            <a href="#" class="primary-button button-sm mb-15-xs">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Boxes START -->
+            <div class="row mt-35">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="feature-flex-square">
+                        <div class="clearfix">
+                            <div class="feature-flex-square-icon">
+                                <i class="icon-monitor"></i>
+                            </div>
+                            <div class="feature-flex-square-content">
+                                <h4><a href="#">Professional Approach</a></h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, nunc ut hendrerit tempus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="feature-flex-square">
+                        <div class="clearfix">
+                            <div class="feature-flex-square-icon">
+                                <i class="icon-wallet"></i>
+                            </div>
+                            <div class="feature-flex-square-content">
+                                <h4><a href="#">Finance Advisor</a></h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, nunc ut hendrerit tempus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="feature-flex-square">
+                        <div class="clearfix">
+                            <div class="feature-flex-square-icon">
+                                <i class="icon-clock"></i>
+                            </div>
+                            <div class="feature-flex-square-content">
+                                <h4><a href="#">Thought Leadership</a></h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, nunc ut hendrerit tempus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Feature Boxes END -->
+        </div>
+    </div>
+    <!-- Info & Feature Section END -->
+
+
+
+    <!-- Counters Section START -->
+    <div class="section-block-parallax section-md" style="background-image: url(http://via.placeholder.com/1520x203);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="section-heading white-color mt-15">
+                        <span>Gain a Success with Us !</span>
+                        <h3>Get to know us better !</h3>
+                        <div class="section-heading-line-left"></div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="counter-box white-color">
+                                <h4 class="countup">1530</h4>
+                                <p>Happy Clients</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="counter-box white-color">
+                                <h4 class="countup">1240</h4>
+                                <p>Projects Finished</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="counter-box white-color">
+                                <h4 class="countup">1380</h4>
+                                <p>Business Solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Counters Section END -->
+
+    <!-- Team START -->
+    <div class="section-block-grey">
+        <div class="container">
+            <div class="section-heading center-holder">
+                <span>They are always ready to help you !</span>
+                <h3>Our creative team</h3>
+                <div class="section-heading-line"></div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <br>incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="row mt-50">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="team-box">
+                        <div class="team-img">
+                            <img src="http://via.placeholder.com/241x275" alt="img">
+                        </div>
+                        <div class="team-info">
+                            <span>Community</span>
+                            <h4><a href="#">James Wilson</a></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                        <div class="team-social-icons">
+                            <ul>
+                                <li> <a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="team-box">
+                        <div class="team-img">
+                            <img src="http://via.placeholder.com/241x275" alt="img">
+                        </div>
+                        <div class="team-info">
+                            <span>Marketing</span>
+                            <h4><a href="#">Ann White</a></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                        <div class="team-social-icons">
+                            <ul>
+                                <li> <a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="team-box">
+                        <div class="team-img">
+                            <img src="http://via.placeholder.com/241x275" alt="img">
+                        </div>
+                        <div class="team-info">
+                            <span>Financer</span>
+                            <h4><a href="#">John Doe</a></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                        <div class="team-social-icons">
+                            <ul>
+                                <li> <a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="team-box">
+                        <div class="team-img">
+                            <img src="http://via.placeholder.com/241x275" alt="img">
+                        </div>
+                        <div class="team-info">
+                            <span>Expert</span>
+                            <h4><a href="#">Emily Watson</a></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        </div>
+                        <div class="team-social-icons">
+                            <ul>
+                                <li> <a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team END -->
+
+
+    <!-- Progress Bars Section START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="section-heading">
+                        <span>Activities And Skills</span>
+                        <h4>Get to know Our Activities And Skills.</h4>
+                    </div>
+                    <div class="text-content-big">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-5 col-sm-6 col-xs-12 col-md-offset-1">
+                    <!-- PROGRESS BARS Start -->
+                    <div class="mt-35">
+
+                        <!-- Progress Bar Start -->
+                        <div class="progress-text">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    Sales Services
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                    25%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress progress-medium">
+                            <div class="progress-bar custom-bar wow slideInLeft animated" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:25%">
+                            </div>
+                        </div>
+                        <!-- Progress Bar End -->
+
+                        <!-- Progress Bar Start -->
+                        <div class="progress-text">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    Online Reputation
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                    50%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress progress-medium">
+                            <div class="progress-bar custom-bar wow slideInLeft animated" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                            </div>
+                        </div>
+                        <!-- Progress Bar End -->
+
+                        <!-- Progress Bar Start -->
+                        <div class="progress-text">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    Strategic Consulting
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                    75%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress progress-medium">
+                            <div class="progress-bar custom-bar wow slideInLeft animated" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:75%">
+                            </div>
+                        </div>
+                        <!-- Progress Bar End -->
+                    </div>
+                    <!-- PROGRESS BARS End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Progress Bars Section END -->
+
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}

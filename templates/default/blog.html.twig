@@ -1,0 +1,244 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+
+    <!-- Page Title START -->
+    <div class="page-title-section" style="background-image: url({{ asset('img/blog.jpg') }});">
+        <div class="container">
+            <h1>Blog</h1>
+            <ul>
+                <li><a href="{{ path('default') }}">Home</a></li>
+                <li><a href="{{ path('blog') }}">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Title END -->
+    <!-- Blog Post START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="row">
+                <!-- Left Side START -->
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <!-- Post Start -->
+                    <div class="blog-list-left">
+                        <img src="http://via.placeholder.com/848x390" alt="img">
+                        <div class="data-box">
+                            <h4>23</h4>
+                            <strong>Mar</strong>
+                        </div>
+                        <div class="blog-title-box">
+                            <h2>Save Time & Money In Your Business</h2>
+                            <span><i class="fa fa-calendar"></i>Feb 19, 2018</span>
+                            <span><i class="fa fa-list-ul"></i>	Business</span>
+                        </div>
+
+                        <div class="blog-post-content">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
+                        </div>
+
+                        <div class="mt-15 mb-40">
+                            <a href="#" class="primary-button button-md">Read Article</a>
+                        </div>
+                    </div>
+                    <!-- Post End -->
+
+                    <!-- Post Start -->
+                    <div class="blog-list-left">
+                        <img src="http://via.placeholder.com/848x390" alt="img">
+                        <div class="data-box">
+                            <h4>23</h4>
+                            <strong>Mar</strong>
+                        </div>
+                        <div class="blog-title-box">
+                            <h2>Save Time & Money In Your Business</h2>
+                            <span><i class="fa fa-calendar"></i>Feb 19, 2018</span>
+                            <span><i class="fa fa-list-ul"></i>	Business</span>
+                        </div>
+
+                        <div class="blog-post-content">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
+                        </div>
+
+                        <div class="mt-15 mb-40">
+                            <a href="#" class="primary-button button-md">Read Article</a>
+                        </div>
+                    </div>
+                    <!-- Post End -->
+
+                    <!-- Post Start -->
+                    <div class="blog-list-left">
+                        <img src="http://via.placeholder.com/848x390" alt="img">
+                        <div class="data-box">
+                            <h4>23</h4>
+                            <strong>Mar</strong>
+                        </div>
+                        <div class="blog-title-box">
+                            <h2>Save Time & Money In Your Business</h2>
+                            <span><i class="fa fa-calendar"></i>Feb 19, 2018</span>
+                            <span><i class="fa fa-list-ul"></i>	Business</span>
+                        </div>
+
+                        <div class="blog-post-content">
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
+                        </div>
+
+                        <div class="mt-15 mb-40">
+                            <a href="#" class="primary-button button-md">Read Article</a>
+                        </div>
+                    </div>
+                    <!-- Post End -->
+                </div>
+                <!-- Left Side END -->
+
+                <!-- Right Side START -->
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="blog-list-right">
+                        <div id="search-input">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search"/>
+                                <span class="input-group-btn">
+								<button class="btn" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+		               		</span>
+                            </div>
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="blog-list-left-heading">
+                            <h4>Categories</h4>
+                        </div>
+                        <div class="blog-categories">
+                            <ul>
+                                <li><a href="#">All Topics</a></li>
+                                <li><a href="#">Business Solutions</a></li>
+                                <li><a href="#">Finance Services</a></li>
+                                <li><a href="#">Market Research</a></li>
+                                <li><a href="#">Professional Planning</a></li>
+                                <li><a href="#">World of Business</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Recent News -->
+                        <div class="blog-list-left-heading">
+                            <h4>Recent News</h4>
+                        </div>
+                        <div class="latest-posts">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5 col-xs-4 latest-posts-img">
+                                    <img src="http://via.placeholder.com/91x91" alt="blog-img">
+                                </div>
+
+                                <div class="col-md-7 col-sm-7 col-xs-8 latest-posts-text pl-0">
+                                    <a href="#">Simply dummy text of the printing</a>
+                                    <span>Mar 13, 2018</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="latest-posts">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5 col-xs-4 latest-posts-img">
+                                    <img src="http://via.placeholder.com/91x91" alt="blog-img">
+                                </div>
+
+                                <div class="col-md-7 col-sm-7 col-xs-8 latest-posts-text pl-0">
+                                    <a href="#">Simply dummy text of the printing</a>
+                                    <span>Mar 19, 2018</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="latest-posts">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5 col-xs-4 latest-posts-img">
+                                    <img src="http://via.placeholder.com/91x91" alt="blog-img">
+                                </div>
+
+                                <div class="col-md-7 col-sm-7 col-xs-8 latest-posts-text pl-0">
+                                    <a href="#">Simply dummy text of the printing</a>
+                                    <span>Mar 27, 2018</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Archives -->
+                        <div class="blog-list-left-heading">
+                            <h4>Archives</h4>
+                        </div>
+                        <div class="archives">
+                            <ul>
+                                <li><a href="#">January 03</a> <span>(09)</span></li>
+                                <li><a href="#">February 17</a> <span>(13)</span></li>
+                                <li><a href="#">March 23</a> <span>(03)</span></li>
+                                <li><a href="#">April 19</a> <span>(07)</span></li>
+                                <li><a href="#">May 07</a> <span>(16)</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="blog-list-left-heading">
+                            <h4>Tags</h4>
+                        </div>
+                        <div class="mt-10">
+                            <a href="#" class="button-tag primary-button">Funding</a>
+                            <a href="#" class="button-tag primary-button">Merchant</a>
+                            <a href="#" class="button-tag primary-button">Job</a>
+                            <a href="#" class="button-tag primary-button">Wallet</a>
+                            <a href="#" class="button-tag primary-button">Technology</a>
+                            <a href="#" class="button-tag primary-button">Coin</a>
+                            <a href="#" class="button-tag primary-button">Funding</a>
+                            <a href="#" class="button-tag primary-button">Transaction</a>
+                        </div>
+
+                        <!--Share Links -->
+                        <div class="blog-list-left-heading">
+                            <h4>Share Links</h4>
+                        </div>
+                        <div class="blog-share">
+                            <ul>
+                                <li> <a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                <li> <a href="#"><i class="fa fa-skype"></i></a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Right Side END -->
+            </div>
+        </div>
+    </div>
+    <!-- Blog Post END -->
+
+
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

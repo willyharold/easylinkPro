@@ -1,0 +1,47 @@
+<!-- Navbar START -->
+<header>
+    <div class="nav-wrapper">
+        <nav class="navbar navbar-default navbar-custom" data-spy="affix" data-offset-top="50">
+            <div class="container">
+                <div class="row">
+                    <div class="navbar-header navbar-header-custom">
+                        <button type="button" class="navbar-toggle collapsed menu-icon" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-logo" href="index.html"><img src="{{ asset('assets/img/logos/easylink.png') }}" alt="logo" id="logo" width="200px" height="200px"></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right navbar-links-custom">
+                            <li class="dropdown">
+                                <a href="{{ path('default') }}">Trouver un pro</a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="{{ path('blog') }}">Astuces & conseils</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="{{ path('artisan') }}">Vous etes un pro</a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="{{ path('about') }}">A propos</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="{{ path('contact') }}">Contact</a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="{{ path('default') }}">Connexion</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- Navbar END -->

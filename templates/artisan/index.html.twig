@@ -1,0 +1,355 @@
+{% extends 'baseArtisan.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+
+
+
+
+
+    <!-- Slider START -->
+    <div class="swiper-main-slider-fade swiper-container">
+        <div class="swiper-wrapper">
+
+            <!-- Slide 1 Start -->
+            <div class="swiper-slide" style="background-image:url({{ asset('img/banniere.jpg') }});">
+                <!-- <div class="medium-overlay"></div> -->
+                <div class="container">
+                    <div class="slider-content left-holder">
+                        <h2 class="animated fadeInDown">
+                            Vous recherchez un artisan, fiable et recommandé?
+                        </h2>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <p class="animated fadeInDown">
+                                    En quelques Clics seulement faites vous contactez par des professionels fiables
+                                    C‘est simple, rapide et fiable.
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="animated fadeInUp mt-30">
+                            <a href="" class="dark-button1 button-md">Descrivez votre project et faites vous contacter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 1 End -->
+
+
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- Slider END -->
+
+
+
+
+    <!-- Service Boxes START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="section-heading center-holder">
+                <h3>Travaux les plus demandés</h3>
+                <div class="section-heading-line"></div>
+            </div>
+            <div class="row mt-50">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block">
+                        <img src="{{ asset('assets/img/img1.png') }}" alt="service">
+                        <div class="clearfix">
+                            <div class="service-block-number">
+                                <h5>01</h5>
+                            </div>
+                            <div class="service-block-title">
+                                <h4><a href="#">Plomberie, eau chaude</a></h4>
+                            </div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block">
+                        <img src="{{ asset('assets/img/chauffage.png') }}" alt="service">
+                        <div class="clearfix">
+                            <div class="service-block-number">
+                                <h5>02</h5>
+                            </div>
+                            <div class="service-block-title">
+                                <h4><a href="#">Isolation, Chauffage, Climatisation</a></h4>
+                            </div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block">
+                        <img src="{{ asset('assets/img/construction.png') }}" alt="service">
+                        <div class="clearfix">
+                            <div class="service-block-number">
+                                <h5>03</h5>
+                            </div>
+                            <div class="service-block-title">
+                                <h4><a href="#">Construction, extension, rénovation</a></h4>
+                            </div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block">
+                        <img src="{{ asset('assets/img/isoler.png') }}" alt="service">
+                        <div class="clearfix">
+                            <div class="service-block-number">
+                                <h5>04</h5>
+                            </div>
+                            <div class="service-block-title">
+                                <h4><a href="#">Rénover et isoler l'extérieur</a></h4>
+                            </div>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Service Boxes END -->
+
+    <!-- Feature Boxes Section START -->
+    <div class="section-block-grey">
+        <div class="container">
+            <div class="section-heading center-holder">
+                <h3>Comment ça marche</h3>
+                <div class="section-heading-line"></div>
+            </div>
+            <div class="row mt-50">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="feature-box-long">
+                        <i class="icon-chat"></i>
+                        <h3>Poster une annonce</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="feature-box-long">
+                        <i class="icon-document"></i>
+                        <h3>Passer en revue les entreprises</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="feature-box-long">
+                        <i class="icon-agenda"></i>
+                        <h3>Faites appel à une entreprise</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feature Boxes Section END -->
+
+
+
+
+    <!-- Testmonials START -->
+    <div class="section-block-bg" style="background-image:url({{ asset('assets/img/bg6.jpg') }}) ;">
+        <div class="container">
+            <div class="section-heading center-holder">
+                <span>Témoignage</span>
+                <h3>Avis des clients</h3>
+                <div class="section-heading-line"></div>
+            </div>
+            <div class="owl-carousel owl-theme" id="testmonials-carousel">
+                <div class="testmonial-single">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h4>John Doe</h4>
+                    <h6>Consultant</h6>
+                </div>
+
+                <div class="testmonial-single">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h4>Mary Kay</h4>
+                    <h6>Design Lead</h6>
+                </div>
+
+                <div class="testmonial-single">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h4>Jakob Nielsen</h4>
+                    <h6>Networking Lead</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testmonials END -->
+
+    <!-- Latest News Section START -->
+    <div class="section-block-grey">
+        <div class="container">
+            <div class="section-heading">
+                <h4>Dernières actualités</h4>
+                <div class="section-heading-line-left"></div>
+            </div>
+            <div class="row mt-40">
+                <div class="owl-carousel owl-theme" id="blog-grid">
+                    <div class="blog-grid-simple">
+                        <h4><a href="#">Comment contacter un pro</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <div class="blog-grid-simple-content">
+                            <div class="row">
+                                <div class="blog-grid-simple-date">
+                                    <div class="col-xs-2 pr-0">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <div class="col-xs-5 pl-0">
+                                        <h5>Feb 20, 2018</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 right-holder">
+                                    <a href="#">Lire Article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-grid-simple">
+                        <h4><a href="#">Noter un artisan</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <div class="blog-grid-simple-content">
+                            <div class="row">
+                                <div class="blog-grid-simple-date">
+                                    <div class="col-xs-2 pr-0">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <div class="col-xs-5 pl-0">
+                                        <h5>Feb 20, 2018</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 right-holder">
+                                    <a href="#">Lire Article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-grid-simple">
+                        <h4><a href="#">Suivre son  projet</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <div class="blog-grid-simple-content">
+                            <div class="row">
+                                <div class="blog-grid-simple-date">
+                                    <div class="col-xs-2 pr-0">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <div class="col-xs-5 pl-0">
+                                        <h5>Feb 20, 2018</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 right-holder">
+                                    <a href="#">Lire Article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-grid-simple">
+                        <h4><a href="#">Comment contacter un pro</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <div class="blog-grid-simple-content">
+                            <div class="row">
+                                <div class="blog-grid-simple-date">
+                                    <div class="col-xs-2 pr-0">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <div class="col-xs-5 pl-0">
+                                        <h5>Feb 20, 2018</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 right-holder">
+                                    <a href="#">Lire Article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-grid-simple">
+                        <h4><a href="#">Comment contacter un pro</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <div class="blog-grid-simple-content">
+                            <div class="row">
+                                <div class="blog-grid-simple-date">
+                                    <div class="col-xs-2 pr-0">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <div class="col-xs-5 pl-0">
+                                        <h5>Feb 20, 2018</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 right-holder">
+                                    <a href="#">Lire Article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Latest News Section END -->
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        toastr.options.showMethod = 'slideDown';
+        toastr.options.hideMethod = 'slideUp';
+        toastr.options.closeMethod = 'slideUp';
+        toastr.options.positionClass = 'toast-top-full-width';
+        toastr.options.progressBar = true
+        toastr.options.closeButton = true;
+        toastr.options.timeOut = 30000;
+        toastr.options.extendedTimeOut = 6000;
+        {% for flashMessage in app.session.flashbag.get('confirmer') %}
+
+        toastr.success('{{ flashMessage }}')
+
+        {% endfor %}
+
+    </script>
+{% endblock %}

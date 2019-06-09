@@ -1,0 +1,40 @@
+{% extends "baseFosUser.html.twig" %}
+
+{% block fos_user_content %}
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Page Title START -->
+    <div class="page-title-section" style="background-image: url({{ asset('img/login.jpg') }});">
+        <div class="container">
+            <h1>Connexion</h1>
+            <ul>
+                <li><a href="{{ path('default') }}">Accueil</a></li>
+                <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page Title END -->
+
+
+    <!-- Contact Section START -->
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+    <!-- Contact Section END -->
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock fos_user_content %}

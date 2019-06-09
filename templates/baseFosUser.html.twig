@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% set locale = app.request.locale %}
+<html lang="{{ locale }}">
+<head>
+    <title>EasyLink</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ asset('assets/img/logos/logo-shortcut.png') }} "/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
+
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.css') }}">
+
+    <!-- Icomoon -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/icomoon.css') }}">
+
+    <!-- Slider -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/swiper.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slider.css') }}">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.css') }}">
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/styles-2.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <!-- Fonts Google -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <!-- Start of  Zendesk Widget script -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=5b7823f6-8b96-44bd-81a1-569d615766a8"> </script>
+    <!-- End of  Zendesk Widget script -->
+
+
+</head>
+<body>
+
+{% block fos_user_content %}
+{% endblock fos_user_content %}
+
+<!-- Jquery -->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
+<!-- Bootstrap JS-->
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+<!-- Owl Carousel-->
+<script src="{{ asset('assets/js/owl.carousel.js') }}"></script>
+
+<!-- Wow JS -->
+<script src="{{ asset('assets/js/wow.min.js') }}"></script>
+
+<!-- Countup -->
+<script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+
+<!-- Tabs -->
+<script src="{{ asset('assets/js/tabs.min.js') }}"></script>
+
+<!-- Yotube Video Player -->
+<script src="{{ asset('assets/js/jquery.mb.YTPlayer.min.js') }}"></script>
+
+<!-- Swiper Slider -->
+<script src="{{ asset('assets/js/swiper.min.js') }}"></script>
+
+<!-- Isotop -->
+<script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
+
+<!-- Modernizr -->
+<script src="{{ asset('assets/js/modernizr.js') }}"></script>
+
+<!-- Google Map -->
+<script src="{{ asset('assets/js/map.js') }}"></script>
+
+<!-- Main JS -->
+<script src="{{ asset('assets/js/main.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{% block script %}{% endblock %}
+
+</body>
+</html>

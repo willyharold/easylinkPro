@@ -1,0 +1,58 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="section-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-12" style="background-image: url(http://via.placeholder.com/450x290); height: 300px;">
+                <div class="contact-info-box">
+                    <div class="row" >
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="section-heading mt-15">
+                    <h4>Connectez-vous</h4>
+                    <div class="section-heading-line-left"></div>
+                </div>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                <div class="contact-form-box mt-30">
+                    <!-- Form START -->
+                    <form class="contact-form" action="{{ path("fos_user_security_check") }}" method="post" autocomplete="off">
+                        {% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"  placeholder="{{ 'security.login.username'|trans }}">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                            </div>
+
+                            <div class="col-md-12 mb-30">
+                                <div class="center-holder">
+                                    <button type="submit" id="_submit" name="_submit">{{ 'security.login.submit'|trans }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Form END -->
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
