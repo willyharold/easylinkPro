@@ -16,4 +16,22 @@ class ArtisanController extends Controller
             'controller_name' => 'ArtisanController',
         ]);
     }
+
+    /**
+     * @Route("/artisan/register", name="artisan_register")
+     */
+    public function register(){
+        return $this->render('artisan/register.html.twig', [
+            'controller_name' => 'ArtisanController',
+        ]);
+    }
+
+    /**
+     * @Route("/artisan/login", name="artisan_login")
+     */
+    public function login(){
+        return $this->render('artisan/register.html.twig', [
+            'controller_name' => 'ArtisanController',
+        ]);
+    }
 }

@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Page Title START -->
+    <div class="page-title-section" style="background-image: url({{ asset('img/annonce.jpg') }});">
+        <div class="container">
+            <h1>Connectez vous</h1>
+            <ul>
+                <li><a href="{{ path('default') }}">Home</a></li>
+                <li><a href="{{ path('client_register') }}">Inscription / Connexion</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page Title END -->
+
+
+    <!-- Contact Section START -->
+    <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+    <div class="section-block">
+        <div class="container">
+                <h2 class="text-center" id="title">Authentification</h2>
+                <p class="text-center">
+                    <small id="passwordHelpInline" class="text-muted">Authentifiez vous pour gerer vos annonces</small>
+                </p>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form role="form" method="post" action="register.php">
+                            <fieldset>
+                                <div class="section-heading mt-15 text-center">
+                                    <h4>Inscrivez-vous</h4>
+                                    <div class="section-heading-line"></div>
+                                </div>
+                                <div class="contact-form">
+                                    <input type="text" name="username" id="username" class="" placeholder="username">
+                                </div>
+                                <div class="contact-form">
+                                    <input type="email" name="email" id="email" class="" placeholder="Email Address">
+                                </div>
+                                <div class="contact-form">
+                                    <input type="password" name="password" id="password" class="" placeholder="Password">
+                                </div>
+                                <div class="contact-form">
+                                    <input type="password" name="password2" id="password2" class="" placeholder="Password2">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            Agree to terms and conditions
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-lg btn-primary"   value="inscription"/>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div class="col-md-1">
+                        <!-------null------>
+                    </div>
+
+                    <div class="col-md-5">
+                        <form role="form">
+                            <fieldset>
+                                <div class="section-heading mt-15 text-center" >
+                                    <h4>Connectez-vous</h4>
+                                    <div class="section-heading-line"></div>
+                                </div>
+                                <div class="contact-form">
+                                    <input type="email" name="username" id="username" class="" placeholder="username">
+                                </div>
+                                <div class="contact-form">
+                                    <input type="password" name="password" id="password" class="" placeholder="Password">
+                                </div>
+                                <div>
+                                    <input type="submit" class="btn btn-lg btn-primary" value="Connexion">
+                                </div>
+                                <div class="pull-right">
+                                    <a class="btn btn-link password-forget" href="#" style="color: #337ab7;">Mot de passe oublié ?</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- Contact Section END -->
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+{% block script %}
+<script>
+    function updatesous(){
+        var id = $('#form-specialite').val();
+
+        $.ajax({
+            async: true,
+            url: "{{ path('specialite') }}/"+id,
+            method: "GET"
+           ,
+            success:function(data){
+                var element = document.getElementById("form-sousspecialite");
+                while (element.firstChild) {
+                    element.removeChild(element.firstChild);
+                }
+                $('#form-sousspecialite').append(data);
+
+            },
+            error:function (er) {
+
+                var element = document.getElementById("form-sousspecialite");
+                while (element.firstChild) {
+                    element.removeChild(element.firstChild);
+                }
+            }
+
+        });
+
+    }
+</script>
+{% endblock %}

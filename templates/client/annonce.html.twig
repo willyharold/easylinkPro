@@ -1,7 +1,5 @@
-{% extends '::template.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block body %}
-
-
 
     <!-- Preloader Start-->
     <div id="preloader">
@@ -11,15 +9,15 @@
     </div>
     <!-- Preloader End ici qu'il faut rajouter le menu -->
 
-    {{ render(controller('NanotechEasylinkBundle:Default:menu')) }}
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
 
     <!-- Page Title START -->
     <div class="page-title-section" style="background-image: url({{ asset('img/annonce.jpg') }});">
         <div class="container">
             <h1>Poster votre annonce</h1>
             <ul>
-                <li><a href="{{ path('nanotech_easylink_homepage') }}">Home</a></li>
-                <li><a href="{{ path('nanotech_easylink_annonce') }}">Annonce</a></li>
+                <li><a href="{{ path('default') }}">Home</a></li>
+                <li><a href="{{ path('annonce') }}">Annonce</a></li>
             </ul>
         </div>
     </div>
@@ -27,6 +25,7 @@
 
 
     <!-- Contact Section START -->
+    <link rel="stylesheet" href="{{ asset('assets/css/annonce.css') }}">
     <div class="section-block">
         <div class="container">
             <div class="row">
@@ -37,7 +36,7 @@
                     </div>
                     <div class="contact-form-box mt-30">
                         <!-- Form START -->
-                        <form class="contact-form" method="post" action="{{ path('nanotech_easylink_anoncepost') }}">
+                        <form class="contact-form" method="post" action="{{ path('annonce') }}">
                             <div class="row">
                                 <div class="col-md-12">
                                     <select id="form-specialite" name="form-specialite" required onchange="updatesous()" >
@@ -45,7 +44,6 @@
                                         {% for categorie in categories  %}
                                             <option value="{{ categorie.id }}">{{ categorie.nom }}</option>
                                         {% endfor %}
-
                                     </select>
                                 </div>
                                 <div class="col-md-12">
@@ -79,7 +77,50 @@
                 <div class="col-md-5 col-sm-5 col-xs-12">
                     <div class="contact-info-box">
                         <div class="row">
-
+                            <div class="widget">
+                                <h4 class="widget-title">Des artisants qualifiés à votre service</h4>
+                                <div class="summary-block">
+                                    <div class="summary-content">
+                                        <div class="summary-head"><h5 class="summary-title">Fiabilité</h5></div>
+                                        <div class="summary-price">
+                                            <span class="summary-small-text pull-right">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-block">
+                                    <div class="summary-content">
+                                        <div class="summary-head"> <h5 class="summary-title">Disponibilité
+                                                </h5></div>
+                                        <div class="summary-price">
+                                            <span class="summary-small-text pull-right">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-block">
+                                    <div class="summary-content">
+                                        <div class="summary-head"> <h5 class="summary-title">Rapidité</h5></div>
+                                        <div class="summary-price">
+                                            <span class="summary-small-text pull-right">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-block">
+                                    <div class="summary-content">
+                                        <div class="summary-head"> <h5 class="summary-title">Efficacité</h5></div>
+                                        <div class="summary-price">
+                                            <span class="summary-small-text pull-right">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="summary-block">
+                                    <div class="summary-content">
+                                        <div class="summary-head"> <h5 class="summary-title">Qualifier</h5></div>
+                                        <div class="summary-price">
+                                            <span class="summary-small-text pull-right">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,7 +130,7 @@
     <!-- Contact Section END -->
 
 
-    {{ render(controller('NanotechEasylinkBundle:Default:footer')) }}
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
 
 
     <!-- Scroll to top button Start -->
@@ -104,7 +145,7 @@
 
         $.ajax({
             async: true,
-            url: "/web/sousspecialite/"+id,
+            url: "{{ path('specialite') }}/"+id,
             method: "GET"
            ,
             success:function(data){

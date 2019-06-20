@@ -1,0 +1,55 @@
+/*
+==============================================
+TABLE OF CONTENT
+==============================================
+
+1. General
+2. Align Holders
+3. Modals
+4. Margins, Paddings
+5. Overflow
+6. Clearfix
+ 
+==============================================
+[END] TABLE OF CONTENT
+==============================================
+*/
+
+
+
+
+/*-----------------------------------------
+	1. widget block css
+-------------------------------------------*/
+
+.widget {
+    margin-bottom: 10px;
+    background-color: #e9ebef;
+    padding: 50px;
+    border-radius: 6px;
+    margin-top:120px
+}
+
+.widget:last-child {
+    border-bottom: 0px;
+}
+
+.widget-title {
+    color: #094bde; font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    display: table;
+    line-height: 1;
+}
+
+.secure-price { bottom: 68px; }
+.summary-block { border-bottom: 2px solid #d7d9de; }
+.summary-block:last-child { border-bottom: 0px; }
+.summary-content { padding: 28px 0px; }
+.summary-price { color: #094bde; font-size: 20px; font-weight: 400; letter-spacing: -1px; margin-bottom: 0px; display: inline-block; float: right; }
+.summary-small-text { font-weight: 700; font-size: 12px; color: #8f929a; }
+.summary-text { margin-bottom: -10px; }
+.summary-title { font-weight: 700; font-size: 14px; color: #1c1e22; }
+.summary-head { display: inline-block; width: 120px; }
