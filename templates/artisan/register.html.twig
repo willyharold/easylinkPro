@@ -48,7 +48,17 @@
                                             <input type="text" name="form-name" required placeholder="Prenom">
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="text" name="artisant_societe" value="" placeholder="Nom de la société" class="field-new" id="artisant_societe">
+                                            <input type="text" name="artisant_societe" value="" placeholder="Nom de l'entreprise" class="field-new" id="artisant_societe">
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <label for="artisant_create_date_entreprise" class="ml-1 mb-0" style="color: #757575;font-size: 1.1rem;">Date de creation de l'entreprise</label>
+                                            <input type="date" name="artisant_create_date_entreprise" value="" placeholder="Date de creation de l'entreprise" class="field-new" id="artisant_create_date_entreprise">
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="form-fiscale" required placeholder="Numero fiscale">
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="form-code_siren" required placeholder="Code siren">
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="text" name="form-adresse" required placeholder="Adresse">
@@ -68,8 +78,8 @@
                                     <legend>Domaine d'activité</legend>
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="mdb-select md-form" multiple>
-                                                <option value="" disabled selected>Choisir les category category</option>
+                                            <label for="artisant_create_date_entreprise" class="ml-1 mb-0" style="color: #757575;font-size: 1.1rem;">Choisir les categories</label>
+                                            <select class="mdb-select md-form" multiple id="artisan_category">
                                                 <option value="1">USA</option>
                                                 <option value="2">Germany</option>
                                                 <option value="3">France</option>
@@ -78,8 +88,8 @@
                                             </select>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                            <select class="mdb-select md-form" multiple>
-                                                <option value="" disabled selected>Choisir le domaine</option>
+                                            <label for="artisant_create_date_entreprise" class="ml-1 mb-0" style="color: #757575;font-size: 1.1rem;">Choisir les sous categories</label>
+                                            <select class="mdb-select md-form" id="artisan_sous_category" multiple>
                                                 <option value="1">USA</option>
                                                 <option value="2">Germany</option>
                                                 <option value="3">France</option>
@@ -195,5 +205,13 @@
         });
 
     }
+    $(document).ready(function() {
+        new SlimSelect({
+            select: '#artisan_category'
+        })
+        new SlimSelect({
+            select: '#artisan_sous_category'
+        })
+    });
 </script>
 {% endblock %}
