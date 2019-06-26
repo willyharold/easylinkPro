@@ -5,10 +5,14 @@ namespace App\Controller\Artisan;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/artisan")
+ */
+
 class ArtisanController extends Controller
 {
     /**
-     * @Route("/artisan", name="artisan")
+     * @Route("/", name="artisan")
      */
     public function index()
     {

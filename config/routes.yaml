@@ -4,3 +4,20 @@
 index:
   path: /
   defaults: { _controller: 'App\Controller\DefaultController::index' }
+
+
+fos_user_security_artisan_check:
+  path: /artisan/check
+  defaults: { _controller: "FOSUserBundle:Security:check" }
+
+fos_user_security_artisan_logout:
+  path: /artisan/logout
+  defaults: { _controller: "FOSUserBundle:Security:logout" }
+
+fos_user_security_artisan_login:
+  path: /artisan/login
+  defaults: { _controller: "FOSUserBundle:Security:login" }
+
+fos_user_register_artisan_register:
+  path: /artisan/register
+  defaults: { _controller: "FOSUserBundle:Registration:register" }

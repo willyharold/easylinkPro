@@ -2,7 +2,10 @@
 
 namespace App\Controller\Index;
 
+use App\Entity\Specialite;
+use App\Repository\SpecialiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
@@ -49,4 +52,23 @@ class DefaultController extends Controller
     {
         return $this->render('default/about.html.twig');
     }
+
+    /**
+     * @Route("/annonce", name="annonce")
+     */
+    public function annonce(SpecialiteRepository $sprepo,Request $request){
+        /**
+         * @var Specialite $specialite
+         */
+        $specialite = $sprepo->findAll();
+
+        if($request->isMethod("POST")) {
+
+        }
+        return $this->render('client/annonce.html.twig', [
+            'controller_name' => 'ClientController',
+            'categories' => $specialite
+        ]);
+    }
+
 }

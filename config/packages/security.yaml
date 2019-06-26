@@ -16,6 +16,26 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        artisan:
+            pattern: ^/artisan
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                login_path: fos_user_security_artisan_login
+                check_path: fos_user_security_artisan_check
+                always_use_default_target_path: true
+                default_target_path: /artisan
+
+            logout:
+                path: fos_user_security_artisan_logout
+
+            anonymous:    true
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /artisan
+
         client:
             pattern: ^/
             form_login:
@@ -33,4 +53,8 @@ security:
     - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/artisan/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/artisan/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/artisan/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/artisan/, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/admin/, role: IS_AUTHENTICATED_ANONYMOUSLY }
