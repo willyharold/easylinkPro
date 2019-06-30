@@ -36,3 +36,8 @@ services:
         public: true
         calls:
             - [setContainer, ["@service_container"]]
+
+    app.form.registration:
+        class: App\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }

@@ -15,10 +15,10 @@
     <!-- Page Title START -->
     <div class="page-title-section" style="background-image: url({{ asset('img/annonce.jpg') }});">
         <div class="container">
-            <h1>Connectez vous</h1>
+            <h1>Inscrivez vous</h1>
             <ul>
                 <li><a href="{{ path('default') }}">Home</a></li>
-                <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                <li><a href="{{ path('fos_user_registration_register') }}">Connexion</a></li>
             </ul>
         </div>
     </div>
@@ -26,7 +26,7 @@
 
 
     <!-- Contact Section START -->
-    {{ include('@FOSUser/Security/login_content.html.twig') }}
+    {% include "@FOSUser/Resetting/request_content.html.twig" %}
     <!-- Contact Section END -->
 
 

@@ -1,0 +1,92 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<!-- Contact Section START -->
+<link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+<div class="section-block">
+    <div class="container">
+        <h2 class="text-center" id="title">Authentification</h2>
+        <p class="text-center">
+            <small id="passwordHelpInline" class="text-muted">Authentifiez vous pour gerer vos annonces</small>
+        </p>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-6">
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'contact-form'}}) }}
+                    <fieldset>
+                        <div class="section-heading mt-15 text-center" >
+                            <h4>Inscrivez-vous</h4>
+                            <div class="section-heading-line"></div>
+                        </div>
+                        {% if form_errors(form) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form) }}
+                        </div>
+                        {% endif %}
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+                            {{ form_widget(form.email,{'attr':{'placeholder':'Email'}}) }}
+                        </div>
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+                            {{ form_widget(form.username,{'attr':{'placeholder':'Nom d\'utilisateur '}}) }}
+                        </div>
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                    {{ form_widget(form.plainPassword.first,{'attr':{'placeholder':'Mot de passe'}}) }}
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-12">
+                                    {{ form_widget(form.plainPassword.second,{'attr':{'placeholder':'Confirmer le mot de passe'}}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                {{ form_widget(form.plainPassword.first,{'attr':{'placeholder':'Mot de passe'}}) }}
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">
+                                {{ form_widget(form.plainPassword.second,{'attr':{'placeholder':'Confirmer le mot de passe'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 col-md-12" >
+                            {{ form_widget(form.telephone,{'attr':{'placeholder':'Numéro téléphone '}}) }}
+                        </div>
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+                            <div class="row">
+
+                                <div class="col-md-1 col-lg-1 col-sm-1">
+                                    <input  type="checkbox" value="" required>
+                                </div>
+                                <div class="col-md-11 col-lg-11 col-sm-11">
+                                    <label style="margin: 8px 0px">
+                                        Agree to terms and conditions
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-lg-12 col-md-12">
+                            <button type="submit"> {{ 'registration.submit'|trans }} </button>
+                        </div>
+
+                    </fieldset>
+                {{ form_end(form) }}
+                <br>
+
+                <p style="text-align: center">Vous avez un compte? <a href="{{ path('fos_user_security_login') }}" style="color:#2193f1 !important;">Connectez vous!</a> </p>
+
+            </div>
+
+            <div class="col-md-1">
+
+                <!-------null------>
+            </div>
+
+            <div class="col-md-5">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Section END -->

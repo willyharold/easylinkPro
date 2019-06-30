@@ -28,6 +28,35 @@ class RefreshToken extends BaseRefreshToken
      */
     protected $user;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient($client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 
 
 

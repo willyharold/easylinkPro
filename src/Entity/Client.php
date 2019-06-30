@@ -60,5 +60,10 @@ class Client extends BaseClient
         return $this->name;
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
 
 }
