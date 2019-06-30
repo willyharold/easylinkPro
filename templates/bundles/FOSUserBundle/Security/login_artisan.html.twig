@@ -15,10 +15,10 @@
     <!-- Page Title START -->
     <div class="page-title-section" style="background-image: url({{ asset('img/annonce.jpg') }});">
         <div class="container">
-            <h1>Reinitialisation</h1>
+            <h1>Connectez vous artisan</h1>
             <ul>
                 <li><a href="{{ path('default') }}">Accueil</a></li>
-                <li><a href="{{ path('fos_user_resetting_request') }}">Reinitialisation</a></li>
+                <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
             </ul>
         </div>
     </div>
@@ -26,7 +26,7 @@
 
 
     <!-- Contact Section START -->
-    {% include "@FOSUser/Resetting/request_content.html.twig" %}
+    {{ include('@FOSUser/Security/login_content_artisan.html.twig') }}
     <!-- Contact Section END -->
 
 

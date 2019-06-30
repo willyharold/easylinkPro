@@ -1,11 +1,51 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-    <div>
-        <label for="username">{{ 'resetting.request.username'|trans }}</label>
-        <input type="text" id="username" name="username" required="required" />
+
+<!-- Contact Section START -->
+<link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+<div class="section-block">
+    <div class="container">
+        <h2 class="text-center" id="title">Authentification</h2>
+        <p class="text-center">
+            <small id="passwordHelpInline" class="text-muted">Authentifiez vous pour gerer vos annonces</small>
+        </p>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <!-------null------>
+            </div>
+
+            <div class="col-md-1">
+
+                <!-------null------>
+            </div>
+
+            <div class="col-md-5">
+                <div class="row">
+                    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="contact-form">
+                        <div class="section-heading mt-15 text-center" >
+                            <h4>Réinitialisation de votre compte</h4>
+                            <div class="section-heading-line"></div>
+                        </div>
+
+
+                        <div class="col-md-12 col-lg-12 col-sm-12">
+                            <input type="text" id="username" name="username" required="required"  placeholder="{{ 'resetting.request.username'|trans }}">
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-sm-12">
+                            <button type="submit" id="submit" >{{ 'resetting.request.submit'|trans }}</button>
+
+                        </div>
+                    </form>
+                </div>
+
+                <br>
+                <p style="text-align: center">Vous n'avez pas encore de compte? <a href="{{ path('fos_user_registration_register') }}" style="color:#2193f1 !important;">Inscrivez vous!</a> </p>
+            </div>
+        </div>
     </div>
-    <div>
-        <input type="submit" value="{{ 'resetting.request.submit'|trans }}" />
-    </div>
-</form>
+</div>
+<!-- Contact Section END -->
