@@ -23,6 +23,11 @@ class DefaultController extends Controller
         return $this->render('default/menu.html.twig');
     }
 
+    public function menuArtisan()
+    {
+        return $this->render('default/menuArtisan.html.twig');
+    }
+
     public function footer()
     {
         return $this->render('default/footer.html.twig');
