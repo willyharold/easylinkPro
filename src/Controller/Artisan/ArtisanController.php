@@ -22,7 +22,7 @@ class ArtisanController extends Controller
     }
 
     /**
-     * @Route("/artisan/register", name="artisan_register")
+     * @Route("/register", name="artisan_register")
      */
     public function register(){
         return $this->render('artisan/register.html.twig', [
@@ -31,14 +31,14 @@ class ArtisanController extends Controller
     }
 
     /**
-     * @Route("/artisan/login", name="artisan_login")
+     * @Route("/login", name="artisan_login")
      */
     public function login(){
         return $this->render('artisan/register.html.twig');
     }
 
     /**
-     * @Route("/artisan/dashbord", name="artisan_dashbord")
+     * @Route("/dashbord", name="artisan_dashbord")
      */
     public function dashbord(){
         return $this->render('artisan/dashbord.html.twig', [
@@ -47,12 +47,21 @@ class ArtisanController extends Controller
     }
 
     /**
-     * @Route("/artisan/menu/{id}", name="artisan_menu")
+     * @Route("/menu/{id}", name="artisan_menu")
      */
     public function menu($id=0){
         return $this->render('artisan/menu.html.twig', [
             'controller_name' => 'ArtisanController',
             'id'=>$id
+        ]);
+    }
+
+    /**
+     * @Route("/profile", name="artisan_profile")
+     */
+    public function profile(){
+        return $this->render('artisan/profile/profile.html.twig', [
+            'controller_name' => 'ArtisanController',
         ]);
     }
 
