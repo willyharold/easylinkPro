@@ -28,12 +28,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
     <div class="section-block">
         <div class="container">
+            {{ form_start(form,{'attr':{'class':"contact-form"}}) }}
+
             <div class="row">
                 <div class="section-heading mt-10">
                     <h4>Vous etes un Artisan Pro ? Inscrivez-vous !!</h4>
                     <div class="section-heading-line-left"></div>
                 </div>
-                {{ form_start(form,{'attr':{'class':"contact-form"}}) }}
+
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
 
@@ -141,14 +143,19 @@
 
                     </div>
                 </div>
+
+
+
+            </div>
+            <div class="row">
                 <div class="col-md-12 mb-30">
                     <div class="center-holder">
                         <button type="submit">S'inscrire</button>
                     </div>
                 </div>
-                {{ form_end(form) }}
-
             </div>
+            {{ form_end(form) }}
+
         </div>
     </div>
     <!-- Contact Section END -->

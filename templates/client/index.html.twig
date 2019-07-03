@@ -1,20 +1,45 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello ClientController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/easylinkPro/src/Controller/ClientController.php'|file_link(0) }}">src/Controller/ClientController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/easylinkPro/templates/client/index.html.twig'|file_link(0) }}">templates/client/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        toastr.options.showMethod = 'slideDown';
+        toastr.options.hideMethod = 'slideUp';
+        toastr.options.closeMethod = 'slideUp';
+        toastr.options.positionClass = 'toast-top-full-width';
+        toastr.options.progressBar = true
+        toastr.options.closeButton = true;
+        toastr.options.timeOut = 30000;
+        toastr.options.extendedTimeOut = 6000;
+        {% for flashMessage in app.session.flashbag.get('confirmer') %}
+
+        toastr.success('{{ flashMessage }}')
+
+        {% endfor %}
+
+    </script>
 {% endblock %}
