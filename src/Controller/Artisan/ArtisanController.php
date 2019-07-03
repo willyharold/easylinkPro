@@ -16,7 +16,7 @@ class ArtisanController extends Controller
      */
     public function index()
     {
-        return $this->render('artisan/index.html.twig', [
+        return $this->render('artisan/dashboard/index.html.twig', [
             'controller_name' => 'ArtisanController',
         ]);
     }
@@ -36,4 +36,24 @@ class ArtisanController extends Controller
     public function login(){
         return $this->render('artisan/register.html.twig');
     }
+
+    /**
+     * @Route("/artisan/dashbord", name="artisan_dashbord")
+     */
+    public function dashbord(){
+        return $this->render('artisan/dashbord.html.twig', [
+            'controller_name' => 'ArtisanController',
+        ]);
+    }
+
+    /**
+     * @Route("/artisan/menu/{id}", name="artisan_menu")
+     */
+    public function menu($id=0){
+        return $this->render('artisan/menu.html.twig', [
+            'controller_name' => 'ArtisanController',
+            'id'=>$id
+        ]);
+    }
+
 }
