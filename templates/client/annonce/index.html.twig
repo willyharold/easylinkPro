@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Navbar END -->
+
+
+
+    <!-- Contact Section START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="row">
+                <!-- Left Side START -->
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="services-single-left-box">
+
+                        <!-- Vertical Menu START -->
+                        <div class="services-single-left-heading">
+                            <h4>Mon Menu</h4>
+                        </div>
+                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:2})) }}
+                        <!-- Vertical Menu END -->
+
+                    </div>
+                </div>
+                <!-- Left Side END -->
+
+                <!-- Right Side START -->
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="services-single-left-heading">
+                                <h4>Mes annonces</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ path('client_annonce_add') }}" class="btn btn-info">Créer une annonce</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br>
+
+
+                        <table class="table table-striped" >
+                            <thead style="color: #0d6aad;">
+                            <th scope="col">#</th>
+                            <th scope="col">Annonce</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Artisan</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Action</th>
+                            </thead>
+                            <tbody style="color: black;">
+                            <tr>
+                                <th scope="row">1</th>
+                                <th>ce va reussir a coup sur</th>
+                                <th>En attente</th>
+                                <th></th>
+                                <th>April 13, 2019 07:08</th>
+                                <th>
+                                    <a href="/web/client/annonce/view/9" class="btn btn-info">Voir</a>
+                                    <a href="/web/client/annonce/edit/9" class="btn btn-default">Modifier</a>
+                                    <a href="/web/client/annonce/dell/9" class="btn btn-danger">Supprimer</a>
+                                </th>
+                            </tr>
+
+                            {% for annonce in annonces %}
+                            <tr>
+                                <th scope="row">{{ annonce.id }}</th>
+                                <th>{{ annonce.description | slice(0,200) }}</th>
+                                <th>{{ annonce.etat }}</th>
+                                <th>{{ annonce.artisan }}</th>
+                                <th>{{ annonce.dateEnreg | date }}</th>
+                                <th>
+                                    <a href="/web/client/annonce/view/9" class="btn btn-info">Voir</a>
+                                    <a href="/web/client/annonce/edit/9" class="btn btn-default">Modifier</a>
+                                    <a href="/web/client/annonce/dell/9" class="btn btn-danger">Supprimer</a>
+                                </th>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+                <!-- Right Side END -->
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section END -->
+
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        toastr.options.showMethod = 'slideDown';
+        toastr.options.hideMethod = 'slideUp';
+        toastr.options.closeMethod = 'slideUp';
+        toastr.options.positionClass = 'toast-top-full-width';
+        toastr.options.progressBar = true
+        toastr.options.closeButton = true;
+        toastr.options.timeOut = 30000;
+        toastr.options.extendedTimeOut = 6000;
+        {% for flashMessage in app.session.flashbag.get('confirmer') %}
+
+        toastr.success('{{ flashMessage }}')
+
+        {% endfor %}
+
+    </script>
+{% endblock %}
