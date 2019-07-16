@@ -30,8 +30,6 @@ services:
         container_name: sf4_php
         volumes:
           - .:/home/wwwroot/sf4
-        environment:
-          - maildev_host=sf4_maildev
         depends_on:
           - maildev
           - mysql
@@ -49,6 +47,7 @@ services:
 
     maildev:
         image: djfarrelly/maildev
-        container_name: sf4_maildev
+        container_name: maildev
         ports:
+          - 1000:25
           - 8001:80
