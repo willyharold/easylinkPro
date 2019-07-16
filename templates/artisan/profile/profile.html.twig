@@ -22,12 +22,16 @@
                 <!-- Left Side START -->
                 <div class="col-md-3 col-sm-4 col-xs-12">
                     <div class="services-single-left-box">
-
+                        <div class="text-center contact-form-box">
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <h6>Upload a different photo...</h6>
+                            <input type="file" class="text-center center-block file-upload">
+                        </div>
                         <!-- Vertical Menu START -->
                         <div class="services-single-left-heading">
                             <h4>Mon Menu</h4>
                         </div>
-                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:2}))}}
+                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:5}))}}
                         <!-- Vertical Menu END -->
 
                     </div>
@@ -37,118 +41,108 @@
                 <!-- Right Side START -->
                 {% block droit %}
                             <div class="col-sm-3"><!--left col-->
-                                <div class="text-center contact-form-box">
-                                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                                    <h6>Upload a different photo...</h6>
-                                    <input type="file" class="text-center center-block file-upload">
-                                </div></hr><br>
+                               </hr><br>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
                                     <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
                                 </div>
-                                <ul class="list-group">
-                                    <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
-                                    <li class="list-group-item text-right"><span class="pull-left"><strong>clients</strong></span>2</li>
-                                    <li class="list-group-item text-right"><span class="pull-left"><strong>Avis</strong></span>13</li>
-                                </ul>
                             </div><!--/col-3-->
                             <div class="col-sm-6">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                                    <li><a data-toggle="tab" href="#passwordtab">Mot de passe</a></li>
-                                    <li><a data-toggle="tab" href="#settings">Parametres</a></li>
+                                    <li class="active"><a data-toggle="tab" href="#entreprise">Informations de l'entreprise</a></li>
+                                    <li><a data-toggle="tab" href="#activite">Domaine d'activité</a></li>
+                                    <li><a data-toggle="tab" href="#personel">Informations Personnels</a></li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="home">
+                                    <div class="tab-pane active" id="entreprise">
                                         <hr>
                                         <form class="form contact-form-box" action="#" method="post" id="registrationForm">
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="first_name"><h4>First name</h4></label>
-                                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <input type="text" name="artisant_societe" value="" placeholder="Nom de l'entreprise" class="field-new" id="artisant_societe">
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="last_name"><h4>Last name</h4></label>
-                                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <label for="artisant_create_date_entreprise" class="ml-1 mb-0" style="color: #757575;font-size: 1.1rem;">Date de creation de l'entreprise</label>
+                                                    <input type="date" name="artisant_create_date_entreprise" value="" placeholder="Date de creation de l'entreprise" class="field-new" id="artisant_create_date_entreprise">
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="phone"><h4>Phone</h4></label>
-                                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" name="form-fiscale" required placeholder="Numero fiscale">
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="mobile"><h4>Mobile</h4></label>
-                                                    <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="text" name="form-code_siren" required placeholder="Code siren">
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="email"><h4>Email</h4></label>
-                                                    <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.adresse,{'attr':{'placeholder':"Adresse"}}) }}
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="email"><h4>Location</h4></label>
-                                                    <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.codePostale,{'attr':{'placeholder':"Code postal"}}) }}
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="password"><h4>Password</h4></label>
-                                                    <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.telephone,{'attr':{'placeholder':"Téléphone"}}) }}
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="password2"><h4>Verify</h4></label>
-                                                    <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <input type="phone" name="form-phone2" placeholder="Téléphone 2">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-xs-12">
                                                     <br>
                                                     <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                                                 </div>
                                             </div>
                                         </form>
                                         <hr>
                                     </div><!--/tab-pane-->
-                                    <div class="tab-pane" id="passwordtab">
+                                    <div class="tab-pane" id="activite">
                                         <h2></h2>
                                         <hr>
                                         <form class="form contact-form-box" action="#" method="post" id="registrationForm">
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="password"><h4>Password</h4></label>
-                                                    <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <label for="artisant_create_date_entreprise" class="ml-1 mb-0" style="color: #757575;font-size: 1.1rem;">Choisir les categories</label>
+                                                        <select class="mdb-select md-form" multiple id="artisan_category">
+                                                            <option value="1">USA</option>
+                                                            <option value="2">Germany</option>
+                                                            <option value="3">France</option>
+                                                            <option value="4">Poland</option>
+                                                            <option value="5">Japan</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <label for="artisant_create_date_entreprise" class="ml-1 mb-0" style="color: #757575;font-size: 1.1rem;">Choisir les sous categories</label>
+                                                        <select class="mdb-select md-form" id="artisan_sous_category" multiple>
+                                                            <option value="1">USA</option>
+                                                            <option value="2">Germany</option>
+                                                            <option value="3">France</option>
+                                                            <option value="4">Poland</option>
+                                                            <option value="5">Japan</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-6">
-                                                    <label for="password2"><h4>Verify</h4></label>
-                                                    <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
+                                                <div class="form-group">
                                                 <div class="col-xs-12">
                                                     <br>
                                                     <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div><!--/tab-pane-->
-                                    <div class="tab-pane" id="settings">
+                                    <div class="tab-pane" id="personel">
                                         <hr>
                                         <form class="form contact-form-box" action="#" method="post" id="registrationForm">
-                                            nothing
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.nom,{'attr':{'placeholder':"Nom"}}) }}
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    {{ form_widget(form.prenom,{'attr':{'placeholder':"Prenom"}}) }}
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    {{ form_widget(form.genre,{'attr':{'placeholder':"Genre"}}) }}
+                                                </div>
+
+                                            </div>
                                         </form>
                                     </div>
                                 </div><!--/tab-pane-->

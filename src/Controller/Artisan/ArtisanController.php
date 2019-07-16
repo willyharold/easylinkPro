@@ -65,4 +65,32 @@ class ArtisanController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/annonces", name="artisan_annonces")
+     */
+    public function annonces(){
+        return $this->render('artisan/annonces/annonces_list.html.twig', [
+            'controller_name' => 'ArtisanController',
+        ]);
+    }
+
+    /**
+     * @Route("/annonces/{id}", name="artisan_annonce_view")
+     */
+    public function annonce_view(){
+        return $this->render('artisan/annonces/annonce_view.html.twig', [
+            'controller_name' => 'ArtisanController',
+        ]);
+    }
+
+
+    /**
+     * @Route("/abonement", name="artisan_abonement")
+     */
+    public function abonement(){
+        return $this->render('artisan/abonement/abonement.html.twig', [
+            'controller_name' => 'ArtisanController',
+        ]);
+    }
+
 }
