@@ -1,0 +1,58 @@
+{% extends 'NanotechEasylinkBundle:client:index.html.twig' %}
+{% block droit %}
+    <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="services-single-left-heading">
+                    <h4>Mes Estimations</h4>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{{ path('nanotech_easylink_client_estimation_add') }}" class="btn btn-info">Demander une estimation</a>
+            </div>
+        </div>
+        <div class="row">
+            <br>
+            {% for flashMessage in app.session.flashbag.get('estimation') %}
+                <div class="alert alert-success" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+
+            <table class="table table-striped" >
+                <thead style="color: #0d6aad;">
+                <th scope="col">#</th>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Spécialite</th>
+                <th scope="col">Artisan</th>
+                <th scope="col">Etat</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+                </thead>
+                <tbody style="color: black;">
+
+                {% for estimation in estimations %}
+                <tr>
+                    <th scope="row">{{ estimation.id }}</th>
+                    <th>{{ estimation.specialite }}</th>
+                    <th>{% for sousSpecialite in estimation.sousSpecialite%}{{ sousSpecialite }},  {% endfor %}</th>
+                    <th>{{ estimation.artisan }}</th>
+                    <th>{{ estimation.etat }}</th>
+                    <th>{{ estimation.dateEn | date }}</th>
+                    <th>
+                        <a href="{{ path('nanotech_easylink_client_estimation_view',{id:estimation.id}) }}" class="btn btn-info">Voir</a>
+                        <a href="{{ path('nanotech_easylink_client_estimation_edit',{id:estimation.id}) }}" class="btn btn-default">Modifier</a>
+                        <a href="{{ path('nanotech_easylink_client_estimation_del',{id:estimation.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </th>
+                </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+{% endblock %}

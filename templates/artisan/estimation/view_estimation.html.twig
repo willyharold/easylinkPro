@@ -1,0 +1,151 @@
+{% extends 'NanotechEasylinkBundle:client:index.html.twig' %}
+{% block droit %}
+    <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="services-single-left-heading">
+                    <h4>Détails de l'estimation</h4>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{{ path('nanotech_easylink_client_estimation') }}" class="btn btn-info">Retour</a>
+            </div>
+        </div>
+        <div class="row">
+            <br>
+            {% for flashMessage in app.session.flashbag.get('contact') %}
+                <div class="alert alert-success" role="alert">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+
+            <div class="project-single-text">
+                <!-- Left Side Start -->
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                    <h5>Description de l'estimation</h5>
+                    <p class="text-justify">{{ estimation.description }}</p>
+                    <i></i>
+
+                </div>
+                <!-- Left Side End -->
+
+                <!-- Right Side Start -->
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                    <h5>Information de l'estimation</h5>
+                    <div class="project-single-info">
+                        <ul>
+                            <li><span>Type de bien :</span> {{ estimation.typeBien }}</li>
+                            <li><span>Début des travaux :</span> {{ estimation.debuttravaux }}</li>
+                            <li><span>Titre :</span> {{ estimation.titre }}</li>
+                            <li><span>Catégorie :</span> {{ estimation.specialite.nom }}</li>
+                            <li><span>Spécialité :</span> {% for sousSpecialite in estimation.sousSpecialite%}{{ sousSpecialite }},  {% endfor %}</li>
+                            <li><span>Status :</span> {{ estimation.etat }}</li>
+                            <li><span>Artisan :</span> {{ estimation.artisan }}</li>
+                            <li><span>Date :</span> {{ estimation.dateEn | date }}</li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- Right Side End -->
+            </div>
+
+        </div>
+        <div class="row">
+                <div class="services-single-left-heading">
+                    <h4>Les artisans selectionnés pour vous !</h4>
+                </div>
+        </div>
+        {% if affectation.artisan1 is defined %}
+             <div class="row mt-50">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-member">
+                    <div class="team-member-img">
+                        {% if affectation.artisan1.avatar.media is defined %}
+                            <img src="{% path affectation.artisan1.avatar , 'big' %}" width="358" alt="avatar">
+                        {% else %}
+                            <img src="http://via.placeholder.com/358x298" alt="img">
+
+                        {% endif %}
+                    </div>
+                    <div class="team-member-text">
+                        <h5><a href="#">{{ affectation.artisan1.prenom }} {{ affectation.artisan1.nom }}</a></h5>
+                        <span>{{ affectation.artisan1.specialite }}</span>
+                        <div class="product-review-area">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        {{ form_start(form) }}
+                        <input type="hidden" value="{{ affectation.artisan1.id }}" name="artisan">
+                        <input type="submit"  class="btn btn-info btn-block" value="Me contacter">
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-member">
+                    <div class="team-member-img">
+                        {% if affectation.artisan2.avatar.media is defined %}
+                            <img src="{% path affectation.artisan2.avatar , 'big' %}" width="358" alt="avatar">
+                        {% else %}
+                            <img src="http://via.placeholder.com/358x298" alt="img">
+
+                        {% endif %}
+                    </div>
+                    <div class="team-member-text">
+                        <h5><a href="#">{{ affectation.artisan1.prenom }} {{ affectation.artisan1.nom }}</a></h5>
+                        <span>{{ affectation.artisan1.specialite }}</span>
+                        <div class="product-review-area">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        {{ form_start(form) }}
+                        <input type="hidden" value="{{ affectation.artisan2.id }}" name="artisan">
+                        <input type="submit"  class="btn btn-info btn-block" value="Me contacter">
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="team-member">
+                    <div class="team-member-img">
+                        {% if affectation.artisan3.avatar.media is defined %}
+                            <img src="{% path affectation.artisan3.avatar , 'big' %}" width="358" alt="avatar">
+                        {% else %}
+                            <img src="http://via.placeholder.com/358x298" alt="img">
+
+                        {% endif %}                    </div>
+                    <div class="team-member-text">
+                        <h5><a href="#">{{ affectation.artisan1.prenom }} {{ affectation.artisan1.nom }}</a></h5>
+                        <span>{{ affectation.artisan1.specialite }}</span>
+                        <div class="product-review-area">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        {{ form_start(form) }}
+                        <input type="hidden" value="{{ affectation.artisan3.id }}" name="artisan">
+                        <input type="submit"  class="btn btn-info btn-block" value="Me contacter">
+                        {{ form_end(form) }}                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+            <br>
+            <p>Désolez, aucun artisan n'a postulé pour le moment !</p>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

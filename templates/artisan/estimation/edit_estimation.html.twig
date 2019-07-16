@@ -1,0 +1,98 @@
+{% extends 'NanotechEasylinkBundle:client:index.html.twig' %}
+{% block droit %}
+    <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="services-single-left-heading">
+                    <h4>Modifier une ancienne estimation</h4>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{{ path('nanotech_easylink_client_estimation') }}" class="btn btn-info">Annuler</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="contact-form-box mt-30">
+                <!-- Form START -->
+                {{ form_start(form,{'attr':{'class':'contact-form'}}) }}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_label(form.typeBien) }}
+                            {{form_widget(form.typeBien)  }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_label(form.debuttravaux) }}
+
+                            {{form_widget(form.debuttravaux)  }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_label(form.titre) }}
+
+                            {{form_widget(form.titre)  }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_label(form.adresse) }}
+
+                            {{ form_widget(form.adresse) }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_label(form.codePostale) }}
+
+                            {{ form_widget(form.codePostale) }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_label(form.specialite) }}
+
+                            {{form_widget(form.specialite)  }}
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-12 mb-30">
+                        <div class="center-holder">
+                            <button type="submit">Suivant</button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+                <!-- Form END -->
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function updatesous(){
+            var id = $('#form-specialite').val();
+
+            $.ajax({
+                async: true,
+                url: "/web/sousspecialite/"+id,
+                method: "GET"
+                ,
+                success:function(data){
+                    var element = document.getElementById("nanotech_easylinkbundle_offre_sous_specialite");
+                    while (element.firstChild) {
+                        element.removeChild(element.firstChild);
+                    }
+                    $('#nanotech_easylinkbundle_offre_sous_specialite').append(data);
+
+                },
+                error:function (er) {
+
+                    var element = document.getElementById("nanotech_easylinkbundle_offre_sous_specialite");
+                    while (element.firstChild) {
+                        element.removeChild(element.firstChild);
+                    }
+                }
+
+            });
+
+        }
+    </script>
+{% endblock %}

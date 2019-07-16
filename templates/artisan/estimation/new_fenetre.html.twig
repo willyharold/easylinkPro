@@ -1,0 +1,59 @@
+{% extends 'NanotechEasylinkBundle:client:index.html.twig' %}
+{% block droit %}
+    <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="services-single-left-heading">
+                    <h4>Demander une estimation</h4>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{{ path('nanotech_easylink_client_estimation') }}" class="btn btn-info">Annuler</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="contact-form-box mt-30">
+                <!-- Form START -->
+                {{ form_start(form,{'attr':{'class':'contact-form'}}) }}
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_label(form.sousSpecialite) }}
+                            {{form_widget(form.sousSpecialite)  }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_label(form.materielFenetre) }}
+
+                            {{form_widget(form.materielFenetre)  }}
+                        </div>
+                        <div class="col-md-12">
+                            {{ form_label(form.nbrOuvertureFenetre) }}
+
+                            {{form_widget(form.nbrOuvertureFenetre)  }}
+                        </div>
+
+                        <div class="col-md-12">
+                            {{ form_label(form.description) }}
+
+                            {{form_widget(form.description)  }}
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 mb-30">
+                        <div class="center-holder">
+                            <button type="submit">Terminer</button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+                <!-- Form END -->
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

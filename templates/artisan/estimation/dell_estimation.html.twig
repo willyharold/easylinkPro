@@ -1,0 +1,39 @@
+{% extends 'NanotechEasylinkBundle:client:index.html.twig' %}
+{% block droit %}
+    <div class="col-md-9 col-sm-8 col-xs-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="services-single-left-heading">
+                    <h4>Supprimer l'estimation</h4>
+                </div>
+            </div>
+            <div class="col-md-6 text-right">
+                <a href="{{ path('nanotech_easylink_client_estimation') }}" class="btn btn-info">Annuler</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="contact-form-box mt-30">
+                <!-- Form START -->
+                {{ form_start(form,{'attr':{'class':'contact-form'}}) }}
+
+                    <div class="col-md-12 mb-30">
+                        <div class="col-md-12">
+                            <h4 style="color: red;">Confirmez la suppression de l'estimation ?</h4>
+                        </div>
+                        <div class="center-holder">
+                            <button type="submit">Envoyer</button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+                <!-- Form END -->
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
