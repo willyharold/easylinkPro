@@ -8,7 +8,7 @@
 /app/spool/*
 
 # Cache, session files and logs (Symfony3)
-/var/cache/*
+var/cache/*
 /var/logs/*
 /var/sessions/*
 !var/cache/.gitkeep
@@ -48,3 +48,6 @@
 /.web-server-pid
 
 .env
+.docker/data
+.idea/
+var/log/
