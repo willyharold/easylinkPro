@@ -5,9 +5,11 @@ namespace App\Controller\Client;
 use App\Entity\Annonce;
 use App\Entity\Specialite;
 use App\Repository\AnnonceRepository;
+use App\Repository\AvisRepository;
 use App\Repository\SpecialiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -91,5 +93,15 @@ class ClientController extends Controller
 
     public function menu($id=0){
         return $this->render('client/menu.html.twig', ['id'=>$id]);
+    }
+
+    public function nbrAnnonce(Request $request, AnnonceRepository $annonceRepository){
+        $annonces = $annonceRepository->findByClient($this->getUser());
+        return new Response(count($annonces));
+    }
+
+    public function nbrAvis(Request $request, AvisRepository $avisRepository){
+        $avis  = $avisRepository->findBy(["client"=>$this->getUser()]);
+        return new Response( count($avis));
     }
 }

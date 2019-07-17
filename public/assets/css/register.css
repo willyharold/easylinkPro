@@ -56,3 +56,20 @@ TABLE OF CONTENT
 a.password-forget:hover, a.log:hover{
     text-decoration: underline;
 }
+
+.brd-error {
+    border-color: #d21e2b !important;
+}
+
+.rsv-error {
+    padding-top: 2px;
+}
+.cl3 {
+    color: rgba(228,22,59,1);
+}
+.md-12 {
+    font-size: 12px;
+}
+.text-right {
+    text-align: right !important;
+}

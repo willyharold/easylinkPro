@@ -49,5 +49,4 @@ services:
         image: djfarrelly/maildev
         container_name: maildev
         ports:
-          - 1000:25
           - 8001:80

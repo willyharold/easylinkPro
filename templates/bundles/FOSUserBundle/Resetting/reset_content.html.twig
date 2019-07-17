@@ -1,8 +1,66 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+
+<!-- Contact Section START -->
+<link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+<div class="section-block">
+    <div class="container">
+        <h2 class="text-center" id="title">Authentification</h2>
+        <p class="text-center">
+            <small id="passwordHelpInline" class="text-muted">Authentifiez vous pour gerer vos annonces</small>
+        </p>
+        <hr>
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <!-------null------>
+            </div>
+
+            <div class="col-md-1">
+
+                <!-------null------>
+            </div>
+
+            <div class="col-md-5">
+                <div class="row">
+                    {{ form_start(form, { 'action': path('fos_user_resetting_send_email', {'token': token}), 'attr': { 'class': 'contact-form' } }) }}
+
+                        <div class="section-heading mt-15 text-center" >
+                            <h4>Réinitialisation de votre compte</h4>
+                            <div class="section-heading-line"></div>
+                        </div>
+
+
+
+                        <div class="col-md-12 col-lg-12 col-sm-12">
+                            {% if form_errors(form.plainPassword.first)   %}
+                                {{ form_widget(form.plainPassword.first,{'attr':{'placeholder':'Mot de passe','class':'brd-error'}}) }}
+                            {% else %}
+                                {{ form_widget(form.plainPassword.first,{'attr':{'placeholder':'Mot de passe'}}) }}
+
+                            {% endif %}
+                            <div class="rsv-error text-right md-12 cl3 "> {{ form_errors(form.plainPassword.first) }}</div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-sm-12">
+                            {{ form_widget(form.plainPassword.second,{'attr':{'placeholder':'Confirmer le mot de passe'}}) }}
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-sm-12">
+                            <button type="submit" id="submit" >{{ 'resetting.reset.submit'|trans }}</button>
+
+                        </div>
+                    {{ form_widget(form) }}
+
+                    {{ form_end(form) }}
+
+                </div>
+
+                <br>
+                <p style="text-align: center">Vous n'avez pas encore de compte ? <a href="{{ path('fos_user_registration_register') }}" style="color:#2193f1 !important;">Inscrivez vous !</a> </p>
+            </div>
+        </div>
     </div>
-{{ form_end(form) }}
+</div>
+<!-- Contact Section END -->
