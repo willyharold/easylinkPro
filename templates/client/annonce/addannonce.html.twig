@@ -45,35 +45,35 @@
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="/web/client/annonce" class="btn btn-info">Annuler</a>
+                            <a href="{{ path('annonce') }}" class="btn btn-info">Annuler</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="contact-form-box mt-30">
                             <!-- Form START -->
-                            <form name="nanotech_easylinkbundle_offre" method="post" class="contact-form">
+                                {{ form_start(form , {'attr': {'class': 'contact-form'}}) }}
 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <select id="form-specialite" name="form-specialite" required onchange="updatesous()" >
                                             <option value="0" >Sélectionnez une catégorie</option>
-                                            <option value="1">sanitaire</option>
-
+                                            {% for specialite in specialites %}
+                                            <option value="{{ specialite.id }}">{{ specialite.nom }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                     <div class="col-md-12">
-                                        <select id="nanotech_easylinkbundle_offre_sous_specialite" name="nanotech_easylinkbundle_offre[sous_specialite]"><option value="1">pose wc</option></select>
+                                        {{ form_widget(form.sousSpectialite) }}
                                     </div>
 
                                     <div class="col-md-12">
-                                        <textarea id="nanotech_easylinkbundle_offre_description" name="nanotech_easylinkbundle_offre[description]" required="required" maxlength="255" placeholder="Description detaillé des travaux requis"></textarea>
-
+                                        {{ form_widget(form.description,{'attr':{'placeholder':'Description','row': 5}}) }}
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="nanotech_easylinkbundle_offre_adresse" name="nanotech_easylinkbundle_offre[adresse]" required="required" placeholder="Adresse" />
+                                        {{ form_widget(form.adresse,{'attr':{'placeholder':'Adresse '}}) }}
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="number" id="nanotech_easylinkbundle_offre_codePostale" name="nanotech_easylinkbundle_offre[codePostale]" required="required" placeholder="Code Postal" />
+                                        {{ form_widget(form.codePostale,{'attr':{'placeholder':'Code postal'}}) }}
                                     </div>
 
 
@@ -83,8 +83,10 @@
                                         <button type="submit">Envoyer</button>
                                     </div>
                                 </div>
-                                <input type="hidden" id="nanotech_easylinkbundle_offre__token" name="nanotech_easylinkbundle_offre[_token]" value="7skpX0goLavk1IrkADBsdmXfdNDw6erC4076tXFuN3o" /></form>
                             <!-- Form END -->
+
+
+                            {{ form_end(form) }}
                         </div>
 
                     </div>
@@ -111,22 +113,13 @@
     <!-- Scroll to top button End -->
 
 {% endblock %}
-
 {% block script %}
     <script>
-        toastr.options.showMethod = 'slideDown';
-        toastr.options.hideMethod = 'slideUp';
-        toastr.options.closeMethod = 'slideUp';
-        toastr.options.positionClass = 'toast-top-full-width';
-        toastr.options.progressBar = true
-        toastr.options.closeButton = true;
-        toastr.options.timeOut = 30000;
-        toastr.options.extendedTimeOut = 6000;
-        {% for flashMessage in app.session.flashbag.get('confirmer') %}
+        $(document).ready(function() {
+            new SlimSelect({
+                select: '#annonce_sousSpectialite'
+            })
 
-        toastr.success('{{ flashMessage }}')
-
-        {% endfor %}
-
+        });
     </script>
 {% endblock %}

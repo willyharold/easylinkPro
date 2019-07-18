@@ -47,4 +47,14 @@ class AnnonceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getWithSearchQueryBuilder($user)
+    {
+        return $this->createQueryBuilder('a')
+        ->where('a.client =:val')
+            ->setParameter('val', $user)
+            ->orderBy('a.dateEnreg','DESC')
+        ;
+    }
+
 }

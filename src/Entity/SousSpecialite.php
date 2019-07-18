@@ -46,10 +46,7 @@ class SousSpecialite
      */
     private $specialite;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="sousSpectialite")
-     */
-    private $annonces;
+
 
     public function __construct()
     {
@@ -121,34 +118,10 @@ class SousSpecialite
         return $this;
     }
 
-    /**
-     * @return Collection|Annonce[]
-     */
-    public function getAnnonces(): Collection
+    public function __toString()
     {
-        return $this->annonces;
+        return "".$this->getNom();
     }
 
-    public function addAnnonce(Annonce $annonce): self
-    {
-        if (!$this->annonces->contains($annonce)) {
-            $this->annonces[] = $annonce;
-            $annonce->setSousSpectialite($this);
-        }
 
-        return $this;
-    }
-
-    public function removeAnnonce(Annonce $annonce): self
-    {
-        if ($this->annonces->contains($annonce)) {
-            $this->annonces->removeElement($annonce);
-            // set the owning side to null (unless already changed)
-            if ($annonce->getSousSpectialite() === $this) {
-                $annonce->setSousSpectialite(null);
-            }
-        }
-
-        return $this;
-    }
 }

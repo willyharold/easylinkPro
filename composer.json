@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "friendsofsymfony/oauth-server-bundle": "^1.6",
         "friendsofsymfony/user-bundle": "^2.1",
+        "knplabs/knp-paginator-bundle": "^4.0",
         "sensio/framework-extra-bundle": "^5.1",
         "sonata-project/admin-bundle": "^3.43",
         "sonata-project/media-bundle": "^3.16",

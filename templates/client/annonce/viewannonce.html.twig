@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Navbar END -->
+
+
+
+    <!-- Contact Section START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="row">
+                <!-- Left Side START -->
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="services-single-left-box">
+
+                        <!-- Vertical Menu START -->
+                        <div class="services-single-left-heading">
+                            <h4>Mon Menu</h4>
+                        </div>
+                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:2})) }}
+                        <!-- Vertical Menu END -->
+
+                    </div>
+                </div>
+                <!-- Left Side END -->
+
+                <!-- Right Side START -->
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="services-single-left-heading">
+                                <h4>Détails de l'annonce</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ path('client_annonce') }}" class="btn btn-primary">Retour</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="project-single-text">
+                            <!-- Left Side Start -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <h5>Description de l'annonce</h5>
+                                <p class="text-justify">{{ annonce.description }}</p>
+                                <i></i>
+
+                            </div>
+                            <!-- Left Side End -->
+
+                            <!-- Right Side Start -->
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <h5>Information de l'annonce</h5>
+                                <div class="project-single-info">
+                                    <ul>
+                                        <li><span>Catégorie : {{ annonce.sousSpectialite[0].specialite }}</span> </li>
+                                        <li><span>Spécialité :{% for sousspecialite in annonce.sousSpectialite %} <span class="badge" style="color: white;background-color: #0a74a7">{{ sousspecialite }}</span> {% endfor %}</span> </li>
+                                        <li><span>Status :</span> {{ annonce.etat }}</li>
+                                        <li><span>Artisan :</span> {{ annonce.artisan }}</li>
+                                        <li><span>Date :</span> {{ annonce.dateEnreg | date }}</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Right Side End -->
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="services-single-left-heading">
+                            <h4>Les artisans selectionnés pour vous !</h4>
+                        </div>
+                    </div>
+
+                        <br>
+                        <p>Désolez, aucun artisan n'a postulé pour le moment !</p>
+
+                </div>
+
+
+                <!-- Right Side END -->
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section END -->
+
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            new SlimSelect({
+                select: '#annonce_sousSpectialite'
+            })
+
+        });
+    </script>
+{% endblock %}

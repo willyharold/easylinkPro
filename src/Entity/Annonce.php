@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +19,7 @@ class Annonce
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -42,7 +44,7 @@ class Annonce
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SousSpecialite", inversedBy="annonces")
+     * @ORM\ManyToMany(targetEntity="App\Entity\SousSpecialite")
      */
     private $sousSpectialite;
 
@@ -61,6 +63,12 @@ class Annonce
      * @ORM\OneToOne(targetEntity="App\Entity\Affectation", mappedBy="annonce", cascade={"persist", "remove"})
      */
     private $affectation;
+
+    public function __construct()
+    {
+        $this->sousSpectialite = new ArrayCollection();
+        $this->dateEnreg = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -127,18 +135,6 @@ class Annonce
         return $this;
     }
 
-    public function getSousSpectialite(): ?SousSpecialite
-    {
-        return $this->sousSpectialite;
-    }
-
-    public function setSousSpectialite(?SousSpecialite $sousSpectialite): self
-    {
-        $this->sousSpectialite = $sousSpectialite;
-
-        return $this;
-    }
-
     public function getClient(): ?User
     {
         return $this->client;
@@ -176,6 +172,32 @@ class Annonce
         $newAnnonce = $affectation === null ? null : $this;
         if ($newAnnonce !== $affectation->getAnnonce()) {
             $affectation->setAnnonce($newAnnonce);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SousSpecialite[]
+     */
+    public function getSousSpectialite(): Collection
+    {
+        return $this->sousSpectialite;
+    }
+
+    public function addSousSpectialite(SousSpecialite $sousSpectialite): self
+    {
+        if (!$this->sousSpectialite->contains($sousSpectialite)) {
+            $this->sousSpectialite[] = $sousSpectialite;
+        }
+
+        return $this;
+    }
+
+    public function removeSousSpectialite(SousSpecialite $sousSpectialite): self
+    {
+        if ($this->sousSpectialite->contains($sousSpectialite)) {
+            $this->sousSpectialite->removeElement($sousSpectialite);
         }
 
         return $this;
