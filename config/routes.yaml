@@ -1,11 +1,6 @@
 # This file is the entry point to configure your own HTTP routes.
 # Files in the routes/ subdirectory configure the routes for your dependencies.
 
-index:
-  path: /
-  defaults: { _controller: 'App\Controller\DefaultController::index' }
-
-
 fos_user_security_artisan_check:
   path: /artisan/check
   defaults: { _controller: "FOSUserBundle:Security:check" }

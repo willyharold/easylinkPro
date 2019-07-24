@@ -13,10 +13,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
+ * @UniqueEntity("email")
+ * @UniqueEntity("username")
  */
 class User extends BaseUser
 {
@@ -37,11 +41,6 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $genre;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -97,6 +96,16 @@ class User extends BaseUser
     protected $password;
 
     protected $username;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $civilite;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Artisan", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $artisan;
 
     public function __construct()
     {
@@ -332,6 +341,36 @@ class User extends BaseUser
     public function setUsername($username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getCivilite(): ?string
+    {
+        return $this->civilite;
+    }
+
+    public function setCivilite(string $civilite): self
+    {
+        $this->civilite = $civilite;
+
+        return $this;
+    }
+
+    public function getArtisan(): ?Artisan
+    {
+        return $this->artisan;
+    }
+
+    public function setArtisan(?Artisan $artisan): self
+    {
+        $this->artisan = $artisan;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newUser = $artisan === null ? null : $this;
+        if ($newUser !== $artisan->getUser()) {
+            $artisan->setUser($newUser);
+        }
 
         return $this;
     }

@@ -16,7 +16,9 @@ RUN apt-get install -y \
 	&& docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-install pdo pdo_mysql zip
-
+RUN apt-get install -y libicu-dev\
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
 COPY php.ini /usr/local/etc/php/php.ini
 COPY php-fpm-pool.conf 	/usr/local/etc/php/pool.d/www.conf
 

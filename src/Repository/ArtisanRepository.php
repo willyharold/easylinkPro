@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Avis;
+use App\Entity\Artisan;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Avis|null find($id, $lockMode = null, $lockVersion = null)
- * @method Avis|null findOneBy(array $criteria, array $orderBy = null)
- * @method Avis[]    findAll()
- * @method Avis[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Artisan|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Artisan|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Artisan[]    findAll()
+ * @method Artisan[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AvisRepository extends ServiceEntityRepository
+class ArtisanRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Avis::class);
+        parent::__construct($registry, Artisan::class);
     }
 
     // /**
-    //  * @return Avis[] Returns an array of Avis objects
+    //  * @return Artisan[] Returns an array of Artisan objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class AvisRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Avis
+    public function findOneBySomeField($value): ?Artisan
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')
@@ -47,14 +47,4 @@ class AvisRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    public function getWithSearchQueryBuilder($user)
-    {
-        return $this->createQueryBuilder('a')
-            ->where('a.client =:val')
-            ->setParameter('val', $user)
-            ->orderBy('a.dateEn','DESC')
-            ;
-    }
-
 }

@@ -46,11 +46,17 @@ class SousSpecialite
      */
     private $specialite;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Artisan", mappedBy="sousSpecialite")
+     */
+    private $artisans;
+
 
 
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
+        $this->artisans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,6 +127,34 @@ class SousSpecialite
     public function __toString()
     {
         return "".$this->getNom();
+    }
+
+    /**
+     * @return Collection|Artisan[]
+     */
+    public function getArtisans(): Collection
+    {
+        return $this->artisans;
+    }
+
+    public function addArtisan(Artisan $artisan): self
+    {
+        if (!$this->artisans->contains($artisan)) {
+            $this->artisans[] = $artisan;
+            $artisan->addSousSpecialite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtisan(Artisan $artisan): self
+    {
+        if ($this->artisans->contains($artisan)) {
+            $this->artisans->removeElement($artisan);
+            $artisan->removeSousSpecialite($this);
+        }
+
+        return $this;
     }
 
 

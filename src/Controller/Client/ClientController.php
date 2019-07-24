@@ -3,9 +3,11 @@
 namespace App\Controller\Client;
 
 use App\Entity\Annonce;
+use App\Entity\Avis;
 use App\Entity\Specialite;
 use App\Entity\User;
 use App\Form\AnnonceType;
+use App\Form\ClientInfoType;
 use App\Repository\AnnonceRepository;
 use App\Repository\AvisRepository;
 use App\Repository\SpecialiteRepository;
@@ -59,11 +61,6 @@ class ClientController extends Controller
     public function annonce(AnnonceRepository $annonceRepository, PaginatorInterface $paginator, Request $request)
     {
 
-        /**
-         * @var Annonce[] $annonces
-         */
-        $annonces = $annonceRepository->findBy(["client" => $this->getUser()],["dateEnreg"=>"DESC"]);
-
         $queryBuilder = $annonceRepository->getWithSearchQueryBuilder($this->getUser());
         $pagination = $paginator->paginate(
             $queryBuilder, /* query NOT result */
@@ -71,7 +68,7 @@ class ClientController extends Controller
             7/*limit per page*/
         );
 
-        return $this->render('client/annonce/index.html.twig', ["annonces" => $annonces,'pagination' => $pagination]);
+        return $this->render('client/annonce/index.html.twig', ['pagination' => $pagination]);
     }
 
     /**
@@ -87,6 +84,48 @@ class ClientController extends Controller
 
         return $this->render('client/annonce/viewannonce.html.twig', ["annonce" => $annonce]);
     }
+
+    /**
+     * @Route("/information", name="client_information")
+     */
+    public function information(Request $request)
+    {
+
+        return $this->render('client/information/index.html.twig', ["user" => $this->getUser()]);
+    }
+
+    /**
+     * @Route("/information/edit", name="client_information_edit")
+     */
+    public function edit_information(\Swift_Mailer $mailer,Request $request,ObjectManager $em)
+    {
+
+        $user = $this->getUser();
+        $form = $this->createForm(ClientInfoType::class,$user);
+        if($request->getMethod() == 'POST'){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->persist($user);
+                $em->flush();
+                $session = new Session();
+                $session->getFlashBag()->add('information',"Information modifiée");
+
+                $user = $this->getUser();
+
+                $message = (new \Swift_Message('Nouvelle annonce'))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($user->getEmail())
+                    ->setBody('email pour dire les informations ont été modifie')
+                ;
+
+                $mailer->send($message);
+                return $this->redirectToRoute('client_information');
+            }
+
+        }
+        return $this->render('client/information/editinfo.html.twig', ["form" => $form->createView()]);
+    }
+
 
     /**
      * @Route("/annonce/edit/{id}", name="client_annonce_edit")
@@ -146,7 +185,7 @@ class ClientController extends Controller
                 $user = $this->getUser();
 
                 $message = (new \Swift_Message('Nouvelle annonce'))
-                    ->setFrom('support@agrisoft.com')
+                    ->setFrom('support@easylink.com')
                     ->setTo($user->getEmail())
                     ->setBody('l annonce enregistrer besoin dun texte pour sa')
                 ;
@@ -179,8 +218,28 @@ class ClientController extends Controller
     /**
      * @Route("/avis", name="client_avis")
      */
-    public function avis(){
-        return $this->render('client/avis/index.html.twig');
+    public function avis(PaginatorInterface $paginator, Request $request, AvisRepository $avisRepository){
+
+        $queryBuilder = $avisRepository->getWithSearchQueryBuilder($this->getUser());
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            7/*limit per page*/
+        );
+        return $this->render('client/avis/index.html.twig',["pagination"=>$pagination]);
+    }
+
+    /**
+     * @Route("/avis/view/{id}", name="client_avis_view")
+     */
+    public function view_avis($id, Request $request, AvisRepository $avisRepository){
+
+
+        /**
+         * @var Avis $avis
+         */
+        $avis = $avisRepository->findOneBy(["client"=>$this->getUser(),"id"=>$id]);
+        return $this->render('client/avis/viewavis.html.twig',["avis"=>$avis]);
     }
 
 

@@ -4,7 +4,7 @@
         <li {% if id == 2 %} class="services-active" {% endif %} ><a href="{{ path('client_annonce') }}">Mes annonces <span class="badge " style="float: right; margin-right: 5px; background-color: #0a74a7 ">{{ render(controller('App\\Controller\\Client\\ClientController::nbrAnnonce')) }}</span></a> </li>
         <li {% if id == 3 %} class="services-active" {% endif %}><a href="{{ path('client_estimation') }}">Mes estimations <span class="badge " style="float: right; margin-right: 5px; background-color: #0a74a7 ">1</span></a></li>
         <li {% if id == 4 %} class="services-active" {% endif %}><a href="{{ path('client_avis') }}">Mes avis <span class="badge " style="float: right; margin-right: 5px; background-color: #0a74a7 ">{{ render(controller('App\\Controller\\Client\\ClientController::nbrAvis')) }}</span></a></li>
-        <li {% if id == 5 %} class="services-active" {% endif %}><a href="#">Mes informations</a></li>
+        <li {% if id == 5 %} class="services-active" {% endif %}><a href="{{ path('client_information') }}">Mes informations</a></li>
         <li {% if id == 6 %} class="services-active" {% endif %}><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
 
     </ul>

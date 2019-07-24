@@ -15,10 +15,16 @@ class RegistrationController extends Controller
      */
     public function index(Request $request)
     {
-        $user = new User();
+        $usermanager = $this->get('fos_user.user_manager');
+
+        $user =$usermanager->createUser();
         $form = $this->createForm(UserType::class, $user);
         if($request->getMethod()== 'POST'){
-
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $usermanager->updateUser($user);
+                return $this->redirectToRoute('default');
+            }
         }
         return $this->render('artisan/register.html.twig',["form"=>$form->createView()]);
     }

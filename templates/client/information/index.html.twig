@@ -38,7 +38,141 @@
 
                 <!-- Right Side START -->
                 <div class="col-md-9 col-sm-8 col-xs-12">
-                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="services-single-left-heading">
+                                <h4>Mes informations</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ path('client_annonce') }}" class="btn btn-primary">Retour</a>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <br>
+                        {% for flashMessage in app.session.flashbag.get('information') %}
+                            <div class="alert alert-success" role="alert">
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+                        <div class="col-md-6 contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Nom :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.nom }}</p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Prenom :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.prenom }}</p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Email :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.email }}</p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Username :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.username }}</p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Civilité :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.civilite }}</p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Téléphone :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.telephone }}</p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Adresse :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.adresse }}</p>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="font-weight: bolder">Code postal :</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{ user.codePostale }}</p>
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: center">
+                                    <a href="{{ path('client_information_edit') }}"  class="dark-button1 button-md">Modifier mes informations</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 contact-form">
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    {% if user.avatar.media is defined %}
+                                        <img src="{% path user.avatar , 'big' %}" class="img-rounded" alt="avatar">
+                                    {% else %}
+                                        <img src="{{ asset('img/login.jpg') }}" class="img-rounded" alt="avatar">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <form method="post" action="#" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="file" name="image" id="img" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" >Charger</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
                 </div>
                 <!-- Right Side END -->
             </div>
@@ -60,19 +194,6 @@
 
 {% block script %}
     <script>
-        toastr.options.showMethod = 'slideDown';
-        toastr.options.hideMethod = 'slideUp';
-        toastr.options.closeMethod = 'slideUp';
-        toastr.options.positionClass = 'toast-top-full-width';
-        toastr.options.progressBar = true
-        toastr.options.closeButton = true;
-        toastr.options.timeOut = 30000;
-        toastr.options.extendedTimeOut = 6000;
-        {% for flashMessage in app.session.flashbag.get('confirmer') %}
-
-        toastr.success('{{ flashMessage }}')
-
-        {% endfor %}
 
     </script>
 {% endblock %}

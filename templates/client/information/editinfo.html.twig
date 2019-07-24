@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Navbar END -->
+
+
+
+    <!-- Contact Section START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="row">
+                <!-- Left Side START -->
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="services-single-left-box">
+
+                        <!-- Vertical Menu START -->
+                        <div class="services-single-left-heading">
+                            <h4>Mon Menu</h4>
+                        </div>
+                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:5})) }}
+                        <!-- Vertical Menu END -->
+
+                    </div>
+                </div>
+                <!-- Left Side END -->
+
+                <!-- Right Side START -->
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="services-single-left-heading">
+                                <h4>Modifier les informations</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ path('client_information') }}" class="btn btn-primary">Annuler</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="contact-form-box mt-30">
+                            <!-- Form START -->
+                            {{ form_start(form,{'attr':{'class':'contact-form'}}) }}
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ form_widget(form.nom) }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{form_widget(form.prenom)  }}
+                                </div>
+
+                                <div class="col-md-12">
+                                    {{ form_widget(form.civilite) }}
+
+                                </div>
+
+                                <div class="col-md-12">
+                                    {{ form_widget(form.telephone) }}
+
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {{ form_widget(form.adresse) }}
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {{ form_widget(form.codePostale) }}
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-12 mb-30">
+                                <div class="center-holder">
+                                    <button type="submit">Envoyer</button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                            <!-- Form END -->
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- Right Side END -->
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section END -->
+
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}

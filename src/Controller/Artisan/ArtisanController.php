@@ -22,15 +22,6 @@ class ArtisanController extends Controller
     }
 
     /**
-     * @Route("/register", name="artisan_register")
-     */
-    public function register(){
-        return $this->render('artisan/register.html.twig', [
-            'controller_name' => 'ArtisanController',
-        ]);
-    }
-
-    /**
      * @Route("/login", name="artisan_login")
      */
     public function login(){

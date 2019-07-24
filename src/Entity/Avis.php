@@ -17,7 +17,7 @@ class Avis
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $contenu;
 
@@ -26,10 +26,7 @@ class Avis
      */
     private $note;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $amelioration;
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -76,18 +73,6 @@ class Avis
         return $this;
     }
 
-    public function getAmelioration(): ?string
-    {
-        return $this->amelioration;
-    }
-
-    public function setAmelioration(string $amelioration): self
-    {
-        $this->amelioration = $amelioration;
-
-        return $this;
-    }
-
     public function getDateEn(): ?\DateTimeInterface
     {
         return $this->dateEn;
@@ -123,4 +108,5 @@ class Avis
 
         return $this;
     }
+
 }

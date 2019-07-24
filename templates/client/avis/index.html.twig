@@ -38,8 +38,65 @@
 
                 <!-- Right Side START -->
                 <div class="col-md-9 col-sm-8 col-xs-12">
-                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="services-single-left-heading">
+                                <h4>Mes avis</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br>
+                        {% for flashMessage in app.session.flashbag.get('annonce') %}
+                            <div class="alert alert-success" role="alert">
+                                {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+
+                        <table class="table table-striped table-responsive" >
+                            <thead style="color: #0d6aad;">
+                            <th scope="col">#</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Annonce</th>
+                            <th scope="col">Estimation</th>
+                            <th scope="col">Note</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Action</th>
+                            </thead>
+                            <tbody style="color: black;">
+
+                            {% for avis in pagination %}
+                                <tr>
+                                    <th scope="row">{{ avis.id }}</th>
+                                    <th>{{ avis.contenu | slice(0,100) }}</th>
+                                    <th><a  class="btn btn-default" href="{{ path('client_annonce_view',{id:avis.annonce.id}) }}">{{ avis.annonce.id }}</a></th>
+                                    <th>estimation</th>
+                                    <th>{{ avis.note  }}</th>
+                                    <th>{{ avis.dateEn | date }}</th>
+                                    <th>
+                                        <a href="{{ path('client_avis_view',{id:avis.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                        <a href="" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                        <a href="/web/client/annonce/dell/9" class="btn btn-danger"><i class="fa fa-close"></i></a>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {# display navigation #}
+                            <div class="navigation" style="float: right">
+                                {{ knp_pagination_render(pagination) }}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
                 <!-- Right Side END -->
             </div>
         </div>

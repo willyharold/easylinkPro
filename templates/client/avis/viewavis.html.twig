@@ -29,7 +29,7 @@
                         <div class="services-single-left-heading">
                             <h4>Mon Menu</h4>
                         </div>
-                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:1})) }}
+                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:4})) }}
                         <!-- Vertical Menu END -->
 
                     </div>
@@ -39,33 +39,46 @@
                 <!-- Right Side START -->
                 <div class="col-md-9 col-sm-8 col-xs-12">
                     <div class="row">
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="contact-box">
-                                <h1 style="color: #2193f1">{{ render(controller('App\\Controller\\Client\\ClientController::nbrAnnonce')) }}</h1>
-                                <h4>Mes annonces</h4>
-                                <a href="{{ path('client_annonce') }}" class="dark-button1 button-md">Détails</a>
+                        <div class="col-md-6">
+                            <div class="services-single-left-heading">
+                                <h4>Détails de l'avis</h4>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="contact-box">
-                                <h1 style="color: #2193f1">1</h1>
-                                <h4>Mes estimations</h4>
-                                <a href="/web/client/estimation" class="dark-button1 button-md">Détails</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="contact-box">
-                                <h1 style="color: #2193f1">{{ render(controller('App\\Controller\\Client\\ClientController::nbrAvis')) }}</h1>
-                                <h4>Mes avis</h4>
-                                <a href="{{ path('client_avis') }}" class="dark-button1 button-md">Détails</a>
-                            </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ path('client_avis') }}" class="btn btn-primary">Retour</a>
                         </div>
 
                     </div>
                     <div class="row">
+                        <div class="project-single-text">
+                            <!-- Left Side Start -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <h5>Description de l'avis</h5>
+                                <p class="text-justify">{{ avis.contenu }}</p>
+                                <i></i>
 
+                            </div>
+                            <!-- Left Side End -->
+
+                            <!-- Right Side Start -->
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <h5>Information de l'annonce</h5>
+                                <div class="project-single-info">
+                                    <ul>
+                                        <li><span>Catégorie :</span> </li>
+                                        <li><span>Spécialité : {% for sousspecialite in avis.annonce.sousSpectialite %} <span class="badge" style="color: white;background-color: #0a74a7">{{ sousspecialite }}</span>  {% endfor %}</span></li>
+                                        <li><span>Status :</span> {{ avis.annonce.etat }}</li>
+                                        <li><span>Artisan :</span> {{ avis.annonce.artisan }}</li>
+                                        <li><span>Date :</span> {{ avis.annonce.dateEnreg | date }}</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Right Side End -->
+                        </div>
 
                     </div>
+
 
                 </div>
                 <!-- Right Side END -->
