@@ -33,14 +33,32 @@
                             <li class="dropdown">
                                 <a href="{{ path('contact') }}">Contact</a>
                             </li>
-
+                            {% if is_granted('ROLE_USER') %}
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Connexion</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.user }}</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-                                    <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                                    <li><a href="{{ path('client') }}">Tableau de Bord</a></li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                                 </ul>
                             </li>
+                            {% elseif is_granted('ROLE_ARTISAN')  %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ app.user }}</a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="{{ path('artisan') }}">Tableau de Bord</a></li>
+                                        <li><a href="{{ path('fos_user_security_artisan_logout') }}">Déconnexion</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">connexion</a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                                        <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
+
                         </ul>
                     </div>
                 </div>
