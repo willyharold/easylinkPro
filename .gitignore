@@ -51,3 +51,4 @@ var/cache/*
 .docker/data
 .idea/
 var/log/
+public/bundles
