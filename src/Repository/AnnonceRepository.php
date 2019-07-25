@@ -68,4 +68,28 @@ class AnnonceRepository extends ServiceEntityRepository
             ;
     }
 
+    public function getWithSearchQueryBuilder1result($user)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.affectation','affec')
+            ->leftJoin('affec.artisan','art')
+            ->where('art =:val')
+            ->setParameter('val', $user)
+            ->orderBy('a.dateEnreg','DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function getWithSearchQueryBuilder2($user)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.affectationConfirme','affec')
+            ->leftJoin('affec.artisanConfirme','art')
+            ->where('art =:val')
+            ->setParameter('val', $user)
+            ->orderBy('a.dateEnreg','DESC')
+            ;
+    }
+
 }

@@ -13,10 +13,12 @@ use App\Form\ClientInfoType;
 use App\Repository\AnnonceRepository;
 use App\Repository\AvisRepository;
 use App\Repository\SpecialiteRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -73,10 +75,12 @@ class ClientController extends Controller
         return $this->render('client/annonce/index.html.twig', ['pagination' => $pagination]);
     }
 
+
+
     /**
      * @Route("/annonce/view/{id}", name="client_annonce_view")
      */
-    public function view_annonce($id, AnnonceRepository $annonceRepository, Request $request)
+    public function view_annonce($id, \Swift_Mailer $mailer, AnnonceRepository $annonceRepository, Request $request, UserRepository $userRepository, ObjectManager $objectManager)
     {
 
         /**
@@ -84,7 +88,40 @@ class ClientController extends Controller
          */
         $annonce = $annonceRepository->findOneBy(["client" => $this->getUser(),"id"=>$id]);
 
-        return $this->render('client/annonce/viewannonce.html.twig', ["annonce" => $annonce]);
+        $form = $this->createForm(FormType::class,$annonce);
+        if($request->getMethod() == "POST"){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $artisan = $userRepository->findOneBy(["id"=>$request->request->get('form-artisan')]);
+                $annonce->getAffectationConfirme()->setArtisanConfirme($artisan);
+                $annonce->getAffectationConfirme()->setEtat(true);
+                $objectManager->merge($annonce);
+                $objectManager->flush();
+                $session = new Session();
+                $session->getFlashBag()->add('annonce',"L'artisan a été contacté");
+
+                $user = $this->getUser();
+
+                $message = (new \Swift_Message('Information du client'))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($artisan->getEmail())
+                    ->setBody('email pour donnée les informations du client')
+                ;
+                $mailer->send($message);
+
+
+                $message = (new \Swift_Message("Information de l'artisan"))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($this->getUser()->getEmail())
+                    ->setBody("email pour donnée les informations de l'artisan")
+                ;
+
+                $mailer->send($message);
+                return $this->redirectToRoute('client_annonce');
+            }
+
+        }
+        return $this->render('client/annonce/viewannonce.html.twig', ["annonce" => $annonce,"form" => $form->createView()]);
     }
 
     /**

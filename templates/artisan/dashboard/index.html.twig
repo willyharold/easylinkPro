@@ -40,21 +40,21 @@
                         <div class="row">
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="contact-box">
-                                    <h1 style="color: #2193f1">1</h1>
+                                    <h1 style="color: #2193f1">{{ render(controller('App\\Controller\\Artisan\\ArtisanController::nbrAnnonce')) }}</h1>
                                     <h4>Mes annonces en attente</h4>
-                                    <a href="#" class="dark-button1 button-md">Détails</a>
+                                    <a href="{{ path('artisan_annonces') }}" class="dark-button1 button-md">Détails</a>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="contact-box">
-                                    <h1 style="color: #2193f1">5</h1>
+                                    <h1 style="color: #2193f1">0</h1>
                                     <h4>Mes estimations en attente</h4>
                                     <a href="#" class="dark-button1 button-md">Détails</a>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="contact-box">
-                                    <h1 style="color: #2193f1">2</h1>
+                                    <h1 style="color: #2193f1">0</h1>
                                     <h4>Les avis</h4>
                                     <a href="#" class="dark-button1 button-md">Détails</a>
                                 </div>

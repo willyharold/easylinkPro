@@ -29,7 +29,11 @@
     <div class="section-block">
         <div class="container">
             {{ form_start(form,{'attr':{'class':"contact-form"}}) }}
-
+            {% if form_errors(form) %}
+                <div class="alert alert-danger">
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
             <div class="row">
                 <div class="section-heading mt-10">
                     <h4>Vous etes un Artisan Pro ? Inscrivez-vous !!</h4>
@@ -121,13 +125,33 @@
                         <legend>Creation de Compte</legend>
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                {{ form_widget(form.email,{'attr':{'placeholder':"Email"}}) }}
+                                {% if form_errors(form.email)   %}
+                                    {{ form_widget(form.email,{'attr':{'placeholder':'Email','class':'brd-error'}}) }}
+
+                                {% else %}
+                                    {{ form_widget(form.email,{'attr':{'placeholder':'Email'}}) }}
+
+                                {% endif %}
+                                <div class="rsv-error text-right md-12 cl3 "> {{ form_errors(form.email) }}</div>
+
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                {{ form_widget(form.username,{'attr':{'placeholder':"Nom d'utilisateur"}}) }}
+                                {% if form_errors(form.username)   %}
+                                    {{ form_widget(form.username,{'attr':{'placeholder':'Nom d\'utilisateur ','class':'brd-error'}}) }}
+                                {% else %}
+                                    {{ form_widget(form.username,{'attr':{'placeholder':'Nom d\'utilisateur '}}) }}
+
+                                {% endif %}
+                                <div class="rsv-error text-right md-12 cl3 "> {{ form_errors(form.username) }}</div>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                {{ form_widget(form.plainPassword.first,{'attr':{'placeholder':"Mot de passe"}}) }}
+                                {% if form_errors(form.plainPassword.first)   %}
+                                    {{ form_widget(form.plainPassword.first,{'attr':{'placeholder':'Mot de passe','class':'brd-error'}}) }}
+                                {% else %}
+                                    {{ form_widget(form.plainPassword.first,{'attr':{'placeholder':'Mot de passe'}}) }}
+
+                                {% endif %}
+                                <div class="rsv-error text-right md-12 cl3 "> {{ form_errors(form.plainPassword.first) }}</div>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 {{ form_widget(form.plainPassword.second,{'attr':{'placeholder':"Confirmez votre Mot de passe"}}) }}

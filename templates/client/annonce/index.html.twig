@@ -72,7 +72,7 @@
                                 <th scope="row">{{ annonce.id }}</th>
                                 <th>{{ annonce.description | slice(0,100) }}</th>
                                 <th>{{ annonce.etat }}</th>
-                                <th>{{ annonce.artisan }}</th>
+                                <th>{{ annonce.affectationConfirme.artisanConfirme.artisan.nom }}</th>
                                 <th>{{ annonce.dateEnreg | date }}</th>
                                 <th>
                                     <a href="{{ path('client_annonce_view',{id:annonce.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>

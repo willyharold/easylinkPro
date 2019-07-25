@@ -37,13 +37,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="services-single-left-heading">
-                                <h4>Annonces en attente</h4>
+                                <h4>Annonces validées</h4>
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ path('artisan_annonce_valider') }}" class="btn btn-primary">Annonce validée</a>
+                            <a href="{{ path('artisan_annonces') }}" class="btn btn-primary">Retour</a>
                         </div>
-
                     </div>
                     <div class="row">
                         <br>
@@ -70,7 +69,7 @@
                                     <th>{{ annonce.etat }}</th>
                                     <th>{{ annonce.dateEnreg | date }}</th>
                                     <th>
-                                        <a href="{{ path('artisan_annonce_view',{id:annonce.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ path('artisan_annonce_valider_view',{id:annonce.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                     </th>
                                 </tr>
                             {% endfor %}

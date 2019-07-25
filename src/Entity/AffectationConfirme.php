@@ -33,9 +33,15 @@ class AffectationConfirme
      */
     private $artisanConfirme;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $etat;
+
     public function __construct()
     {
         $this->artisan = new ArrayCollection();
+        $this->etat = false;
     }
 
     public function getId(): ?int
@@ -89,6 +95,18 @@ class AffectationConfirme
     public function setArtisanConfirme(?User $artisanConfirme): self
     {
         $this->artisanConfirme = $artisanConfirme;
+
+        return $this;
+    }
+
+    public function getEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

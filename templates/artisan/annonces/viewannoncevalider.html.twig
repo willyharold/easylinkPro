@@ -29,7 +29,7 @@
                         <div class="services-single-left-heading">
                             <h4>Mon Menu</h4>
                         </div>
-                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:2})) }}
+                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:2}))}}
                         <!-- Vertical Menu END -->
 
                     </div>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ path('client_annonce') }}" class="btn btn-primary">Retour</a>
+                            <a href="{{ path('artisan_annonce_valider') }}" class="btn btn-primary">Retour</a>
                         </div>
                     </div>
                     <div class="row">
@@ -54,7 +54,7 @@
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <h5>Description de l'annonce</h5>
                                 <p class="text-justify">{{ annonce.description }}</p>
-                                <i></i>
+                                <p>Client: {{ annonce.client.prenom }} {{ annonce.client.nom }}, Adresse: {{ annonce.adresse }}</p>
 
                             </div>
                             <!-- Left Side End -->
@@ -77,50 +77,6 @@
                         </div>
 
                     </div>
-                    {% if annonce.affectationConfirme.etat == false  %}
-
-                    <div class="row">
-                        <div class="services-single-left-heading">
-                            <h4>Les artisans selectionnés pour vous !</h4>
-                        </div>
-                    </div>
-
-                    {% if annonce.affectationConfirme.artisan | length > 0 %}
-                        <div class="row mt-50">
-
-                            {% for artisan in annonce.affectationConfirme.artisan %}
-                            <div class="col-md-4 col-sm-6 col-xs-12">
-                                <div class="team-member">
-                                    <div class="team-member-img">
-                                        <img src="http://via.placeholder.com/358x298" alt="img">
-                                    </div>
-                                    <div class="team-member-text text-uppercase">
-                                        <h5><a href="#"> {{ artisan.artisan.nom }}</a></h5>
-                                        <div class="product-review-area">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                        </div>
-                                        {{ form_start(form) }}
-                                        <input type="hidden" name="form-artisan" value="{{ artisan.id }}">
-                                        <button type="submit" class="btn btn-block btn-primary">Me contacter</button>
-
-                                        {{ form_end(form) }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {% endfor %}
-
-                        </div>
-                    {% else %}
-                        <br>
-                        <p>Désolez, aucun artisan n'a postulé pour le moment !</p>
-                    {% endif %}
-
-                    {% endif %}
-
 
                 </div>
 
