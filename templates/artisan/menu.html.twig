@@ -1,12 +1,11 @@
 
 <div class="services-single-menu mt-30">
     <ul>
-        <li class="{% if id ==0  %} services-active {% endif %}"><a href="#">Tableau de bord</a></li>
-        <li class="{% if id ==1  %} services-active {% endif %}"><a href="#">Mes clients <span class="badge " style="float: right; margin-right: 5px; background-color: #0a74a7 ">2</span></a> </li>
-        <li class="{% if id ==2  %} services-active {% endif %}"><a href="{{ path("artisan_abonement")}}">Mon Abonement</a></li>
-        <li class="{% if id ==3  %} services-active {% endif %}"><a href="{{ path("artisan_annonces")}}">Mes Annonces</a></li>
-        <li class="{% if id ==4  %} services-active {% endif %}"><a href="{{ path("artisan_profile")}}">Mes Etats</a></li>
+        <li class="{% if id ==0  %} services-active {% endif %}"><a href="{{ path('artisan') }}">Tableau de bord</a></li>
+        <li class="{% if id ==2  %} services-active {% endif %}"><a href="{{ path("artisan_annonces")}}">Annonces</a></li>
+        <li class="{% if id ==3  %} services-active {% endif %}"><a href="{{ path("artisan_annonces")}}">Estimations</a></li>
+        <li class="{% if id ==4  %} services-active {% endif %}"><a href="{{ path("artisan_profile")}}">Mes avis</a></li>
         <li class="{% if id ==5  %} services-active {% endif %}"><a href="{{ path("artisan_profile")}}">Mes informations</a></li>
-        <li class=""><a href="#">Déconnexion</a></li>
+        <li class=""><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
     </ul>
 </div>

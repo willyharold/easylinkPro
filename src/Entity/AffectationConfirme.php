@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AffectationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AffectationConfirmeRepository")
  */
-class Affectation
+class AffectationConfirme
 {
     /**
      * @ORM\Id()
@@ -19,25 +19,23 @@ class Affectation
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Annonce", inversedBy="affectation", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Annonce", inversedBy="affectationConfirme", cascade={"persist", "remove"})
      */
     private $annonce;
 
-
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateEn;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="affectations")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="affectationConfirmes")
      */
     private $artisan;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     */
+    private $artisanConfirme;
 
     public function __construct()
     {
         $this->artisan = new ArrayCollection();
-        $this->dateEn = new \DateTime();
     }
 
     public function getId(): ?int
@@ -53,19 +51,6 @@ class Affectation
     public function setAnnonce(?Annonce $annonce): self
     {
         $this->annonce = $annonce;
-
-        return $this;
-    }
-
-
-    public function getDateEn(): ?\DateTimeInterface
-    {
-        return $this->dateEn;
-    }
-
-    public function setDateEn(\DateTimeInterface $dateEn): self
-    {
-        $this->dateEn = $dateEn;
 
         return $this;
     }
@@ -96,4 +81,15 @@ class Affectation
         return $this;
     }
 
+    public function getArtisanConfirme(): ?User
+    {
+        return $this->artisanConfirme;
+    }
+
+    public function setArtisanConfirme(?User $artisanConfirme): self
+    {
+        $this->artisanConfirme = $artisanConfirme;
+
+        return $this;
+    }
 }

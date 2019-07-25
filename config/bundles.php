@@ -25,4 +25,5 @@ return [
     FOS\OAuthServerBundle\FOSOAuthServerBundle::class => ['all' => true],
     App\Application\Sonata\MediaBundle\ApplicationSonataMediaBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
+    Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class => ['all' => true],
 ];

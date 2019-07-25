@@ -41,3 +41,10 @@ services:
         class: App\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+
+    admin.affectation:
+        class: App\Admin\AffectationAdmin
+        arguments: [~, App\Entity\Affectation, App\Controller\AffectationAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Affectation }
+        public: true

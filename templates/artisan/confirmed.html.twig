@@ -1,0 +1,88 @@
+{% extends "baseFosUser.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menuArtisan')) }}
+
+    <!-- Page Title START -->
+    <div class="page-title-section" style="background-image: url({{ asset('img/annonce.jpg') }});">
+        <div class="container">
+            <h1>Inscrivez vous</h1>
+            <ul>
+                <li><a href="{{ path('default') }}">Accueil</a></li>
+                <li><a href="#">Confirmation</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page Title END -->
+    <!-- Contact Form Section START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="section-heading center-holder">
+                <span>Compte validé</span>
+                <h3>Félécitation! Votre espace artisan a été activé.</h3>
+                <div class="section-heading-line"></div>
+            </div>
+            <div class="row mt-50">
+                <div class="contact-form-box">
+                    <!-- Form Start -->
+                    <form class="contact-form">
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <ul class="primary-list mt-35">
+                                <li><i class="fa fa-check"></i>Consulter les entreprises proposées</li>
+                                <li><i class="fa fa-check"></i>Consulter les réponses des professionels</li>
+                                <li><i class="fa fa-check"></i>Créer de nouvelles annonces</li>
+                                <li><i class="fa fa-check"></i>Consultés vos estimations et devis</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <div class="row mt-35" >
+                                <div class="col-md-12">
+                                    <div class="center-holder">
+                                        <a href="{{ path('artisan') }}" class="dark-button1 button-md" >Acceder a mon espace artisan</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row mt-35" >
+
+                                <div class="col-md-12">
+                                    <div class="center-holder">
+                                        <a href="#" class="dark-button1 button-md">Démander une estimation</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </form>
+                    <!-- Form End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Form Section END -->
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+{% endblock fos_user_content %}

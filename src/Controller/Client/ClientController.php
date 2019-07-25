@@ -2,6 +2,8 @@
 
 namespace App\Controller\Client;
 
+use App\Entity\Affectation;
+use App\Entity\AffectationConfirme;
 use App\Entity\Annonce;
 use App\Entity\Avis;
 use App\Entity\Specialite;
@@ -180,6 +182,13 @@ class ClientController extends Controller
                 $annonce->setEtat("En attente");
                 $em->persist($annonce);
 
+                $affectation = new Affectation();
+                $affectation->setAnnonce($annonce);
+                $affectationconfirmer = new AffectationConfirme();
+                $affectationconfirmer->setAnnonce($annonce);
+
+                $em->persist($affectation);
+                $em->persist($affectationconfirmer);
                 $em->flush();
 
                 $user = $this->getUser();

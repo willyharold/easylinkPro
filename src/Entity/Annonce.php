@@ -64,6 +64,11 @@ class Annonce
      */
     private $affectation;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\AffectationConfirme", mappedBy="annonce", cascade={"persist", "remove"})
+     */
+    private $affectationConfirme;
+
     public function __construct()
     {
         $this->sousSpectialite = new ArrayCollection();
@@ -202,4 +207,28 @@ class Annonce
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return "".$this->getId();
+    }
+
+    public function getAffectationConfirme(): ?AffectationConfirme
+    {
+        return $this->affectationConfirme;
+    }
+
+    public function setAffectationConfirme(?AffectationConfirme $affectationConfirme): self
+    {
+        $this->affectationConfirme = $affectationConfirme;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newAnnonce = $affectationConfirme === null ? null : $this;
+        if ($newAnnonce !== $affectationConfirme->getAnnonce()) {
+            $affectationConfirme->setAnnonce($newAnnonce);
+        }
+
+        return $this;
+    }
+
 }

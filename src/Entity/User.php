@@ -17,10 +17,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
  * @ORM\Table(name="user")
  * @UniqueEntity("email")
  * @UniqueEntity("username")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -98,7 +98,7 @@ class User extends BaseUser
     protected $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $civilite;
 
@@ -107,6 +107,16 @@ class User extends BaseUser
      */
     private $artisan;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Affectation", mappedBy="artisan")
+     */
+    private $affectations;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\AffectationConfirme", mappedBy="artisan")
+     */
+    private $affectationConfirmes;
+
     public function __construct()
     {
         parent::__construct();
@@ -114,6 +124,9 @@ class User extends BaseUser
         $this->dateEnreg = new \DateTime();
         $this->annonces = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->affectations = new ArrayCollection();
+        $this->affectationConfirmes = new ArrayCollection();
+        $this->civilite = "HOMME";
     }
 
     public function getNom(): ?string
@@ -370,6 +383,62 @@ class User extends BaseUser
         $newUser = $artisan === null ? null : $this;
         if ($newUser !== $artisan->getUser()) {
             $artisan->setUser($newUser);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Affectation[]
+     */
+    public function getAffectations(): Collection
+    {
+        return $this->affectations;
+    }
+
+    public function addAffectation(Affectation $affectation): self
+    {
+        if (!$this->affectations->contains($affectation)) {
+            $this->affectations[] = $affectation;
+            $affectation->addArtisan($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAffectation(Affectation $affectation): self
+    {
+        if ($this->affectations->contains($affectation)) {
+            $this->affectations->removeElement($affectation);
+            $affectation->removeArtisan($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AffectationConfirme[]
+     */
+    public function getAffectationConfirmes(): Collection
+    {
+        return $this->affectationConfirmes;
+    }
+
+    public function addAffectationConfirme(AffectationConfirme $affectationConfirme): self
+    {
+        if (!$this->affectationConfirmes->contains($affectationConfirme)) {
+            $this->affectationConfirmes[] = $affectationConfirme;
+            $affectationConfirme->addArtisan($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAffectationConfirme(AffectationConfirme $affectationConfirme): self
+    {
+        if ($this->affectationConfirmes->contains($affectationConfirme)) {
+            $this->affectationConfirmes->removeElement($affectationConfirme);
+            $affectationConfirme->removeArtisan($this);
         }
 
         return $this;

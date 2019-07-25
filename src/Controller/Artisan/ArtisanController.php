@@ -2,7 +2,18 @@
 
 namespace App\Controller\Artisan;
 
+use App\Entity\Affectation;
+use App\Entity\AffectationConfirme;
+use App\Entity\Annonce;
+use App\Repository\AffectationConfirmeRepository;
+use App\Repository\AffectationRepository;
+use App\Repository\AnnonceRepository;
+use Doctrine\Common\Persistence\ObjectManager;
+use Knp\Component\Pager\PaginatorInterface;
+use phpDocumentor\Reflection\Types\Resource_;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,12 +32,6 @@ class ArtisanController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/login", name="artisan_login")
-     */
-    public function login(){
-        return $this->render('artisan/register.html.twig');
-    }
 
     /**
      * @Route("/dashbord", name="artisan_dashbord")
@@ -59,18 +64,43 @@ class ArtisanController extends Controller
     /**
      * @Route("/annonces", name="artisan_annonces")
      */
-    public function annonces(){
-        return $this->render('artisan/annonces/annonces_list.html.twig', [
-            'controller_name' => 'ArtisanController',
-        ]);
+    public function annonces(AnnonceRepository $annonceRepository, PaginatorInterface $paginator, Request $request){
+
+        $queryBuilder = $annonceRepository->getWithSearchQueryBuilder1($this->getUser());
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            7/*limit per page*/
+        );
+
+        return $this->render('artisan/annonces/annonces_list.html.twig', ['pagination' => $pagination]);
     }
 
     /**
      * @Route("/annonces/{id}", name="artisan_annonce_view")
      */
-    public function annonce_view(){
+    public function annonce_view(Annonce $id, AnnonceRepository $annonceRepository, Request $request, ObjectManager $objectManager, AffectationRepository $affectationRepository, AffectationConfirmeRepository $affectationConfirmeRepository){
+
+        $form = $this->createForm(FormType::class,$id);
+
+        if($request->getMethod() == "POST"){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $affectation = $affectationRepository->findOneBy(["annonce"=>$id]);
+                $affectationconfirmer = $affectationConfirmeRepository->findOneBy(["annonce"=>$id]);
+                $affectationconfirmer->addArtisan($this->getUser());
+                $affectation->removeArtisan($this->getUser());
+                $objectManager->persist($affectation);
+                $objectManager->persist($affectationconfirmer);
+                $objectManager->flush();
+
+                return $this->redirectToRoute('artisan_annonces');
+
+            }
+        }
         return $this->render('artisan/annonces/annonce_view.html.twig', [
-            'controller_name' => 'ArtisanController',
+            'annonce' => $id,'form'=>$form->createView()
         ]);
     }
 

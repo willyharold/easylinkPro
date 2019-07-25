@@ -40,7 +40,7 @@
                         <div class="services-single-left-heading">
                             <h4>Mon Menu</h4>
                         </div>
-                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:3}))}}
+                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:2}))}}
                         <!-- Vertical Menu END -->
 
                     </div>
@@ -52,36 +52,37 @@
                     <div class="col-md-9 col-sm-7 mt-15">
                         <aside class="mt-35">
                             <article class="card-body p-5 pl-20">
-                                <h3 class="title mb-10 text-uppercase">Original Version of Some product name</h3>
+                                <h3 class="title mb-10 text-uppercase">Annonce #{{ annonce.id }}</h3>
                                 <p class="price-detail-wrap mb-5">
                                     <span class="price h3 text-warning">
-                                        <span class="num">Ploberie</span>
+                                        {% for sousspectialite in annonce.sousSpectialite %}
+                                            <span class="badge">{{ sousspectialite }}</span>
+                                        {% endfor %}
                                     </span>
                                 </p> <!-- price-detail-wrap .// -->
                                 <dl class="item-property mt-10">
                                     <dt>Description</dt>
                                     <dd>
-                                        <p>Here goes description consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco </p>
+                                        <p style="text-align: justify">{{ annonce.description }}</p>
                                     </dd>
                                 </dl>
-                                <dl class="param param-feature">
-                                    <dt>Model#</dt>
-                                    <dd>12345611</dd>
-                                </dl>  <!-- item-property-hor .// -->
+
                                 <dl class="param param-feature">
                                     <dt>Client</dt>
-                                    <dd>Jean</dd>
+                                    <dd>{{ annonce.client.prenom }} {{ annonce.client.nom }}</dd>
                                 </dl>  <!-- item-property-hor .// -->
                                 <dl class="param param-feature">
-                                    <dt>Delivery</dt>
-                                    <dd>Russia, USA, and Europe</dd>
+                                    <dt>Adresse</dt>
+                                    <dd>{{ annonce.client.adresse }}</dd>
                                 </dl>  <!-- item-property-hor .// -->
 
-                                <a href="#" class="btn btn-lg btn-primary">Confirmer</a>
-                                <a href="#" class="btn btn-lg btn-success">Estimation</a>
-                                <a href="{{ path("artisan_annonces")}}" class="btn btn-lg btn-default"></i>Liste</a>
+                                <div style="float: right">
+                                    {{ form_start(form) }}
+                                    <a href="#" class="btn btn-lg btn-danger">Refuser</a>
+                                    <button type="submit" class="btn btn-lg btn-primary">Accepter</button>
+                                    {{ form_end(form) }}
+                                </div>
+
                             </article> <!-- card-body.// -->
                         </aside>
                     </div>

@@ -20,7 +20,7 @@ class ArtisanType extends AbstractType
                 'widget' => 'single_text',
                 // prevents rendering it as type="date", to avoid HTML5 date pickers
                 'html5' => false,
-                'format' => 'dd-mm-yyyy',
+                'format' => 'dd-MM-yyyy',
                 // adds a class that can be selected in JavaScript
                 'attr' => ['class' => 'js-datepicker'],
                 'placeholder'=> "Date de creation de l'entreprise"

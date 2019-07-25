@@ -8,3 +8,4 @@ fos_user_security_artisan_check:
 fos_user_security_artisan_logout:
   path: /artisan/logout
   defaults: { _controller: "FOSUserBundle:Security:logout" }
+
