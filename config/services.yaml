@@ -48,3 +48,45 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Affectation }
         public: true
+
+    admin.affectation_confirme:
+        class: App\Admin\AffectationConfirmeAdmin
+        arguments: [~, App\Entity\AffectationConfirme, App\Controller\AffectationConfirmeAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Affectation Confirme }
+        public: true
+
+    admin.annonce:
+        class: App\Admin\AnnonceAdmin
+        arguments: [~, App\Entity\Annonce, App\Controller\AnnonceAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Annonce }
+        public: true
+
+    admin.artisan:
+        class: App\Admin\ArtisanAdmin
+        arguments: [~, App\Entity\Artisan, App\Controller\ArtisanAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Artisan }
+        public: true
+
+    admin.sous_specialite:
+        class: App\Admin\SousSpecialiteAdmin
+        arguments: [~, App\Entity\SousSpecialite, App\Controller\SousSpecialiteAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Sous catégorie }
+        public: true
+
+    admin.specialite:
+        class: App\Admin\SpecialiteAdmin
+        arguments: [~, App\Entity\Specialite, App\Controller\SpecialiteAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Catégorie }
+        public: true
+
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: User }
+        public: true
