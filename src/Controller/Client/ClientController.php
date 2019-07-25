@@ -105,7 +105,7 @@ class ClientController extends Controller
                 $message = (new \Swift_Message('Information du client'))
                     ->setFrom('support@easylink.com')
                     ->setTo($artisan->getEmail())
-                    ->setBody('email pour donnée les informations du client')
+                    ->setBody('email pour donner les informations du client')
                 ;
                 $mailer->send($message);
 
@@ -113,7 +113,7 @@ class ClientController extends Controller
                 $message = (new \Swift_Message("Information de l'artisan"))
                     ->setFrom('support@easylink.com')
                     ->setTo($this->getUser()->getEmail())
-                    ->setBody("email pour donnée les informations de l'artisan")
+                    ->setBody("email pour donner les informations de l'artisan")
                 ;
 
                 $mailer->send($message);
@@ -154,7 +154,7 @@ class ClientController extends Controller
                 $message = (new \Swift_Message('Nouvelle annonce'))
                     ->setFrom('support@easylink.com')
                     ->setTo($user->getEmail())
-                    ->setBody('email pour dire les informations ont été modifie')
+                    ->setBody('email pour dire les informations ont été modifiées')
                 ;
 
                 $mailer->send($message);
@@ -184,7 +184,7 @@ class ClientController extends Controller
                 $em->flush();
 
                 $session = new Session();
-                $session->getFlashBag()->add('annonce',"Votre annonce a été modifié");
+                $session->getFlashBag()->add('annonce',"Votre annonce a été modifiée");
 
                 return $this->redirectToRoute("client_annonce");
             }
