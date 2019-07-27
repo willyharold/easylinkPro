@@ -67,7 +67,7 @@
                                         <li><span>Catégorie : {{ annonce.sousSpectialite[0].specialite }}</span> </li>
                                         <li><span>Spécialité :{% for sousspecialite in annonce.sousSpectialite %} <span class="badge" style="color: white;background-color: #0a74a7">{{ sousspecialite }}</span> {% endfor %}</span> </li>
                                         <li><span>Status :</span> {{ annonce.etat }}</li>
-                                        <li><span>Artisan :</span> {{ annonce.affectationConfirme.artisanConfirme.artisan.nom }}</li>
+                                        <li><span>Artisan :</span> {% if annonce.affectationConfirme.artisanConfirme.artisan is defined %} {{ annonce.affectationConfirme.artisanConfirme.artisan.nom }} {% endif %} </li>
                                         <li><span>Date :</span> {{ annonce.dateEnreg | date }}</li>
 
                                     </ul>

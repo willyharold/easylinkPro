@@ -2,11 +2,18 @@
 
 namespace App\Controller\Index;
 
+use App\Entity\Affectation;
+use App\Entity\AffectationConfirme;
+use App\Entity\Annonce;
 use App\Entity\Specialite;
+use App\Form\Annonce2Type;
 use App\Repository\SpecialiteRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DefaultController extends Controller
 {
@@ -61,17 +68,60 @@ class DefaultController extends Controller
     /**
      * @Route("/annonce", name="annonce")
      */
-    public function annonce(SpecialiteRepository $sprepo,Request $request){
+    public function annonce(\Swift_Mailer $mailer, ObjectManager $em,SpecialiteRepository $sprepo,Request $request,  AuthorizationCheckerInterface $authChecker){
         /**
          * @var Specialite $specialite
          */
         $specialite = $sprepo->findAll();
 
+        $annonce = new Annonce();
+        $form = $this->createForm(Annonce2Type::class,$annonce);
+
         if($request->isMethod("POST")) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                if($authChecker->isGranted('ROLE_USER')){
+                    $annonce->setEtat("En attente");
+                    $annonce->setClient($this->getUser());
+                    $em->persist($annonce);
+
+                    $affectation = new Affectation();
+                    $affectation->setAnnonce($annonce);
+                    $affectationconfirmer = new AffectationConfirme();
+                    $affectationconfirmer->setAnnonce($annonce);
+
+                    $em->persist($affectation);
+                    $em->persist($affectationconfirmer);
+                    $em->flush();
+
+                    $user = $this->getUser();
+
+                    $message = (new \Swift_Message('Nouvelle annonce'))
+                        ->setFrom('support@easylink.com')
+                        ->setTo($user->getEmail())
+                        ->setBody('l annonce enregistrer besoin dun texte pour sa')
+                    ;
+
+                    $mailer->send($message);
+                    $session = new Session();
+                    $session->getFlashBag()->add('annonce',"Votre annonce a été enregistré");
+
+                    return $this->redirectToRoute("client_annonce");
+                }
+                else{
+                    $annonce->setEtat("En attente");
+                    $em->persist($annonce);
+                    $em->flush();
+                    $session = new Session();
+                    $session->set('annonceId',$annonce->getId());
+                    return $this->redirectToRoute("fos_user_registration_register");
+
+                }
+            }
 
         }
         return $this->render('client/annonce.html.twig', [
-            'controller_name' => 'ClientController',
+            'form' => $form->createView(),
             'categories' => $specialite
         ]);
     }

@@ -58,6 +58,8 @@ security:
     - { path: ^/artisan/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/artisan/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/artisan/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/artisan, role: ROLE_ARTISAN }
+    - { path: ^/artisan$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/client/specialite/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/artisan/, role: ROLE_ARTISAN }
     - { path: ^/client, role: ROLE_USER }
     - { path: ^/admin/, role: IS_AUTHENTICATED_ANONYMOUSLY }

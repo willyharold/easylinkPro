@@ -19,11 +19,18 @@
                             <h4>Inscrivez-vous</h4>
                             <div class="section-heading-line"></div>
                         </div>
+
+                        {% if app.session.get('annonceId') %}
+                            <div class="alert alert-info">
+                                Terminer votre inscription afin de poster votre annonce !
+                            </div>
+                        {% endif %}
                         {% if form_errors(form) %}
                         <div class="alert alert-danger">
                             {{ form_errors(form) }}
                         </div>
                         {% endif %}
+
                         <div class="col-sm-12 col-lg-12 col-md-12" >
                             {% if form_errors(form.email)   %}
                                 {{ form_widget(form.email,{'attr':{'placeholder':'Email','class':'brd-error'}}) }}

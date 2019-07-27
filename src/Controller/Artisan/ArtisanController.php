@@ -25,11 +25,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArtisanController extends Controller
 {
     /**
-     * @Route("/", name="artisan")
+     * @Route("", name="artisan")
      */
     public function index()
     {
-        return $this->render('artisan/dashboard/index.html.twig', [
+        return $this->render('artisan/index.html.twig', [
             'controller_name' => 'ArtisanController',
         ]);
     }

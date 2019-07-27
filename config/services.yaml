@@ -90,3 +90,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: User }
         public: true
+
+
+    annonce:
+        class: App\Event\AnnonceEvent
+        arguments: ["@session","@doctrine.orm.entity_manager","@swiftmailer.mailer"]
+        tags:
+            - { name: kernel.event_listener, event: fos_user.registration.confirmed, method: annonceOnConfirmed }

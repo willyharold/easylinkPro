@@ -46,7 +46,14 @@ class ClientController extends Controller
     public function specialite($id = 0){
         $em = $this->getDoctrine()->getManager();
         $specialite = $em->getRepository("App:Specialite")->findOneById($id);
-        $sousspecialite = $em->getRepository("App:SousSpecialite")->findBySpecialite($specialite);
+        if($specialite){
+            $sousspecialite = $em->getRepository("App:SousSpecialite")->findBySpecialite($specialite);
+
+        }
+        else{
+            $sousspecialite = $em->getRepository("App:SousSpecialite")->findAll();
+
+        }
         return $this->render('client/annonce-sousspecialite-js.html.twig',[
             'sousspecialites' => $sousspecialite
         ]);

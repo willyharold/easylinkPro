@@ -37,6 +37,7 @@
                     <div class="contact-form-box mt-30">
                         <!-- Form START -->
                         <form class="contact-form" method="post" action="{{ path('annonce') }}">
+                            {{ form_start(form, {'attr': {'class': 'contact-form'}}) }}
                             <div class="row">
                                 <div class="col-md-12">
                                     <select id="form-specialite" name="form-specialite" required onchange="updatesous()" >
@@ -47,19 +48,17 @@
                                     </select>
                                 </div>
                                 <div class="col-md-12">
-                                    <select id="form-sousspecialite" name="form-sousspecialite" required >
-                                        <option value="">Type de travaux</option>
-                                    </select>
+                                    {{ form_widget(form.sousSpectialite) }}
                                 </div>
 
                                 <div class="col-md-12">
-                                    <textarea name="form-message" required placeholder="Description detaillé des travaux requis"></textarea>
+                                    {{ form_widget(form.description) }}
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" name="form-adresse" required placeholder="Adresse">
+                                    {{ form_widget(form.adresse) }}
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="number" name="form-poste" required placeholder="Code postal">
+                                    {{ form_widget(form.codePostale) }}
                                 </div>
 
 
@@ -69,6 +68,7 @@
                                     <button type="submit">Envoyer</button>
                                 </div>
                             </div>
+                            {{ form_end(form) }}
                         </form>
                         <!-- Form END -->
                     </div>
@@ -149,16 +149,16 @@
             method: "GET"
            ,
             success:function(data){
-                var element = document.getElementById("form-sousspecialite");
+                var element = document.getElementById("annonce2_sousSpectialite");
                 while (element.firstChild) {
                     element.removeChild(element.firstChild);
                 }
-                $('#form-sousspecialite').append(data);
+                $('#annonce2_sousSpectialite').append(data);
 
             },
             error:function (er) {
 
-                var element = document.getElementById("form-sousspecialite");
+                var element = document.getElementById("annonce2_sousSpectialite");
                 while (element.firstChild) {
                     element.removeChild(element.firstChild);
                 }
@@ -167,5 +167,12 @@
         });
 
     }
+    $(document).ready(function() {
+        new SlimSelect({
+            select: '#annonce2_sousSpectialite',
+
+        })
+
+    });
 </script>
 {% endblock %}
