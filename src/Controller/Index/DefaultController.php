@@ -41,6 +41,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/trouverUnPro", name="trouverUnPro")
+     */
+    public function trouverUnPro()
+    {
+        return $this->render('default/trouverunpro.html.twig', []);
+    }
+
+    /**
      * @Route("/blog", name="blog")
      */
     public function blog()

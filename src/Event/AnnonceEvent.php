@@ -34,6 +34,9 @@ class AnnonceEvent
     public function annonceOnConfirmed(FilterUserResponseEvent $event)
     {
         $id = $this->session->get("annonceId");
+        if( !$id){
+            $id = 0;
+        }
         /**
          * @var Annonce $annonce
          */
@@ -64,6 +67,11 @@ class AnnonceEvent
             $session->getFlashBag()->add('annonce',"Votre annonce a été enregistrée");
             $this->session->remove("annonceId");
         }
+
+        $user = $event->getUser();
+        $user->addRole("ROLE_CLIENT");
+        $this->em->merge($user);
+        $this->em->flush();
 
 
 

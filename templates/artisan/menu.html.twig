@@ -5,7 +5,7 @@
         <li class="{% if id ==2  %} services-active {% endif %}"><a href="{{ path("artisan_annonces")}}">Annonces <span class="badge " style="float: right; margin-right: 5px; background-color: #0a74a7 ">{{ render(controller('App\\Controller\\Artisan\\ArtisanController::nbrAnnonce')) }}</span></a></li>
         <li class="{% if id ==3  %} services-active {% endif %}"><a href="#">Estimations</a></li>
         <li class="{% if id ==4  %} services-active {% endif %}"><a href="#">Mes avis</a></li>
-        <li class="{% if id ==5  %} services-active {% endif %}"><a href="{{ path("artisan_profile")}}">Mes informations</a></li>
+        <li class="{% if id ==5  %} services-active {% endif %}"><a href="#">Mes informations</a></li>
         <li class=""><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
     </ul>
 </div>

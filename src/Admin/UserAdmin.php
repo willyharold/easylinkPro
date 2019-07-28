@@ -95,7 +95,7 @@ final class UserAdmin extends AbstractAdmin
                     ->add('plainPassword',PasswordType::class, ["label"=>"Mot de passe"])
                     ->add('roles', ChoiceType::class, [
                         'choices' => [
-                            'CLIENT' => 'ROLE_USER',
+                            'CLIENT' => 'ROLE_CLIENT',
                             'ARTISAN' => 'ROLE_ARTISAN',
                             'ADMINISTRATEUR' => 'ROLE_SUPER_ADMIN',
                         ],

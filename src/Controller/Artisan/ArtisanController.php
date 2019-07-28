@@ -39,9 +39,7 @@ class ArtisanController extends Controller
      * @Route("/dashbord", name="artisan_dashbord")
      */
     public function dashbord(){
-        return $this->render('artisan/dashbord.html.twig', [
-            'controller_name' => 'ArtisanController',
-        ]);
+        return $this->render('artisan/dashboard/index.html.twig', []);
     }
 
     /**

@@ -59,12 +59,6 @@ class ClientController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/register", name="client_register")
-     */
-    public function register(){
-        return $this->render('client/register.html.twig');
-    }
 
     /**
      * @Route("/annonce", name="client_annonce")

@@ -25,7 +25,7 @@ security:
                 login_path: fos_user_security_artisan_login
                 check_path: fos_user_security_artisan_check
                 always_use_default_target_path: true
-                default_target_path: /artisan
+                default_target_path: /artisan/dashbord
 
             logout:
                 path: fos_user_security_artisan_logout
@@ -61,5 +61,5 @@ security:
     - { path: ^/artisan$, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/client/specialite/, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/artisan/, role: ROLE_ARTISAN }
-    - { path: ^/client, role: ROLE_USER }
+    - { path: ^/client, role: ROLE_CLIENT }
     - { path: ^/admin/, role: IS_AUTHENTICATED_ANONYMOUSLY }
