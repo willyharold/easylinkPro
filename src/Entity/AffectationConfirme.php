@@ -20,6 +20,7 @@ class AffectationConfirme
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Annonce", inversedBy="affectationConfirme", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $annonce;
 
@@ -29,7 +30,8 @@ class AffectationConfirme
     private $artisan;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $artisanConfirme;
 
@@ -37,6 +39,12 @@ class AffectationConfirme
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $etat;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Estimation", inversedBy="affectationConfirme")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $estimation;
 
     public function __construct()
     {
@@ -107,6 +115,18 @@ class AffectationConfirme
     public function setEtat(bool $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getEstimation(): ?Estimation
+    {
+        return $this->estimation;
+    }
+
+    public function setEstimation(?Estimation $estimation): self
+    {
+        $this->estimation = $estimation;
 
         return $this;
     }

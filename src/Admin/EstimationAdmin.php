@@ -10,14 +10,22 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-final class AffectationConfirmeAdmin extends AbstractAdmin
+final class EstimationAdmin extends AbstractAdmin
 {
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
             ->add('id')
+            ->add('dateEn')
             ->add('etat')
+            ->add('typeBien')
+            ->add('debutTravaux')
+            ->add('ville')
+            ->add('addresse')
+            ->add('description')
+            ->add('codepostal')
+            ->add('titre')
             ;
     }
 
@@ -26,10 +34,15 @@ final class AffectationConfirmeAdmin extends AbstractAdmin
         $listMapper
             ->add('id')
             ->add('etat')
-            ->add('annonce')
-            ->add('estimation')
-            ->add('artisan')
-            ->add('artisanConfirme')
+            ->add('typeBien')
+            ->add('debutTravaux')
+            ->add('ville')
+            ->add('addresse')
+            ->add('description')
+            ->add('codepostal')
+            ->add('titre')
+            ->add('client')
+            ->add('dateEn')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -43,10 +56,14 @@ final class AffectationConfirmeAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('etat')
-            ->add('annonce')
-            ->add('estimation')
-            ->add('artisan')
-            ->add('artisanConfirme')
+            ->add('typeBien')
+            ->add('debutTravaux')
+            ->add('ville')
+            ->add('addresse')
+            ->add('description')
+            ->add('codepostal')
+            ->add('titre')
+            ->add('client')
             ;
     }
 
@@ -54,11 +71,16 @@ final class AffectationConfirmeAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
+            ->add('dateEn')
             ->add('etat')
-            ->add('annonce')
-            ->add('estimation')
-            ->add('artisan')
-            ->add('artisanConfirme')
+            ->add('typeBien')
+            ->add('debutTravaux')
+            ->add('ville')
+            ->add('addresse')
+            ->add('description')
+            ->add('codepostal')
+            ->add('titre')
+            ->add('client')
             ;
     }
 }

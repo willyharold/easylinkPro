@@ -5,9 +5,13 @@ namespace App\Controller\Artisan;
 use App\Entity\Affectation;
 use App\Entity\AffectationConfirme;
 use App\Entity\Annonce;
+use App\Entity\ArtisanEtat;
+use App\Entity\Estimation;
 use App\Repository\AffectationConfirmeRepository;
 use App\Repository\AffectationRepository;
 use App\Repository\AnnonceRepository;
+use App\Repository\ArtisanEtatRepository;
+use App\Repository\EstimationRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Knp\Component\Pager\PaginatorInterface;
 use phpDocumentor\Reflection\Types\Resource_;
@@ -64,7 +68,7 @@ class ArtisanController extends Controller
     /**
      * @Route("/annonces", name="artisan_annonces")
      */
-    public function annonces(AnnonceRepository $annonceRepository, PaginatorInterface $paginator, Request $request){
+    public function annonces(AnnonceRepository $annonceRepository, PaginatorInterface $paginator, Request $request, ArtisanEtatRepository $artisanEtatRepository){
 
         $queryBuilder = $annonceRepository->getWithSearchQueryBuilder1($this->getUser());
         $pagination = $paginator->paginate(
@@ -73,7 +77,12 @@ class ArtisanController extends Controller
             7/*limit per page*/
         );
 
-        return $this->render('artisan/annonces/annonces_list.html.twig', ['pagination' => $pagination]);
+        /**
+         * @var ArtisanEtat[] $tabArtisanEtat
+         */
+        $tabArtisanEtat = $artisanEtatRepository->findBy(["artisan"=>$this->getUser()]) ;
+
+        return $this->render('artisan/annonces/annonces_list.html.twig', ['pagination' => $pagination,'tabartisan'=>$tabArtisanEtat]);
     }
 
     /**
@@ -108,11 +117,27 @@ class ArtisanController extends Controller
     }
 
     /**
+     * @Route("/estimationValider/view/{id}", name="artisan_estimation_valider_view")
+     */
+    public function view_estimation_valider($id, EstimationRepository $estimationRepository, Request $request)
+    {
+
+        /**
+         * @var Annonce $annonce
+         */
+        $estimation = $estimationRepository->findOneBy(["id"=>$id]);
+
+
+        return $this->render('artisan/annonces/viewannoncevalider.html.twig', ["estimation" => $estimation]);
+    }
+
+    /**
      * @Route("/annonces/{id}", name="artisan_annonce_view")
      */
-    public function annonce_view(Annonce $id, \Swift_Mailer $mailer, AnnonceRepository $annonceRepository, Request $request, ObjectManager $objectManager, AffectationRepository $affectationRepository, AffectationConfirmeRepository $affectationConfirmeRepository){
+    public function annonce_view(Annonce $id, \Swift_Mailer $mailer, ArtisanEtatRepository $artisanEtatRepository ,AnnonceRepository $annonceRepository, Request $request, ObjectManager $objectManager, AffectationRepository $affectationRepository, AffectationConfirmeRepository $affectationConfirmeRepository){
 
         $form = $this->createForm(FormType::class,$id);
+        $etat = $artisanEtatRepository->findOneBy(["artisan"=>$this->getUser(),"annonce"=>$id]);
 
         if($request->getMethod() == "POST"){
             $form->handleRequest($request);
@@ -121,9 +146,14 @@ class ArtisanController extends Controller
                 $affectation = $affectationRepository->findOneBy(["annonce"=>$id]);
                 $affectationconfirmer = $affectationConfirmeRepository->findOneBy(["annonce"=>$id]);
                 $affectationconfirmer->addArtisan($this->getUser());
-                $affectation->removeArtisan($this->getUser());
+                //$affectation->removeArtisan($this->getUser());
+                $id->setEtat("Selectionner");
+
                 $objectManager->persist($affectation);
                 $objectManager->persist($affectationconfirmer);
+                $etat->setEtat("Confirmer");
+                $objectManager->merge($etat);
+                $objectManager->merge($id);
                 $objectManager->flush();
 
                 $session = new Session();
@@ -143,10 +173,56 @@ class ArtisanController extends Controller
             }
         }
         return $this->render('artisan/annonces/annonce_view.html.twig', [
-            'annonce' => $id,'form'=>$form->createView()
+            'annonce' => $id,'form'=>$form->createView(),"etat"=>$etat
         ]);
     }
 
+    /**
+     * @Route("/estimations/{id}", name="artisan_estimation_view")
+     */
+    public function estimation_view(Estimation $id, \Swift_Mailer $mailer,ArtisanEtatRepository $artisanEtatRepository, EstimationRepository $estimationRepository, Request $request, ObjectManager $objectManager, AffectationRepository $affectationRepository, AffectationConfirmeRepository $affectationConfirmeRepository){
+
+        $form = $this->createForm(FormType::class,$id);
+        $etat = $artisanEtatRepository->findOneBy(["artisan"=>$this->getUser(),"estimation"=>$id]);
+
+        if($request->getMethod() == "POST"){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $affectation = $affectationRepository->findOneBy(["estimation"=>$id]);
+                $affectationconfirmer = $affectationConfirmeRepository->findOneBy(["estimation"=>$id]);
+                $affectationconfirmer->addArtisan($this->getUser());
+                //$affectation->removeArtisan($this->getUser());
+                $objectManager->persist($affectation);
+                $objectManager->persist($affectationconfirmer);
+
+                $etat->setEtat("Confirmer");
+                $id->setEtat("Selectionner");
+                $objectManager->merge($id);
+                $objectManager->merge($etat);
+                $objectManager->flush();
+
+                $session = new Session();
+                $session->getFlashBag()->add('estimation',"Le client a été contacté");
+
+                $user = $this->getUser();
+
+                $message = (new \Swift_Message("Information de l'estimation"))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($id->getClient()->getEmail())
+                    ->setBody("email pour informer le client qu'un artisan a postuler pour l'estimation")
+                ;
+                $mailer->send($message);
+
+                return $this->redirectToRoute('artisan_estimation');
+
+            }
+        }
+
+        return $this->render('artisan/estimation/estimation_view.html.twig', [
+            'estimation' => $id,'form'=>$form->createView(),'etat'=>$etat
+        ]);
+    }
 
     /**
      * @Route("/abonement", name="artisan_abonement")
@@ -157,10 +233,50 @@ class ArtisanController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/estimations", name="artisan_estimation")
+     */
+    public function estimation(PaginatorInterface $paginator,EstimationRepository $estimationRepository, ArtisanEtatRepository $artisanEtatRepository, Request $request){
+
+        $queryBuilder = $estimationRepository->getWithSearchQueryBuilder1($this->getUser());
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            7/*limit per page*/
+        );
+
+        /**
+         * @var ArtisanEtat[] $tabArtisanEtat
+         */
+        $tabArtisanEtat = $artisanEtatRepository->findBy(["artisan"=>$this->getUser()]) ;
+        return $this->render('artisan/estimation/estimation.html.twig', ['pagination' => $pagination,'tabartisan'=>$tabArtisanEtat]);
+    }
+
+    /**
+     * @Route("/estimationsValider", name="artisan_estimation_valider")
+     */
+    public function estimationValider(PaginatorInterface $paginator,EstimationRepository $estimationRepository, Request $request){
+
+        $queryBuilder = $estimationRepository->getWithSearchQueryBuilder2($this->getUser());
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            7/*limit per page*/
+        );
+
+        return $this->render('artisan/estimation/estimation_valider.html.twig', ['pagination' => $pagination]);
+    }
+
+
 
     public function nbrAnnonce(Request $request, AnnonceRepository $annonceRepository){
         $annonces = $annonceRepository->getWithSearchQueryBuilder1result($this->getUser());
         return new Response(count($annonces));
+    }
+
+    public function nbrEstimation(Request $request, EstimationRepository $estimationRepository){
+        $estimation = $estimationRepository->getWithSearchQueryBuilder1result($this->getUser());
+        return new Response(count($estimation));
     }
 
 }

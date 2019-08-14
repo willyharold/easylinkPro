@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Navbar END -->
+
+
+
+    <!-- Contact Section START -->
+    <div class="section-block">
+        <div class="container">
+            <div class="row">
+                <!-- Left Side START -->
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="services-single-left-box">
+
+                        <!-- Vertical Menu START -->
+                        <div class="services-single-left-heading">
+                            <h4>Mon Menu</h4>
+                        </div>
+                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:2})) }}
+                        <!-- Vertical Menu END -->
+
+                    </div>
+                </div>
+                <!-- Left Side END -->
+
+                <!-- Right Side START -->
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="services-single-left-heading">
+                                <h4>Détails de l'estimation</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ path('client_estimation') }}" class="btn btn-primary">Retour</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="project-single-text">
+                            <!-- Left Side Start -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <h5>Description de l'estimation</h5>
+                                <p class="text-justify">{{ estimation.description }}</p>
+                                <i></i>
+
+                            </div>
+                            <!-- Left Side End -->
+
+                            <!-- Right Side Start -->
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <h5>Information de l'estimation</h5>
+                                <div class="project-single-info">
+                                    <ul>
+                                        <li><span>Catégorie : {{ estimation.specialite }}</span> </li>
+                                        <li><span>Spécialité :{% for sousspecialite in estimation.sousSpecialite %} <span class="badge" style="color: white;background-color: #0a74a7">{{ sousspecialite }}</span> {% endfor %}</span> </li>
+                                        <li><span>Status :</span> {{ estimation.etat }}</li>
+                                        <li><span>Artisan :</span>   {% if estimation.affectationConfirme.artisanConfirme.artisan is defined %} {{ estimation.affectationConfirme.artisanConfirme.artisan.nom }} {% endif %} </li>
+                                        <li><span>Date :</span> {{ estimation.dateEn | date }}</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Right Side End -->
+                        </div>
+
+                    </div>
+                    {% if estimation.affectationConfirme.etat == false  %}
+
+                    <div class="row">
+                        <div class="services-single-left-heading">
+                            <h4>Les artisans selectionnés pour vous !</h4>
+                        </div>
+                    </div>
+
+                    {% if estimation.affectationConfirme.artisan | length > 0 %}
+                        <div class="row mt-50">
+
+                            {% for artisan in estimation.affectationConfirme.artisan %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="team-member">
+                                    <div class="team-member-img">
+                                        <img src="http://via.placeholder.com/358x298" alt="img">
+                                    </div>
+                                    <div class="team-member-text text-uppercase">
+                                        <h5><a href="#"> {{ artisan.artisan.nom }}</a></h5>
+                                        <div class="product-review-area">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </div>
+                                        {{ form_start(form) }}
+                                        <input type="hidden" name="form-artisan" value="{{ artisan.id }}">
+                                        <button type="submit" class="btn btn-block btn-primary">Me contacter</button>
+
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    {% else %}
+                        <br>
+                        <p>Désolez, aucun artisan n'a postulé pour le moment !</p>
+                    {% endif %}
+
+                    {% endif %}
+
+
+                </div>
+
+
+                <!-- Right Side END -->
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section END -->
+
+
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}

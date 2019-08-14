@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-final class AffectationConfirmeAdmin extends AbstractAdmin
+final class ArtisanEtatAdmin extends AbstractAdmin
 {
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
@@ -18,6 +18,9 @@ final class AffectationConfirmeAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('etat')
+            ->add('annonce')
+            ->add('estimation')
+            ->add('artisan')
             ;
     }
 
@@ -29,7 +32,6 @@ final class AffectationConfirmeAdmin extends AbstractAdmin
             ->add('annonce')
             ->add('estimation')
             ->add('artisan')
-            ->add('artisanConfirme')
             ->add('_action', null, [
                 'actions' => [
                     'show' => [],
@@ -42,11 +44,11 @@ final class AffectationConfirmeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
+
             ->add('etat')
             ->add('annonce')
             ->add('estimation')
             ->add('artisan')
-            ->add('artisanConfirme')
             ;
     }
 
@@ -55,10 +57,6 @@ final class AffectationConfirmeAdmin extends AbstractAdmin
         $showMapper
             ->add('id')
             ->add('etat')
-            ->add('annonce')
-            ->add('estimation')
-            ->add('artisan')
-            ->add('artisanConfirme')
             ;
     }
 }

@@ -69,6 +69,11 @@ class Annonce
      */
     private $affectationConfirme;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ArtisanEtat", mappedBy="annonce", cascade={"persist", "remove"})
+     */
+    private $artisanEtat;
+
     public function __construct()
     {
         $this->sousSpectialite = new ArrayCollection();
@@ -226,6 +231,24 @@ class Annonce
         $newAnnonce = $affectationConfirme === null ? null : $this;
         if ($newAnnonce !== $affectationConfirme->getAnnonce()) {
             $affectationConfirme->setAnnonce($newAnnonce);
+        }
+
+        return $this;
+    }
+
+    public function getArtisanEtat(): ?ArtisanEtat
+    {
+        return $this->artisanEtat;
+    }
+
+    public function setArtisanEtat(?ArtisanEtat $artisanEtat): self
+    {
+        $this->artisanEtat = $artisanEtat;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newAnnonce = $artisanEtat === null ? null : $this;
+        if ($newAnnonce !== $artisanEtat->getAnnonce()) {
+            $artisanEtat->setAnnonce($newAnnonce);
         }
 
         return $this;

@@ -49,6 +49,16 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/attribuEstimation/{id}", name="attribuEstimation")
+     */
+    public function attribuEstimation($id=0,Request $request, SpecialiteRepository $specialiteRepository)
+    {
+
+        $specialite = $specialiteRepository->find($id);
+        return $this->render('client/estimation/attribut-estimation-js.html.twig', ["specialite"=>$specialite]);
+    }
+
+    /**
      * @Route("/blog", name="blog")
      */
     public function blog()

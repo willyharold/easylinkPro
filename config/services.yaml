@@ -79,7 +79,7 @@ services:
 
     admin.specialite:
         class: App\Admin\SpecialiteAdmin
-        arguments: [~, App\Entity\Specialite, App\Controller\SpecialiteAdminController]
+        arguments: [~, App\Entity\Specialite, App\Controller\SpecialiteAdminController,"@doctrine.orm.entity_manager","@swiftmailer.mailer"]
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Catégorie }
         public: true
@@ -97,3 +97,24 @@ services:
         arguments: ["@session","@doctrine.orm.entity_manager","@swiftmailer.mailer"]
         tags:
             - { name: kernel.event_listener, event: fos_user.registration.confirmed, method: annonceOnConfirmed }
+
+    admin.attribut_add:
+        class: App\Admin\AttributAddAdmin
+        arguments: [~, App\Entity\AttributAdd, App\Controller\AttributAddAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Attribut Additionel }
+        public: true
+
+    admin.estimation:
+        class: App\Admin\EstimationAdmin
+        arguments: [~, App\Entity\Estimation, App\Controller\EstimationAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Estimation }
+        public: true
+
+    admin.artisan_etat:
+        class: App\Admin\ArtisanEtatAdmin
+        arguments: [~, App\Entity\ArtisanEtat, App\Controller\ArtisanEtatAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ArtisanEtat }
+        public: true

@@ -48,9 +48,9 @@
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="contact-box">
-                                <h1 style="color: #2193f1">0</h1>
+                                <h1 style="color: #2193f1">{{ render(controller('App\\Controller\\Client\\ClientController::nbrEstimation')) }}</h1>
                                 <h4>Mes estimations</h4>
-                                <a href="/web/client/estimation" class="dark-button1 button-md">Détails</a>
+                                <a href="{{ path('client_estimation') }}" class="dark-button1 button-md">Détails</a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12">

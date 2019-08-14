@@ -20,6 +20,7 @@ class Affectation
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Annonce", inversedBy="affectation", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $annonce;
 
@@ -33,6 +34,12 @@ class Affectation
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="affectations")
      */
     private $artisan;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Estimation", inversedBy="affectation", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $estimation;
 
     public function __construct()
     {
@@ -92,6 +99,18 @@ class Affectation
         if ($this->artisan->contains($artisan)) {
             $this->artisan->removeElement($artisan);
         }
+
+        return $this;
+    }
+
+    public function getEstimation(): ?Estimation
+    {
+        return $this->estimation;
+    }
+
+    public function setEstimation(?Estimation $estimation): self
+    {
+        $this->estimation = $estimation;
 
         return $this;
     }

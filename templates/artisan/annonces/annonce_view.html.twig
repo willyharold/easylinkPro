@@ -52,7 +52,7 @@
                     <div class="col-md-9 col-sm-7 mt-15">
                         <aside class="mt-35">
                             <article class="card-body p-5 pl-20">
-                                <h3 class="title mb-10 text-uppercase">Annonce #{{ annonce.id }}</h3>
+                                <h3 class="title mb-10 text-uppercase">Annonce #{{ annonce.id }}</h3>{% if etat == "En attente" %} <span class="label label-warning"> {{ etat }} </span>{% endif %}  {% if etat == "Confirmer" %} <span class="label label-info"> {{ etat }} </span>{% endif %} {% if etat == "Refuser" %} <span class="label label-danger"> {{ etat }} </span>{% endif %} {% if etat == "Accepter" %} <span class="label label-primary"> {{ etat }} </span>{% endif %}
                                 <p class="price-detail-wrap mb-5">
                                     <span class="price h3 text-warning">
                                         {% for sousspectialite in annonce.sousSpectialite %}
@@ -76,12 +76,15 @@
                                     <dd>{{ annonce.client.adresse }}</dd>
                                 </dl>  <!-- item-property-hor .// -->
 
+                                {% if etat =="En attente" %}
+
                                 <div style="float: right">
                                     {{ form_start(form) }}
-                                    <a href="#" class="btn btn-lg btn-danger">Refuser</a>
+                                    <a href="{{ path('artisan_annonces') }}" class="btn btn-lg btn-danger">Refuser</a>
                                     <button type="submit" class="btn btn-lg btn-primary">Accepter</button>
                                     {{ form_end(form) }}
                                 </div>
+                                {% endif %}
 
                             </article> <!-- card-body.// -->
                         </aside>

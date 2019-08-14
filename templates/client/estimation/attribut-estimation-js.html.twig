@@ -1,0 +1,5 @@
+{% for attribut in specialite.attributAdds  %}
+    <div class="col-md-12 col-sm-6 col-xs-12">
+        <input type="{{ attribut.typeRep }}" id="estimation_ville" name="{{ attribut.id }}" required="required"  placeholder="{{ attribut.nom }} ">
+    </div>
+{% endfor %}

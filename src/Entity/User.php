@@ -117,6 +117,11 @@ class User extends BaseUser
      */
     private $affectationConfirmes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Estimation", mappedBy="client")
+     */
+    private $estimations;
+
     public function __construct()
     {
         parent::__construct();
@@ -127,6 +132,7 @@ class User extends BaseUser
         $this->affectations = new ArrayCollection();
         $this->affectationConfirmes = new ArrayCollection();
         $this->civilite = "HOMME";
+        $this->estimations = new ArrayCollection();
     }
 
     public function getNom(): ?string
@@ -439,6 +445,37 @@ class User extends BaseUser
         if ($this->affectationConfirmes->contains($affectationConfirme)) {
             $this->affectationConfirmes->removeElement($affectationConfirme);
             $affectationConfirme->removeArtisan($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Estimation[]
+     */
+    public function getEstimations(): Collection
+    {
+        return $this->estimations;
+    }
+
+    public function addEstimation(Estimation $estimation): self
+    {
+        if (!$this->estimations->contains($estimation)) {
+            $this->estimations[] = $estimation;
+            $estimation->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstimation(Estimation $estimation): self
+    {
+        if ($this->estimations->contains($estimation)) {
+            $this->estimations->removeElement($estimation);
+            // set the owning side to null (unless already changed)
+            if ($estimation->getClient() === $this) {
+                $estimation->setClient(null);
+            }
         }
 
         return $this;

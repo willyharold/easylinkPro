@@ -5,13 +5,18 @@ namespace App\Controller\Client;
 use App\Entity\Affectation;
 use App\Entity\AffectationConfirme;
 use App\Entity\Annonce;
+use App\Entity\AttributAddRep;
 use App\Entity\Avis;
+use App\Entity\Estimation;
 use App\Entity\Specialite;
 use App\Entity\User;
 use App\Form\AnnonceType;
 use App\Form\ClientInfoType;
+use App\Form\EstimationType;
 use App\Repository\AnnonceRepository;
+use App\Repository\ArtisanEtatRepository;
 use App\Repository\AvisRepository;
+use App\Repository\EstimationRepository;
 use App\Repository\SpecialiteRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -77,11 +82,74 @@ class ClientController extends Controller
     }
 
 
+    /**
+     * @Route("/estimation/view/{id}", name="client_estimation_view")
+     */
+    public function view_estimation($id, \Swift_Mailer $mailer, ArtisanEtatRepository $artisanEtatRepository,EstimationRepository $estimationRepository, Request $request, UserRepository $userRepository, ObjectManager $objectManager)
+    {
+
+        $estimation = $estimationRepository->findOneBy(["client"=>$this->getUser(),"id"=>$id]);
+
+        $item = new Estimation();
+        $form = $this->createForm(FormType::class, $item );
+        if($request->getMethod() == "POST"){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $postid= $request->request->get('form-artisan');
+                $artisan = $userRepository->findOneBy(["id"=>$postid]);
+
+                $affecta = $estimation->getAffectationConfirme();
+                $affecta->setEtat(true);
+                $affecta->setArtisanConfirme($artisan);
+                $artisanEtat = $artisanEtatRepository->findOneBy(["estimation"=>$estimation,"artisan"=>$artisan]);
+                $estimation->setEtat("Terminer");
+                $artisanEtat->setEtat("Accepter");
+                $artisans = $affecta->getArtisan();
+
+                foreach ($artisans as $item){
+                    if($item != $artisan) {
+                        $artisanEtat1 = $artisanEtatRepository->findOneBy(["estimation" => $estimation, "artisan" => $item]);
+                        $artisanEtat1->setEtat("Refuser");
+                        $objectManager->merge($artisanEtat1);
+                    }
+                }
+                $objectManager->merge($estimation);
+                $objectManager->merge($artisanEtat);
+                $objectManager->merge($affecta);
+                $objectManager->flush();
+
+                $session = new Session();
+                $session->getFlashBag()->add('estimation',"L'artisan a été contacté");
+
+                $user = $this->getUser();
+
+                $message = (new \Swift_Message('Information du client'))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($artisan->getEmail())
+                    ->setBody('email pour donner les informations du client')
+                ;
+                $mailer->send($message);
+
+
+                $message = (new \Swift_Message("Information de l'artisan"))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($this->getUser()->getEmail())
+                    ->setBody("email pour donner les informations de l'artisan")
+                ;
+
+                $mailer->send($message);
+                return $this->redirectToRoute('client_estimation');
+
+            }
+
+        }
+        return $this->render('client/estimation/viewestimation.html.twig',["estimation"=> $estimation,"form"=>$form->createView()]);
+    }
 
     /**
      * @Route("/annonce/view/{id}", name="client_annonce_view")
      */
-    public function view_annonce($id, \Swift_Mailer $mailer, AnnonceRepository $annonceRepository, Request $request, UserRepository $userRepository, ObjectManager $objectManager)
+    public function view_annonce($id, \Swift_Mailer $mailer, ArtisanEtatRepository $artisanEtatRepository, AnnonceRepository $annonceRepository, Request $request, UserRepository $userRepository, ObjectManager $objectManager)
     {
 
         /**
@@ -96,7 +164,24 @@ class ClientController extends Controller
                 $artisan = $userRepository->findOneBy(["id"=>$request->request->get('form-artisan')]);
                 $annonce->getAffectationConfirme()->setArtisanConfirme($artisan);
                 $annonce->getAffectationConfirme()->setEtat(true);
+                $affecta = $annonce->getAffectationConfirme();
+
+                $artisanEtat = $artisanEtatRepository->findOneBy(["annonce"=>$annonce,"artisan"=>$artisan]);
+                $annonce->setEtat("Terminer");
+                $artisanEtat->setEtat("Accepter");
+                $artisans = $affecta->getArtisan();
+
+                foreach ($artisans as $item){
+                    if($item != $artisan) {
+                        $artisanEtat1 = $artisanEtatRepository->findOneBy(["annonce" => $annonce, "artisan" => $item]);
+                        $artisanEtat1->setEtat("Refuser");
+                        $objectManager->merge($artisanEtat1);
+                    }
+                }
                 $objectManager->merge($annonce);
+                $objectManager->merge($artisanEtat);
+                $objectManager->merge($affecta);
+
                 $objectManager->flush();
                 $session = new Session();
                 $session->getFlashBag()->add('annonce',"L'artisan a été contacté");
@@ -258,8 +343,64 @@ class ClientController extends Controller
     /**
      * @Route("/estimation", name="client_estimation")
      */
-    public function estimation(){
-        return $this->render('client/estimation/index.html.twig');
+    public function estimation(EstimationRepository $estimationRepository, Request $request, PaginatorInterface $paginator)
+    {
+        $queryBuilder = $estimationRepository->getWithSearchQueryBuilder($this->getUser());
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            7/*limit per page*/
+        );
+
+        return $this->render('client/estimation/index.html.twig', ['pagination' => $pagination]);
+    }
+
+    /**
+     * @Route("/estimation/new", name="client_estimation_add")
+     */
+    public function estimation_add(\Swift_Mailer $mailer, EstimationRepository $estimationRepository, Request $request,ObjectManager $objectManager)
+    {
+        $estimation = new Estimation();
+        $form = $this->createForm(EstimationType::class,$estimation);
+        $user = $this->getUser();
+        if($request->getMethod()== "POST"){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $attrs= $estimation->getSpecialite()->getAttributAdds();
+                $estimation->setEtat("En attente");
+                $estimation->setClient($user);
+                $objectManager->persist($estimation);
+                foreach ($attrs as $attr){
+                    $rep = new AttributAddRep();
+                    $rep->setEstimation($estimation);
+                    $rep->setAttributAdd($attr);
+                    $rep->setReponse($request->request->get($attr->getId()));
+                    $objectManager->persist($rep);
+                }
+
+                $affectation = new Affectation();
+                $affectation->setEstimation($estimation);
+                $affectationconfirmer = new AffectationConfirme();
+                $affectationconfirmer->setEstimation($estimation);
+
+                $objectManager->persist($affectation);
+                $objectManager->persist($affectationconfirmer);
+
+                $objectManager->flush();
+                $message = (new \Swift_Message('Nouvelle demande d estimation'))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($user->getEmail())
+                    ->setBody('l estimation enregistrer besoin dun texte pour sa')
+                ;
+
+                $mailer->send($message);
+                $session = new Session();
+                $session->getFlashBag()->add('estimation',"Votre demande d'estimation a été enregistré");
+                return $this->redirectToRoute('client_estimation');
+
+            }
+        }
+        return $this->render('client/estimation/addestimation.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -296,6 +437,11 @@ class ClientController extends Controller
 
     public function nbrAnnonce(Request $request, AnnonceRepository $annonceRepository){
         $annonces = $annonceRepository->findByClient($this->getUser());
+        return new Response(count($annonces));
+    }
+
+    public function nbrEstimation(Request $request, EstimationRepository $estimationRepository){
+        $annonces = $estimationRepository->findByClient($this->getUser());
         return new Response(count($annonces));
     }
 

@@ -53,10 +53,13 @@ class SousSpecialite
 
 
 
+
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
         $this->artisans = new ArrayCollection();
+        $this->estimations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,5 +160,4 @@ class SousSpecialite
         return $this;
     }
 
-
-}
+    }

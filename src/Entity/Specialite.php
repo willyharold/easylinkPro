@@ -50,9 +50,21 @@ class Specialite
      */
     private $sousSpecialites;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Estimation", mappedBy="specialite")
+     */
+    private $estimations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AttributAdd", mappedBy="specialite", cascade={"all"})
+     */
+    private $attributAdds;
+
     public function __construct()
     {
         $this->sousSpecialites = new ArrayCollection();
+        $this->estimations = new ArrayCollection();
+        $this->attributAdds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +166,68 @@ class Specialite
     public function __toString()
     {
         return "".$this->getNom();
+    }
+
+    /**
+     * @return Collection|Estimation[]
+     */
+    public function getEstimations(): Collection
+    {
+        return $this->estimations;
+    }
+
+    public function addEstimation(Estimation $estimation): self
+    {
+        if (!$this->estimations->contains($estimation)) {
+            $this->estimations[] = $estimation;
+            $estimation->setSpecialite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstimation(Estimation $estimation): self
+    {
+        if ($this->estimations->contains($estimation)) {
+            $this->estimations->removeElement($estimation);
+            // set the owning side to null (unless already changed)
+            if ($estimation->getSpecialite() === $this) {
+                $estimation->setSpecialite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AttributAdd[]
+     */
+    public function getAttributAdds(): Collection
+    {
+        return $this->attributAdds;
+    }
+
+    public function addAttributAdd(AttributAdd $attributAdd): self
+    {
+        if (!$this->attributAdds->contains($attributAdd)) {
+            $this->attributAdds[] = $attributAdd;
+            $attributAdd->setSpecialite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttributAdd(AttributAdd $attributAdd): self
+    {
+        if ($this->attributAdds->contains($attributAdd)) {
+            $this->attributAdds->removeElement($attributAdd);
+            // set the owning side to null (unless already changed)
+            if ($attributAdd->getSpecialite() === $this) {
+                $attributAdd->setSpecialite(null);
+            }
+        }
+
+        return $this;
     }
 
 

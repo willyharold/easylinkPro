@@ -11,11 +11,7 @@
     </div>
     <!-- Preloader End ici qu'il faut rajouter le menu -->
 
-    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
-
-    <!-- Navbar END -->
-
-
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menuArtisan')) }}
 
     <!-- Contact Section START -->
     <div class="section-block">
@@ -29,7 +25,7 @@
                         <div class="services-single-left-heading">
                             <h4>Mon Menu</h4>
                         </div>
-                        {{ render(controller("App\\Controller\\Client\\ClientController::menu",{id:2})) }}
+                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:3}))}}
                         <!-- Vertical Menu END -->
 
                     </div>
@@ -41,16 +37,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="services-single-left-heading">
-                                <h4>Mes annonces</h4>
+                                <h4>Estimation en attente</h4>
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="{{ path('client_annonce_add') }}" class="btn btn-primary">Créer une annonce</a>
+                            <a href="{{ path('artisan_estimation') }}" class="btn btn-primary">Retour</a>
                         </div>
+
                     </div>
                     <div class="row">
                         <br>
-                        {% for flashMessage in app.session.flashbag.get('annonce') %}
+                        {% for flashMessage in app.session.flashbag.get('estimation') %}
                             <div class="alert alert-success" role="alert">
                                 {{ flashMessage }}
                             </div>
@@ -59,30 +56,25 @@
                         <table class="table table-striped table-responsive" >
                             <thead style="color: #0d6aad;">
                             <th scope="col">#</th>
-                            <th scope="col">Annonce</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Estimation</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Artisan</th>
                             <th scope="col">Date</th>
                             <th scope="col">Action</th>
                             </thead>
                             <tbody style="color: black;">
 
-                            {% for annonce in pagination %}
+                            {% for estimation in pagination %}
                                 <tr>
-                                <th scope="row">{{ annonce.id }}</th>
-                                <th>{{ annonce.description | slice(0,100) }}</th>
-                                <th>{% if annonce.etat == "En attente" %} <span class="label label-default"> {{ annonce.etat }} </span>{% endif %} {% if annonce.etat == "Selectionner" %} <span class="label label-warning"> {{ annonce.etat }} </span>{% endif %} {% if annonce.etat == "Terminer" %} <span class="label label-primary"> {{ annonce.etat }} </span>{% endif %} </th>
-                                <th>{% if annonce.affectationConfirme.artisanConfirme.artisan is defined %} {{ annonce.affectationConfirme.artisanConfirme.artisan.nom }} {% endif %} </th>
-                                <th>{{ annonce.dateEnreg | date }}</th>
-                                <th>
-                                    <a href="{{ path('client_annonce_view',{id:annonce.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                    {% if annonce.etat == "En attente" %}
-                                        <a href="{{ path('client_annonce_edit',{id:annonce.id}) }}" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                        <a href="#" class="btn btn-danger"><i class="fa fa-close"></i></a>
-                                    {% endif %}
-
-                                </th>
-                            </tr>
+                                    <th scope="row">{{ estimation.id }}</th>
+                                    <th>{{ estimation.titre }}</th>
+                                    <th>{{ estimation.description | slice(0,100) }}</th>
+                                    <th>{{ estimation.etat }}</th>
+                                    <th>{{ estimation.dateEn| date }}</th>
+                                    <th>
+                                        <a href="{{ path('artisan_estimation_valider_view',{id:estimation.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                    </th>
+                                </tr>
                             {% endfor %}
                             </tbody>
                         </table>
@@ -98,39 +90,20 @@
                     </div>
 
                 </div>
+
                 <!-- Right Side END -->
             </div>
         </div>
     </div>
     <!-- Contact Section END -->
-
-
-
-
     {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
-
-
     <!-- Scroll to top button Start -->
     <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
     <!-- Scroll to top button End -->
 
 {% endblock %}
-
 {% block script %}
     <script>
-        toastr.options.showMethod = 'slideDown';
-        toastr.options.hideMethod = 'slideUp';
-        toastr.options.closeMethod = 'slideUp';
-        toastr.options.positionClass = 'toast-top-full-width';
-        toastr.options.progressBar = true
-        toastr.options.closeButton = true;
-        toastr.options.timeOut = 30000;
-        toastr.options.extendedTimeOut = 6000;
-        {% for flashMessage in app.session.flashbag.get('confirmer') %}
-
-        toastr.success('{{ flashMessage }}')
-
-        {% endfor %}
 
     </script>
 {% endblock %}
