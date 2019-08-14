@@ -59,6 +59,16 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/sousspecialite/{id}", name="sousSpecilaitejs")
+     */
+    public function sousSpecilaitejs($id=0,Request $request, SpecialiteRepository $specialiteRepository)
+    {
+
+        $specialite = $specialiteRepository->find($id);
+        return $this->render('client/sousSpecialite-js.html.twig', ["specialite"=>$specialite]);
+    }
+
+    /**
      * @Route("/blog", name="blog")
      */
     public function blog()

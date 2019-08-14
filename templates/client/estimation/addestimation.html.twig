@@ -127,6 +127,7 @@
 {% block script %}
     <script>
         $(document).ready(function() {
+            updatesousSpecialite()
             new SlimSelect({
                 select: '#estimation_sousSpecialite'
             })
@@ -174,6 +175,32 @@
                 error:function (er) {
 
                     var element = document.getElementById("attribut");
+                    while (element.firstChild) {
+                        element.removeChild(element.firstChild);
+                    }
+                }
+
+            });
+            updatesousSpecialite()
+        }
+        function updatesousSpecialite(){
+            var specialite =$('#estimation_specialite').val();
+            $.ajax({
+                async: true,
+                url: "{{ path('sousSpecilaitejs') }}/"+specialite,
+                method: "GET"
+                ,
+                success:function(data){
+                    var element = document.getElementById("estimation_sousSpecialite");
+                    while (element.firstChild) {
+                        element.removeChild(element.firstChild);
+                    }
+                    $('#estimation_sousSpecialite').append(data);
+
+                },
+                error:function (er) {
+
+                    var element = document.getElementById("estimation_sousSpecialite");
                     while (element.firstChild) {
                         element.removeChild(element.firstChild);
                     }
