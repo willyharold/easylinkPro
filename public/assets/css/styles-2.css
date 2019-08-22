@@ -2582,11 +2582,24 @@ i) Animations
 	-webkit-transition-duration: .3s;
 	transition-duration: .3s;
 }
+
+.pricing-list-2-button button{
+	display: inline-block;
+	color: #2193f1;
+	font-weight: 500;
+	padding: 7px 50px;
+	-webkit-transition-duration: .3s;
+	transition-duration: .3s;
+}
 .pricing-list-2-button:hover{
 	background: #2193f1;
 	border: 2px solid #2193f1;
 }
 .pricing-list-2-button:hover a{
+	color: #fff;
+}
+
+.pricing-list-2-button:hover button{
 	color: #fff;
 }
 /* active version */
@@ -2608,11 +2621,24 @@ i) Animations
 	-webkit-transition-duration: .3s;
 	transition-duration: .3s;
 }
+
+.pricing-list-2-button-act button{
+	display: inline-block;
+	color: #fff;
+	font-weight: 500;
+	padding: 7px 50px;
+	-webkit-transition-duration: .3s;
+	transition-duration: .3s;
+}
 .pricing-list-2-button-act:hover{
 	background: #fff;
 	border: 2px solid #2193f1;
 }
 .pricing-list-2-button-act:hover a{
+	color: #2193f1;
+}
+
+.pricing-list-2-button-act:hover button{
 	color: #2193f1;
 }
 

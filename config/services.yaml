@@ -118,3 +118,31 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: ArtisanEtat }
         public: true
+
+    admin.abonnement:
+        class: App\Admin\AbonnementAdmin
+        arguments: [~, App\Entity\Abonnement, App\Controller\AbonnementAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Abonnement }
+        public: true
+
+    admin.coupon:
+        class: App\Admin\CouponAdmin
+        arguments: [~, App\Entity\Coupon, App\Controller\CouponAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Coupon }
+        public: true
+
+    admin.pack:
+        class: App\Admin\PackAdmin
+        arguments: [~, App\Entity\Pack, App\Controller\PackAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Pack }
+        public: true
+
+    admin.transaction:
+        class: App\Admin\TransactionAdmin
+        arguments: [~, App\Entity\Transaction, App\Controller\TransactionAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Transaction }
+        public: true

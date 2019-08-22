@@ -12,85 +12,6 @@
     <!-- Preloader End ici qu'il faut rajouter le menu -->
 
     {{ render(controller('App\\Controller\\Index\\DefaultController::menuArtisan')) }}
-    <style>
-        .db-bk-color-two {
-            background-color: #46A6F7;
-        }
-        .db-button-color-square {
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.50);
-            border: none;
-            border-radius: 0px;
-            -webkit-border-radius: 0px;
-            -moz-border-radius: 0px;
-        }
-
-        .db-button-color-square:hover {
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.50);
-            border: none;
-        }
-
-        .db-pricing-eleven {
-            margin-bottom: 10px;
-            margin-top: 30px;
-            text-align: center;
-            box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-            color: #fff;
-            line-height: 30px;
-        }
-
-        .db-pricing-eleven ul {
-            list-style: none;
-            margin: 0;
-            text-align: center;
-            padding-left: 0px;
-        }
-
-        .db-pricing-eleven ul li {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            cursor: pointer;
-        }
-
-        .db-pricing-eleven ul li i {
-            margin-right: 5px;
-        }
-
-
-        .db-pricing-eleven .price {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px 10px 10px 10px;
-            font-size: 20px;
-            font-weight: 500;
-            color: #FFFFFF;
-        }
-
-        .db-pricing-eleven .price small {
-            color: #B8B8B8;
-            display: block;
-            font-size: 12px;
-            margin-top: 22px;
-        }
-
-        .db-pricing-eleven .type {
-            background-color: #52E89E;
-            padding: 15px 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 25px;
-        }
-
-        .db-pricing-eleven .pricing-footer {
-            padding: 20px;
-        }
-        .db-pricing-eleven.popular {
-            margin-top: 10px;
-        }
-        div{
-            color: #000000;
-        }
-    </style>
     <!-- Contact Section START -->
     <div class="section-block">
         <div class="container">
@@ -102,7 +23,7 @@
                         <div class="services-single-left-heading">
                             <h4>Mon Menu</h4>
                         </div>
-                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:2}))}}
+                        {{ render(controller('App\\Controller\\Artisan\\ArtisanController::menu',{id:6}))}}
                         <!-- Vertical Menu END -->
 
                     </div>
@@ -111,25 +32,82 @@
                 <!-- Right Side START -->
                 {% block droit %}
                     <div class="col-md-9 col-sm-7 mt-50">
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                            <div class="db-wrapper">
-                                <div class="db-pricing-eleven db-bk-color-two popular">
-                                    <div class="price">
-                                        2500 FCFA
-                                    </div>
-                                    <div class="type">
-                                        Classique
-                                    </div>
-                                    <ul>
-                                        <li><i class="glyphicon glyphicon-print"></i>30 clients </li>
-                                        <li><i class="glyphicon glyphicon-time"></i>150 Annonces </li>
-                                        <li><i class="glyphicon glyphicon-trash"></i>Normal</li>
-                                    </ul>
-                                    <div class="pricing-footer">
-                                        <a href="#" class="btn db-button-color-square btn-lg">Renouveller</a>
-                                    </div>
+                                <div class="section-heading center-holder">
+                                    <span>Nos Packs</span>
+                                    <h3>Pick The Best Plan For You</h3>
+                                    <div class="section-heading-line"></div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor <br>incididunt ut labore et dolore magna aliqua.</p>
                                 </div>
-                            </div>
+                                {% for  pack in packs %}
+                                <div class="row no-gutters mt-60">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="pricing-list-2 {% if pack.best %} pricing-list-2-emphasise {% endif %}">
+                                            <div class="pricing-list-2-top">
+                                                <i class="{{ pack.icon }}"></i>
+                                            </div>
+                                            <h4>{{ pack.nom }}</h4>
+                                            <div class="pricing-list-2-price">
+                                                <h3><sup>€</sup>{{ pack.prix }}</h3>
+                                                <span>/mois</span>
+                                            </div>
+                                            <ul class="pricing-list-2-prod">
+                                                <li>Business Analysing</li>
+                                                <li>SEO optimization</li>
+                                                <li>Custom Management</li>
+                                                <li>Finance Analysing</li>
+                                            </ul>
+                                            <div class="pricing-list-2-button {% if pack.best %}pricing-list-2-button-act{% endif %}">
+                                                {{ form_start(form) }}
+                                                <button type="submit">Acheter</button>
+                                                <input type="hidden" name="form-prix" value="{{ pack.prix }}">
+                                                {{ form_end(form) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="col-md-4 col-sm-4 col-xs-12 ">
+                                        <div class="pricing-list-2 pricing-list-2-emphasise">
+                                            <div class="pricing-list-2-top">
+                                                <i class="icon-diamond"></i>
+                                            </div>
+                                            <h4>Advanced Package</h4>
+                                            <div class="pricing-list-2-price">
+                                                <h3><sup>€</sup>599</h3>
+                                                <span>/month</span>
+                                            </div>
+                                            <ul class="pricing-list-2-prod">
+                                                <li>Business Analysing</li>
+                                                <li>SEO optimization</li>
+                                                <li>Custom Management</li>
+                                                <li>Finance Analysing</li>
+                                            </ul>
+                                            <div class="pricing-list-2-button pricing-list-2-button-act">
+                                                <a href="#">Buy Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="pricing-list-2">
+                                            <div class="pricing-list-2-top">
+                                                <i class="icon-startup"></i>
+                                            </div>
+                                            <h4>Premium Advanced</h4>
+                                            <div class="pricing-list-2-price">
+                                                <h3><sup>€</sup>799</h3>
+                                                <span>/month</span>
+                                            </div>
+                                            <ul class="pricing-list-2-prod">
+                                                <li>Business Analysing</li>
+                                                <li>SEO optimization</li>
+                                                <li>Custom Management</li>
+                                                <li>Finance Analysing</li>
+                                            </ul>
+                                            <div class="pricing-list-2-button">
+                                                <a href="#">Buy Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
                 {% endblock %}
@@ -146,21 +124,6 @@
 {% endblock %}
 {% block script %}
     <script>
-        $(document).ready(function() {
-            var readURL = function(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        $('.avatar').attr('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-            $(".file-upload").on('change', function(){
-                readURL(this);
-            });
-        });
     </script>
 {% endblock %}

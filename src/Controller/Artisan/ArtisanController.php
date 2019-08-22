@@ -7,11 +7,15 @@ use App\Entity\AffectationConfirme;
 use App\Entity\Annonce;
 use App\Entity\ArtisanEtat;
 use App\Entity\Estimation;
+use App\Entity\Transaction;
 use App\Repository\AffectationConfirmeRepository;
 use App\Repository\AffectationRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\ArtisanEtatRepository;
 use App\Repository\EstimationRepository;
+use App\Repository\PackRepository;
+use Beelab\PaypalBundle\Paypal\Exception;
+use Beelab\PaypalBundle\Paypal\Service;
 use Doctrine\Common\Persistence\ObjectManager;
 use Knp\Component\Pager\PaginatorInterface;
 use phpDocumentor\Reflection\Types\Resource_;
@@ -20,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -227,10 +232,47 @@ class ArtisanController extends Controller
     /**
      * @Route("/abonement", name="artisan_abonement")
      */
-    public function abonement(){
+    public function abonement(PackRepository $packRepository, Service $service, Request $request){
+        $pack = $packRepository->findAll();
+        $tra = new Transaction();
+        $form = $this->createForm(FormType::class,$tra);
+        if($request->getMethod() == "POST"){
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $prix = $request->request->get("form-prix");
+                $transaction = new Transaction($prix);
+                try {
+                    $response = $service->setTransaction($transaction)->start();
+                    $this->getDoctrine()->getManager()->persist($transaction);
+                    $this->getDoctrine()->getManager()->flush();
+
+                    return $this->redirect($response->getRedirectUrl());
+                } catch (Exception $e) {
+                    throw new HttpException(503, 'Payment error', $e);
+                }
+
+            }
+        }
         return $this->render('artisan/abonement/abonement.html.twig', [
-            'controller_name' => 'ArtisanController',
+            'packs' => $pack,'form'=>$form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/success_payment", name="success_payment")
+     */
+    public function success_payment(PackRepository $packRepository, Service $service, Request $request){
+
+        return $this->redirectToRoute("artisan_abonement");
+    }
+
+    /**
+     * @Route("/error_payment", name="error_payment")
+     */
+    public function error_payment(PackRepository $packRepository, Service $service, Request $request){
+
+
+        return $this->redirectToRoute("artisan_abonement");
     }
 
     /**

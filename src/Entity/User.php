@@ -122,6 +122,11 @@ class User extends BaseUser
      */
     private $estimations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="artisan")
+     */
+    private $transactions;
+
     public function __construct()
     {
         parent::__construct();
@@ -133,6 +138,7 @@ class User extends BaseUser
         $this->affectationConfirmes = new ArrayCollection();
         $this->civilite = "HOMME";
         $this->estimations = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     public function getNom(): ?string
@@ -475,6 +481,37 @@ class User extends BaseUser
             // set the owning side to null (unless already changed)
             if ($estimation->getClient() === $this) {
                 $estimation->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Transaction[]
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    public function addTransaction(Transaction $transaction): self
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions[] = $transaction;
+            $transaction->setArtisan($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): self
+    {
+        if ($this->transactions->contains($transaction)) {
+            $this->transactions->removeElement($transaction);
+            // set the owning side to null (unless already changed)
+            if ($transaction->getArtisan() === $this) {
+                $transaction->setArtisan(null);
             }
         }
 
