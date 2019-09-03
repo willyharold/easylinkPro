@@ -1,0 +1,91 @@
+<div class="col-md-3 col-sm-4 col-xs-12">
+    <div class="blog-list-right">
+        <div id="search-input">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search"/>
+                <span class="input-group-btn">
+								<button class="btn" type="button">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+		               		</span>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="blog-list-left-heading">
+            <h4>Categories</h4>
+        </div>
+        <div class="blog-categories">
+            <ul>
+                {% for categorie in categories %}
+                <li><a href="#">{{ categorie }}</a></li>
+                {% endfor %}
+
+            </ul>
+        </div>
+
+        <!-- Recent News -->
+        <div class="blog-list-left-heading">
+            <h4>Nouvelles actualités</h4>
+        </div>
+        {% for article in articles %}
+        <div class="latest-posts">
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-4 latest-posts-img">
+                    <img src="{% path article.avatar , 'small' %}" alt="blog-img">
+                </div>
+
+                <div class="col-md-7 col-sm-7 col-xs-8 latest-posts-text pl-0">
+                    <a href="#">{{ article.titre }}</a>
+                    <span>{{ article.datePub | date}}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+        <!-- Archives -->
+        <div class="blog-list-left-heading">
+            <h4>Archives</h4>
+        </div>
+        <div class="archives">
+            <ul>
+                <li><a href="#">January 03</a> <span>(09)</span></li>
+                <li><a href="#">February 17</a> <span>(13)</span></li>
+                <li><a href="#">March 23</a> <span>(03)</span></li>
+                <li><a href="#">April 19</a> <span>(07)</span></li>
+                <li><a href="#">May 07</a> <span>(16)</span></li>
+            </ul>
+        </div>
+
+        <!-- Tags -->
+        <div class="blog-list-left-heading">
+            <h4>Tags</h4>
+        </div>
+        <div class="mt-10">
+            <a href="#" class="button-tag primary-button">Funding</a>
+            <a href="#" class="button-tag primary-button">Merchant</a>
+            <a href="#" class="button-tag primary-button">Job</a>
+            <a href="#" class="button-tag primary-button">Wallet</a>
+            <a href="#" class="button-tag primary-button">Technology</a>
+            <a href="#" class="button-tag primary-button">Coin</a>
+            <a href="#" class="button-tag primary-button">Funding</a>
+            <a href="#" class="button-tag primary-button">Transaction</a>
+        </div>
+
+        <!--Share Links -->
+        <div class="blog-list-left-heading">
+            <h4>Share Links</h4>
+        </div>
+        <div class="blog-share">
+            <ul>
+                <li> <a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li> <a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
+                <li> <a href="#"><i class="fa fa-pinterest"></i></a></li>
+                <li> <a href="#"><i class="fa fa-skype"></i></a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>

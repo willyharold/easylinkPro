@@ -82,6 +82,19 @@
 <script src="{{ asset('assets/js/main.js') }}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<script>
+    var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+            'sitekey' : '6Lf2_7QUAAAAACkX6mLQulYWya_kZ-AMLOSlbL1S',
+            'callback' : verifyCallback,
+        });
+    };
+    var verifyCallback = function(response) {
+        $("#google-recaptcha").attr("disabled",false);
+    };
+</script>
 {% block script %}{% endblock %}
 
 </body>

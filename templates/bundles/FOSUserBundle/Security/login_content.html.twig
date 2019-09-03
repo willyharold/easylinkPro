@@ -65,15 +65,16 @@
                         {% if csrf_token %}
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                         {% endif %}
+                        <div class="col-md-12 col-lg-12 col-sm-12" id="html_element"></div>
                         <div class="col-md-12 col-lg-12 col-sm-12">
-                            <button type="submit" id="_submit" name="_submit">{{ 'security.login.submit'|trans }}</button>
+                            <button type="submit" name="_submit"  disabled id="google-recaptcha">{{ 'security.login.submit'|trans }}</button>
 
                         </div>
                     </form>
                 </div>
 
                 <br>
-                <p style="text-align: center">Vous n'avez pas encore de compte? <a href="{{ path('fos_user_registration_register') }}" style="color:#2193f1 !important;">Inscrivez vous!</a> </p>
+                <p style="text-align: center">Vous n'avez pas encore de compte ? <a href="{{ path('fos_user_registration_register') }}" style="color:#2193f1 !important;">Inscrivez vous!</a> </p>
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\SpecialiteRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -23,7 +24,7 @@ class RegistrationController extends Controller
     /**
      * @Route("/artisan/register", name="fos_user_registration_artisan_register")
      */
-    public function index(Request $request, TokenGeneratorInterface $tokenGenerator ,\Swift_Mailer $mailer)
+    public function index(Request $request, TokenGeneratorInterface $tokenGenerator ,\Swift_Mailer $mailer,SpecialiteRepository $specialiteRepository)
     {
         $usermanager = $this->get('fos_user.user_manager');
         $eventDispatcher = $this->get('event_dispatcher');
@@ -49,7 +50,8 @@ class RegistrationController extends Controller
                 return $this->render('artisan/check_email.html.twig',["user"=>$user]);
             }
         }
-        return $this->render('artisan/register.html.twig',["form"=>$form->createView()]);
+        $specialites = $specialiteRepository->findAll();
+        return $this->render('artisan/register.html.twig',["form"=>$form->createView(),"specialittes"=>$specialites]);
     }
 
     /**

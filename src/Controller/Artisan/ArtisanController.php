@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Omnipay\Omnipay;
 
 /**
  * @Route("/artisan")
@@ -240,17 +241,37 @@ class ArtisanController extends Controller
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $prix = $request->request->get("form-prix");
-                $transaction = new Transaction($prix);
+                $p = $packRepository->findOneBy(["id"=>$prix]);
+                /*$transaction = new Transaction($p->getPrix());
+                dump(true);
+
                 try {
                     $response = $service->setTransaction($transaction)->start();
                     $this->getDoctrine()->getManager()->persist($transaction);
                     $this->getDoctrine()->getManager()->flush();
-
                     return $this->redirect($response->getRedirectUrl());
                 } catch (Exception $e) {
                     throw new HttpException(503, 'Payment error', $e);
+                }*/
+                $params = array(
+                    'cancelUrl' => 'http://localhost/error_payment',
+                    'returnUrl' => 'http://localhost/success_payment', // in your case             //  you have registered in the routes 'payment_success'
+                    'amount' => '4',
+                );
+                $gateway = Omnipay::create('PayPal_Express');
+                $gateway->setUsername('laetitia.mogoun_api1.gmail.com');
+                $gateway->setPassword('6Q97PF36VM868SKW');
+                $gateway->setSignature('ATbMU602flG3KAfxoD5cPh9QHE1jANt0nir6YNeoDtes8y4p4ayB8tnS'); // and the signature for the account
+                $gateway->setTestMode(true);
+                $response = $gateway->purchase($params)->send();
+                if ($response->isRedirect()) {
+                    // redirect to offsite payment gateway
+                    $response->redirect();
                 }
-
+                else {
+                    // payment failed: display message to customer
+                    echo $response->getMessage();
+                }
             }
         }
         return $this->render('artisan/abonement/abonement.html.twig', [

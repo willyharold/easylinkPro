@@ -59,7 +59,7 @@
                                             <div class="pricing-list-2-button {% if pack.best %}pricing-list-2-button-act{% endif %}">
                                                 {{ form_start(form) }}
                                                 <button type="submit">Acheter</button>
-                                                <input type="hidden" name="form-prix" value="{{ pack.prix }}">
+                                                <input type="hidden" name="form-prix" value="{{ pack.id }}">
                                                 {{ form_end(form) }}
                                             </div>
                                         </div>

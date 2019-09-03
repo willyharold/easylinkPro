@@ -74,10 +74,10 @@
                         <div class="col-sm-12 col-lg-12 col-md-12">
                             <div class="row">
 
-                                <div class="col-md-1 col-lg-1 col-sm-1">
+                                <div class="col-md-2 col-lg-1 col-sm-1">
                                     <input  type="checkbox" value="" required>
                                 </div>
-                                <div class="col-md-11 col-lg-11 col-sm-11">
+                                <div class="col-md-10 col-lg-11 col-sm-11">
                                     <label style="margin: 8px 0px; color: #999">
                                         En cochant cette case, je reconnais avoir pris connaissance des Conditions Générales d'Utilisation du site ainsi que sa Politique de Confidentialité et je les accepte.
                                     </label>
@@ -86,9 +86,13 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12 col-lg-12 col-sm-12" id="html_element"></div>
+
+
                         <div class="col-sm-12 col-lg-12 col-md-12">
-                            <button type="submit"> {{ 'registration.submit'|trans }} </button>
+                            <button type="submit" disabled id="google-recaptcha"> {{ 'registration.submit'|trans }} </button>
                         </div>
+
 
                     </fieldset>
                 {{ form_end(form) }}

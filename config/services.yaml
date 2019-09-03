@@ -146,3 +146,17 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: admin, label: Transaction }
         public: true
+
+    admin.categorie_blog:
+        class: App\Admin\CategorieBlogAdmin
+        arguments: [~, App\Entity\CategorieBlog, App\Controller\CategorieBlogAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: CategorieBlog }
+        public: true
+
+    admin.article_blog:
+        class: App\Admin\ArticleBlogAdmin
+        arguments: [~, App\Entity\ArticleBlog, App\Controller\ArticleBlogAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: ArticleBlog }
+        public: true

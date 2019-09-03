@@ -83,12 +83,11 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <label for="artisant_create_date_entreprise" class="ml-1 mb-0" style="color: #757575;font-size: 1.1rem;">Choisir les categories</label>
-                                            <select class="mdb-select md-form" multiple id="artisan_category">
-                                                <option value="1">USA</option>
-                                                <option value="2">Germany</option>
-                                                <option value="3">France</option>
-                                                <option value="4">Poland</option>
-                                                <option value="5">Japan</option>
+                                            <select class="mdb-select md-form" required id="categorie" onchange="updatesousSpecialite()">
+                                                <option value="0" >Sélectionnez une catégorie</option>
+                                                {% for specialite in specialittes %}
+                                                <option value="{{ specialite.id }}">{{ specialite.nom }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -107,7 +106,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="contact-form-box mt-30">
                     <fieldset class="form-group">
-                        <legend>Informations Personnels</legend>
+                        <legend>Informations Personnelles</legend>
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 {{ form_widget(form.nom,{'attr':{'placeholder':"Nom"}}) }}
@@ -122,7 +121,7 @@
                         </div>
                     </fieldset>
                     <fieldset class="form-group">
-                        <legend>Creation de Compte</legend>
+                        <legend>Informations du Compte</legend>
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 {% if form_errors(form.email)   %}
@@ -166,9 +165,11 @@
 
             </div>
             <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12" id="html_element"></div>
+
                 <div class="col-md-12 mb-30">
                     <div class="center-holder">
-                        <button type="submit">S'inscrire</button>
+                        <button type="submit" disabled id="google-recaptcha">S'inscrire</button>
                     </div>
                 </div>
             </div>
@@ -189,37 +190,32 @@
 {% endblock %}
 {% block script %}
 <script>
-    function updatesous(){
-        var id = $('#form-specialite').val();
-
+    function updatesousSpecialite(){
+        var specialite =$('#categorie').val();
         $.ajax({
             async: true,
-            url: "{{ path('specialite') }}/"+id,
+            url: "{{ path('sousSpecilaitejs') }}/"+specialite,
             method: "GET"
-           ,
+            ,
             success:function(data){
-                var element = document.getElementById("form-sousspecialite");
+                var element = document.getElementById("user_artisan_sousSpecialite");
                 while (element.firstChild) {
                     element.removeChild(element.firstChild);
                 }
-                $('#form-sousspecialite').append(data);
+                $('#user_artisan_sousSpecialite').append(data);
 
             },
             error:function (er) {
 
-                var element = document.getElementById("form-sousspecialite");
+                var element = document.getElementById("user_artisan_sousSpecialite");
                 while (element.firstChild) {
                     element.removeChild(element.firstChild);
                 }
             }
 
         });
-
     }
     $(document).ready(function() {
-        new SlimSelect({
-            select: '#artisan_category'
-        })
         new SlimSelect({
             select: '#user_artisan_sousSpecialite'
         })
@@ -230,5 +226,18 @@
             dateFormat: "dd-mm-yy"
         });
     });
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<script>
+    var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+            'sitekey' : '6Lf2_7QUAAAAACkX6mLQulYWya_kZ-AMLOSlbL1S',
+            'callback' : verifyCallback,
+        });
+    };
+    var verifyCallback = function(response) {
+        $("#google-recaptcha").attr("disabled",false);
+    };
 </script>
 {% endblock %}

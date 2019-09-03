@@ -7,8 +7,11 @@ use App\Entity\AffectationConfirme;
 use App\Entity\Annonce;
 use App\Entity\Specialite;
 use App\Form\Annonce2Type;
+use App\Repository\ArticleBlogRepository;
+use App\Repository\CategorieBlogRepository;
 use App\Repository\SpecialiteRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -71,15 +74,38 @@ class DefaultController extends Controller
     /**
      * @Route("/blog", name="blog")
      */
-    public function blog()
+    public function blog( PaginatorInterface $paginator, Request $request,ArticleBlogRepository $articleBlogRepository)
     {
-        return $this->render('default/blog.html.twig');
+        $queryBuilder = $articleBlogRepository->getWithSearchQueryBuilder();
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            3/*limit per page*/
+        );
+        return $this->render('default/blog.html.twig', ['pagination' => $pagination]);
     }
 
     /**
      * @Route("/contact", name="contact")
      */
     public function contact()
+    {
+        return $this->render('default/contact.html.twig');
+    }
+
+    public function rightblog(CategorieBlogRepository $categorieBlogRepository, ArticleBlogRepository $articleBlogRepository)
+    {
+        $categories = $categorieBlogRepository->findcat();
+
+        $articles = $articleBlogRepository->lastArticle();
+
+        return $this->render('default/recentNews.html.twig',['articles'=>$articles,'categories'=>$categories]);
+    }
+
+    /**
+     * @Route("/annuaire", name="annuaire")
+     */
+    public function annuaire()
     {
         return $this->render('default/contact.html.twig');
     }

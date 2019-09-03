@@ -2,6 +2,6 @@ beelab_paypal:
   username: "laetitia.mogoun_api1.gmail.com"
   password: "6Q97PF36VM868SKW"
   signature: "ATbMU602flG3KAfxoD5cPh9QHE1jANt0nir6YNeoDtes8y4p4ayB8tnS"
-  return_route: success_payment
-  cancel_route: error_payment
-  test_mode: "%kernel.debug%"
+  return_route: "success_payment"
+  cancel_route: "error_payment"
+  test_mode: true
