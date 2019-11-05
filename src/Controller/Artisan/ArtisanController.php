@@ -237,46 +237,53 @@ class ArtisanController extends Controller
         $pack = $packRepository->findAll();
         $tra = new Transaction();
         $form = $this->createForm(FormType::class,$tra);
-        if($request->getMethod() == "POST"){
-            $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $prix = $request->request->get("form-prix");
-                $p = $packRepository->findOneBy(["id"=>$prix]);
-                /*$transaction = new Transaction($p->getPrix());
-                dump(true);
-
-                try {
-                    $response = $service->setTransaction($transaction)->start();
-                    $this->getDoctrine()->getManager()->persist($transaction);
-                    $this->getDoctrine()->getManager()->flush();
-                    return $this->redirect($response->getRedirectUrl());
-                } catch (Exception $e) {
-                    throw new HttpException(503, 'Payment error', $e);
-                }*/
-                $params = array(
-                    'cancelUrl' => 'http://localhost/error_payment',
-                    'returnUrl' => 'http://localhost/success_payment', // in your case             //  you have registered in the routes 'payment_success'
-                    'amount' => '4',
-                );
-                $gateway = Omnipay::create('PayPal_Express');
-                $gateway->setUsername('laetitia.mogoun_api1.gmail.com');
-                $gateway->setPassword('6Q97PF36VM868SKW');
-                $gateway->setSignature('ATbMU602flG3KAfxoD5cPh9QHE1jANt0nir6YNeoDtes8y4p4ayB8tnS'); // and the signature for the account
-                $gateway->setTestMode(true);
-                $response = $gateway->purchase($params)->send();
-                if ($response->isRedirect()) {
-                    // redirect to offsite payment gateway
-                    $response->redirect();
-                }
-                else {
-                    // payment failed: display message to customer
-                    echo $response->getMessage();
-                }
-            }
-        }
+        
         return $this->render('artisan/abonement/abonement.html.twig', [
             'packs' => $pack,'form'=>$form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/initier_paiement", name="initier_paiement")
+     */
+    public function initier_paiement(PackRepository $packRepository, Service $service, Request $request){
+        $p = $packRepository->find($request->request->get('form-prix'));
+        $transaction = new Transaction($p->getPrix());
+        $transaction->setPrix((float)$p->getPrix());
+        $transaction->setNumero(11999944);
+        $transaction->setDateEn(new \DateTime());
+        $transaction->setPack($p);
+        $transaction->setArtisan($this->getUser());
+        
+        try {
+            $response = $service->setTransaction($transaction)->start();
+            $this->getDoctrine()->getManager()->persist($transaction);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirect($response->getRedirectUrl());
+        } catch (Exception $e) {
+            throw new HttpException(503, 'Payment error', $e);
+        }
+        /*$params = array(
+            'cancelUrl' => 'http://localhost/error_payment',
+            'returnUrl' => 'http://localhost/success_payment', // in your case             //  you have registered in the routes 'payment_success'
+            'amount' => '4',
+        );
+        $gateway = Omnipay::create('PayPal_Express');
+        $gateway->setUsername('laetitia.mogoun_api1.gmail.com');
+        $gateway->setPassword('6Q97PF36VM868SKW');
+        $gateway->setSignature('ATbMU602flG3KAfxoD5cPh9QHE1jANt0nir6YNeoDtes8y4p4ayB8tnS'); // and the signature for the account
+        $gateway->setTestMode(true);
+        $response = $gateway->purchase($params)->send();
+        if ($response->isRedirect()) {
+            // redirect to offsite payment gateway
+            $response->redirect();
+        }
+        else {
+            // payment failed: display message to customer
+            echo $response->getMessage();
+        }*/
+            
+        
     }
 
     /**

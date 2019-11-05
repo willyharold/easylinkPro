@@ -54,12 +54,6 @@ class Transaction extends BaseTransaction
      */
     private $artisan;
 
-    public function __construct()
-    {
-        $this->dateEn = new \DateTime();
-    }
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -159,6 +153,22 @@ class Transaction extends BaseTransaction
         // TODO: Implement __toString() method.
         return "".$this->getNumero();
     }
+
+    public function getDescription(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function getItems(): array
+    {
+        return array();
+    }
+
+    public function getShippingAmount(): string
+    {
+        return '0.00';
+    }
+
 
 
 }

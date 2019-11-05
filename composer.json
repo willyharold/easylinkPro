@@ -5,6 +5,7 @@
         "php": "^7.2.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "beelab/paypal-bundle": "^1.4",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
         "friendsofsymfony/oauth-server-bundle": "^1.6",
         "friendsofsymfony/user-bundle": "^2.1",

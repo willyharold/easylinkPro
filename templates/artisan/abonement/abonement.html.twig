@@ -57,10 +57,11 @@
                                                 <li>Finance Analysing</li>
                                             </ul>
                                             <div class="pricing-list-2-button {% if pack.best %}pricing-list-2-button-act{% endif %}">
-                                                {{ form_start(form) }}
+                                                <form action="{{path('initier_paiement')}}" method="post">
+										
                                                 <button type="submit">Acheter</button>
                                                 <input type="hidden" name="form-prix" value="{{ pack.id }}">
-                                                {{ form_end(form) }}
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
