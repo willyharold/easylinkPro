@@ -1,0 +1,38 @@
+{% extends 'template.html.twig' %}
+{% block title %}Affectation confirmé{% endblock %}
+{% block body %}
+<div class="page-inner mt--5">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Consulter Affectation confirmé</div>
+									<div class="card-category">Devis/Annonce > Affectation confirmé > Consulter</div>
+								</div>
+   <div class="card-body">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ affectation_confirme.id }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ affectation_confirme.etat ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <div class="card-action">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('affection_confirme_index') }}" class="btn btn-primary" >back to list</a>
+
+                <a href="{{ path('affection_confirme_edit', {'id': affection_confirme.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
+            </div>										
+        </div>
+    </div>
+   
+
+    {{ include('affection_confirme/_delete_form.html.twig') }}
+

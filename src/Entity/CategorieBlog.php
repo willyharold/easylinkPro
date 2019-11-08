@@ -83,7 +83,7 @@ class CategorieBlog
 
     public function __toString()
     {
-        return "".$this->getTitre();
+        return $this->id.' | '.$this->titre;
     }
 
 

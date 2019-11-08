@@ -1,0 +1,6 @@
+
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Newsletter{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Newsletter',table: 'newsletter', cat: 'Paramètres' }) }}
+{% endblock %}

@@ -1,0 +1,77 @@
+<ul class="nav nav-primary">
+						<li class="nav-item active">
+							<a href="{{path('dashboard')}}">
+								<i class="fa fa-home"></i>
+								<p>Dashboard</p>
+							</a>
+							
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#base">
+								<i class="fa fa-usd"></i>
+								<p>Finance</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="base">
+								<ul class="nav nav-collapse">
+									<li><a href="{{path('abonnement_index')}}"><span class="sub-item">Abonnement</span></a></li>
+									<li><a href="{{path('pack_index')}}"><span class="sub-item">Pack</span></a></li>
+									<li><a href="{{path('coupon_index')}}"><span class="sub-item">Coupon</span></a></li>
+									<li><a href="{{path('transaction_index')}}"><span class="sub-item">Transaction</span></a></li>
+									
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#sidebarLayouts">
+								<i class="fa fa-th-list"></i>
+								<p>Blog</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="sidebarLayouts">
+								<ul class="nav nav-collapse">
+									<li><a href="{{path('categorie_blog_index')}}"><span class="sub-item">Categorie blog</span></a></li>
+									<li><a href="{{path('article_blog_index')}}"><span class="sub-item">Article blog</span></a></li>
+									<li><a href="{{path('avis_index')}}"><span class="sub-item">Avis</span></a></li>
+									
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#forms">
+								<i class="fa fa-cogs"></i>
+								<p>Paramètres</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="forms">
+								<ul class="nav nav-collapse">
+									<li><a href="{{path('user_index')}}"><span class="sub-item">User</span></a></li>
+									<li><a href="{{path('artisan_index')}}"><span class="sub-item">Artisan</span></a></li>
+									<li><a href="{{path('client_index')}}"><span class="sub-item">Client</span></a></li>
+									<li><a href="{{path('sous_specialite_index')}}"><span class="sub-item">Sous Spécialité</span></a></li>
+									<li><a href="{{path('specialite_index')}}"><span class="sub-item">Spécialité</span></a></li>
+									<li><a href="{{path('attribut_add_index')}}"><span class="sub-item">Attribut additionnel</span></a></li>
+									<li><a href="{{path('attribut_add_rep_index')}}"><span class="sub-item">Attribut additionnel rep</span></a></li>
+									<li><a href="{{path('newsletter_index')}}"><span class="sub-item">Newsletter</span></a></li>
+									
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#tables">
+								<i class="fa fa-table"></i>
+								<p>Gestion devis/annonce</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="tables">
+								<ul class="nav nav-collapse">
+									<li><a href="{{path('affectation_index')}}"><span class="sub-item">Affectation</span></a></li>
+									<li><a href="{{path('annonce_index')}}"><span class="sub-item">Annonce</span></a></li>
+									<li><a href="{{path('estimation_index')}}"><span class="sub-item">Estimation</span></a></li>
+									<li><a href="{{path('affectation_confirme_index')}}"><span class="sub-item">Affectation confirmés</span></a></li>
+									
+								</ul>
+							</div>
+						</li>
+						
+					</ul>

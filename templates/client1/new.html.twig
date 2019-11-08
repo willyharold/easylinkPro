@@ -1,0 +1,6 @@
+
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Client{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Client',table: 'client', cat: 'Paramètres' }) }}
+{% endblock %}

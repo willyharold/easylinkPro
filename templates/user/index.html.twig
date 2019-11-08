@@ -1,0 +1,94 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">Liste des utilisateurs</h4>
+										<a href="{{ path('user_new') }}" class="btn btn-primary btn-round ml-auto">
+											<i class="fa fa-plus"></i>
+											Ajouter un utilisateurs
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>UsernameCanonical</th>
+                <th>Email</th>
+                <th>EmailCanonical</th>
+                <th>Enabled</th>
+                <th>Salt</th>
+                <th>Password</th>
+                <th>LastLogin</th>
+                <th>ConfirmationToken</th>
+                <th>PasswordRequestedAt</th>
+                <th>Roles</th>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>DateNaissance</th>
+                <th>Telephone</th>
+                <th>DateEnreg</th>
+                <th>Ville</th>
+                <th>CodePostale</th>
+                <th>Adresse</th>
+                <th>Civilite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.usernameCanonical }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.emailCanonical }}</td>
+                <td>{{ user.enabled ? 'Yes' : 'No' }}</td>
+                <td>{{ user.salt }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.lastLogin ? user.lastLogin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.confirmationToken }}</td>
+                <td>{{ user.passwordRequestedAt ? user.passwordRequestedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.dateEnreg ? user.dateEnreg|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.ville }}</td>
+                <td>{{ user.codePostale }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.civilite }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+								</div>
+							</div>
+						</div> 	
+						
+					</div>
+					
+				</div>
+{% endblock %}			

@@ -73,7 +73,10 @@ class Annonce
      * @ORM\OneToOne(targetEntity="App\Entity\ArtisanEtat", mappedBy="annonce", cascade={"persist", "remove"})
      */
     private $artisanEtat;
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->description;
+    }
     public function __construct()
     {
         $this->sousSpectialite = new ArrayCollection();
@@ -211,11 +214,6 @@ class Annonce
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return "".$this->getId();
     }
 
     public function getAffectationConfirme(): ?AffectationConfirme

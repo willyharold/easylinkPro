@@ -1,0 +1,56 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">Liste des catégories</h4>
+										<a href="{{ path('categorie_blog_new') }}" class="btn btn-primary btn-round ml-auto">
+											<i class="fa fa-plus"></i>
+											Ajouter une catégorie
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_blog in categorie_blogs %}
+            <tr>
+                <td>{{ categorie_blog.id }}</td>
+                <td>{{ categorie_blog.titre }}</td>
+                <td>
+                    <a href="{{ path('categorie_blog_show', {'id': categorie_blog.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
+                    <a href="{{ path('categorie_blog_edit', {'id': categorie_blog.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+								</div>
+							</div>
+						</div> 	
+						
+					</div>
+					
+				</div>
+{% endblock %}			

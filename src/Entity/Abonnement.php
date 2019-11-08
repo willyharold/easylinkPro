@@ -37,6 +37,10 @@ class Abonnement
      */
     private $transaction;
 
+    public function __toString()
+    {
+        return $this->id.' | '.$this->etat;
+    }
     public function __construct()
     {
         $this->dateEn = new \DateTime();

@@ -1,0 +1,58 @@
+{% extends 'template.html.twig' %}
+{% block title %}Pack{% endblock %}
+{% block body %}
+<div class="page-inner mt--5">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Consulter Pack</div>
+									<div class="card-category">Finance > Pack > Consulter</div>
+								</div>
+   <div class="card-body">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pack.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ pack.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ pack.prix }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ pack.duree }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ pack.description }}</td>
+            </tr>
+            <tr>
+                <th>Best</th>
+                <td>{{ pack.best ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Icon</th>
+                <td>{{ pack.icon }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <div class="card-action">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('pack_index') }}" class="btn btn-primary" >back to list</a>
+
+                <a href="{{ path('pack_edit', {'id': pack.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
+            </div>										
+        </div>
+    </div>
+   
+
+    {{ include('pack/_delete_form.html.twig') }}
+

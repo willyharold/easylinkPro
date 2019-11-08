@@ -40,7 +40,10 @@ class Affectation
      * @ORM\JoinColumn(nullable=true)
      */
     private $estimation;
-
+    public function __toString()
+    {
+        return $this->id;
+    }
     public function __construct()
     {
         $this->artisan = new ArrayCollection();

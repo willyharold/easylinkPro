@@ -1,0 +1,5 @@
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Abonnement{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Abonnement',table: 'abonnement', cat: 'Finance' }) }}
+{% endblock %}

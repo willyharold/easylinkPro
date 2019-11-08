@@ -52,7 +52,10 @@ class Pack
      * @ORM\Column(type="string", length=255)
      */
     private $icon;
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->nom;
+    }
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
@@ -143,11 +146,6 @@ class Pack
         return $this;
     }
 
-    public function __toString()
-    {
-        // TODO: Implement __toString() method.
-        return "".$this->getNom();
-    }
 
     public function getBest(): ?bool
     {

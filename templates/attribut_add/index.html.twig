@@ -1,0 +1,58 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des attribut additionnels{% endblock %}
+
+{% block body %}
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">Liste des attribut additionnels</h4>
+										<a href="{{ path('attribut_add_new') }}" class="btn btn-primary btn-round ml-auto">
+											<i class="fa fa-plus"></i>
+											Ajouter un attribut additionnel
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>TypeRep</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for attribut_add in attribut_adds %}
+            <tr>
+                <td>{{ attribut_add.id }}</td>
+                <td>{{ attribut_add.nom }}</td>
+                <td>{{ attribut_add.typeRep }}</td>
+                <td>
+                    <a href="{{ path('attribut_add_show', {'id': attribut_add.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
+                    <a href="{{ path('attribut_add_edit', {'id': attribut_add.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+								</div>
+							</div>
+						</div> 	
+						
+					</div>
+					
+				</div>
+{% endblock %}			

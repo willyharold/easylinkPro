@@ -72,6 +72,10 @@ class Artisan
     {
         $this->sousSpecialite = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->id.' | '.$this->nom;
+    }
 
     public function getId(): ?int
     {

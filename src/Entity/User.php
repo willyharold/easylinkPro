@@ -8,7 +8,6 @@
 
 namespace App\Entity;
 
-use App\Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -73,7 +72,7 @@ class User extends BaseUser
     private $adresse;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
 
@@ -249,12 +248,12 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getAvatar(): ?Media
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
 
-    public function setAvatar(?Media $avatar): self
+    public function setAvatar(string $avatar): self
     {
         $this->avatar = $avatar;
 
@@ -517,5 +516,8 @@ class User extends BaseUser
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->nom;
+    }
 }

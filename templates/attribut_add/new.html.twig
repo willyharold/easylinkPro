@@ -1,0 +1,6 @@
+
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Attribut Additionnel{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Attribut Additionnel',table: 'attribut_add_rep', cat: 'Paramètres' }) }}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des coupons{% endblock %}
+
+{% block body %}
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">Liste des coupons</h4>
+										<a href="{{ path('coupon_new') }}" class="btn btn-primary btn-round ml-auto">
+											<i class="fa fa-plus"></i>
+											Ajouter un coupons
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Number</th>
+                <th>Reduction</th>
+                <th>DateEn</th>
+                <th>DateExp</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for coupon in coupons %}
+            <tr>
+                <td>{{ coupon.id }}</td>
+                <td>{{ coupon.code }}</td>
+                <td>{{ coupon.number }}</td>
+                <td>{{ coupon.reduction }}</td>
+                <td>{{ coupon.dateEn ? coupon.dateEn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ coupon.dateExp ? coupon.dateExp|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ coupon.etat ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('coupon_show', {'id': coupon.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
+                    <a href="{{ path('coupon_edit', {'id': coupon.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+								</div>
+							</div>
+						</div> 	
+						
+					</div>
+					
+				</div>
+{% endblock %}			

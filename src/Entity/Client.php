@@ -36,7 +36,10 @@ class Client extends BaseClient
     {
         parent::__construct();
     }
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->name;
+    }
     /**
      * Set name
      *

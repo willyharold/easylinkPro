@@ -1,0 +1,6 @@
+
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Estimation{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Estimation',table: 'estimation', cat: 'Devis/Annonce' }) }}
+{% endblock %}

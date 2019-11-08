@@ -53,7 +53,11 @@ class Transaction extends BaseTransaction
      * @ORM\JoinColumn(nullable=false)
      */
     private $artisan;
-
+    
+    public function __toString()
+    {
+        return $this->prix.'€ | '.$this->numero;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -146,12 +150,6 @@ class Transaction extends BaseTransaction
         $this->artisan = $artisan;
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        // TODO: Implement __toString() method.
-        return "".$this->getNumero();
     }
 
     public function getDescription(): ?string

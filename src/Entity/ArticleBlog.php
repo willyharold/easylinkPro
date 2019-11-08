@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,8 +41,8 @@ class ArticleBlog
      */
     private $datePub;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
+   /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
 
@@ -52,7 +51,10 @@ class ArticleBlog
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorieBlog;
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->titre;
+    }
     public function __construct()
     {
         $this->dateEn = new \DateTime();
@@ -138,12 +140,12 @@ class ArticleBlog
         return $this;
     }
 
-    public function getAvatar(): ?Media
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }
 
-    public function setAvatar(?Media $avatar): self
+    public function setAvatar(string $avatar): self
     {
         $this->avatar = $avatar;
 

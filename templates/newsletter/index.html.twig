@@ -1,0 +1,58 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des newsletter{% endblock %}
+
+{% block body %}
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">Liste des newsletter</h4>
+										<a href="{{ path('newsletter_new') }}" class="btn btn-primary btn-round ml-auto">
+											<i class="fa fa-plus"></i>
+											Ajouter une newsletter
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>DateEn</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for newsletter in newsletters %}
+            <tr>
+                <td>{{ newsletter.id }}</td>
+                <td>{{ newsletter.email }}</td>
+                <td>{{ newsletter.dateEn ? newsletter.dateEn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('newsletter_show', {'id': newsletter.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
+                    <a href="{{ path('newsletter_edit', {'id': newsletter.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+								</div>
+							</div>
+						</div> 	
+						
+					</div>
+					
+				</div>
+{% endblock %}			

@@ -1,0 +1,70 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des artisans{% endblock %}
+
+{% block body %}
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">Liste des artisans</h4>
+										<a href="{{ path('artisan_new') }}" class="btn btn-primary btn-round ml-auto">
+											<i class="fa fa-plus"></i>
+											Ajouter un artisan
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>DateCreateAt</th>
+                <th>Fiscale</th>
+                <th>Siren</th>
+                <th>Adresse</th>
+                <th>CodePostal</th>
+                <th>Telephone</th>
+                <th>Telephone2</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for artisan in artisans %}
+            <tr>
+                <td>{{ artisan.id }}</td>
+                <td>{{ artisan.nom }}</td>
+                <td>{{ artisan.dateCreateAt ? artisan.dateCreateAt|date('Y-m-d') : '' }}</td>
+                <td>{{ artisan.fiscale }}</td>
+                <td>{{ artisan.siren }}</td>
+                <td>{{ artisan.adresse }}</td>
+                <td>{{ artisan.codePostal }}</td>
+                <td>{{ artisan.telephone }}</td>
+                <td>{{ artisan.telephone2 }}</td>
+                <td>
+                    <a href="{{ path('artisan_show', {'id': artisan.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
+                    <a href="{{ path('artisan_edit', {'id': artisan.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+								</div>
+							</div>
+						</div> 	
+						
+					</div>
+					
+				</div>
+{% endblock %}			

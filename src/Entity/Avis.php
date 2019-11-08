@@ -26,8 +26,6 @@ class Avis
      */
     private $note;
 
-
-
     /**
      * @ORM\Column(type="datetime")
      */
@@ -43,7 +41,10 @@ class Avis
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->contenu;
+    }
     public function getId(): ?int
     {
         return $this->id;

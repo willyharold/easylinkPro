@@ -1,0 +1,5 @@
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Affectation{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Affectation Confirmés',table: 'affectation_confirme', cat: 'Devis/Anonce' }) }}
+{% endblock %}

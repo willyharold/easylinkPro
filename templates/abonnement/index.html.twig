@@ -1,0 +1,62 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Liste des abonnements{% endblock %}
+
+{% block body %}
+				<div class="page-inner mt--5">
+					<div class="row mt--2">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex align-items-center">
+										<h4 class="card-title">Liste des abonnements</h4>
+										<a href="{{ path('abonnement_new') }}" class="btn btn-primary btn-round ml-auto">
+											<i class="fa fa-plus"></i>
+											Ajouter un abonnement
+										</a>
+									</div>
+								</div>
+								<div class="card-body">
+									
+
+									<div class="table-responsive">
+										<table id="add-row" class="display table table-striped table-hover" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Etat</th>
+                <th>Transaction</th>
+                <th>DateEn</th>
+                <th>DateExp</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for abonnement in abonnements %}
+            <tr>
+                <td>{{ abonnement.id }}</td>
+                <td>{{ abonnement.etat ? 'Yes' : 'No' }}</td>
+                <td>{{ abonnement.transaction }}</td>
+                <td>{{ abonnement.dateEn ? abonnement.dateEn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ abonnement.dateExp ? abonnement.dateExp|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('abonnement_show', {'id': abonnement.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
+                    <a href="{{ path('abonnement_edit', {'id': abonnement.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+								</div>
+							</div>
+						</div> 	
+						
+					</div>
+					
+				</div>
+{% endblock %}			

@@ -1,0 +1,54 @@
+{% extends 'template.html.twig' %}
+{% block title %}Article{% endblock %}
+{% block body %}
+<div class="page-inner mt--5">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Consulter Article</div>
+									<div class="card-category">BLog > Article > Consulter</div>
+								</div>
+   <div class="card-body">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article_blog.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article_blog.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ article_blog.description }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ article_blog.etat ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>DateEn</th>
+                <td>{{ article_blog.dateEn ? article_blog.dateEn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DatePub</th>
+                <td>{{ article_blog.datePub ? article_blog.datePub|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <div class="card-action">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('article_blog_index') }}" class="btn btn-primary" >back to list</a>
+
+                <a href="{{ path('article_blog_edit', {'id': article_blog.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
+            </div>										
+        </div>
+    </div>
+   
+
+    {{ include('article_blog/_delete_form.html.twig') }}
+

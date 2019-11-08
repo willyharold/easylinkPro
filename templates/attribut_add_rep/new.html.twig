@@ -1,0 +1,6 @@
+
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Attribut Add Rep{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Attribut Add Rep',table: 'attribut_add_rep', cat: 'Paramètres' }) }}
+{% endblock %}

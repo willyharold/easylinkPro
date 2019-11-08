@@ -1,0 +1,6 @@
+
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Categorie{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Categorie',table: 'categorie_blog', cat: 'Blog' }) }}
+{% endblock %}

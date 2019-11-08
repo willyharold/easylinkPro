@@ -45,7 +45,10 @@ class AffectationConfirme
      * @ORM\JoinColumn(nullable=true)
      */
     private $estimation;
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->etat;
+    }
     public function __construct()
     {
         $this->artisan = new ArrayCollection();

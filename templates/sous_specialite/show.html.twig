@@ -1,0 +1,46 @@
+{% extends 'template.html.twig' %}
+{% block title %}Sous Spécaialité{% endblock %}
+{% block body %}
+<div class="page-inner mt--5">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Consulter sous Spécialité</div>
+									<div class="card-category">Paramètres > Sous Spécialité > Consulter</div>
+								</div>
+   <div class="card-body">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sous_specialite.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ sous_specialite.nom }}</td>
+            </tr>
+            <tr>
+                <th>DesCourte</th>
+                <td>{{ sous_specialite.desCourte }}</td>
+            </tr>
+            <tr>
+                <th>DesLongue</th>
+                <td>{{ sous_specialite.desLongue }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <div class="card-action">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ path('sous_specialite_index') }}" class="btn btn-primary" >back to list</a>
+
+                <a href="{{ path('sous_specialite_edit', {'id': sous_specialite.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
+            </div>										
+        </div>
+    </div>
+   
+
+    {{ include('sous_specialite/_delete_form.html.twig') }}
+

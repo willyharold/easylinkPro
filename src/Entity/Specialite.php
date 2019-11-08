@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -40,8 +39,7 @@ class Specialite
     private $code;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -120,12 +118,12 @@ class Specialite
         return $this;
     }
 
-    public function getImage(): ?Media
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage(?Media $image): self
+    public function setImage(string $image): self
     {
         $this->image = $image;
 

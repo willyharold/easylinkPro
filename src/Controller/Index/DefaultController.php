@@ -6,6 +6,21 @@ use App\Entity\Affectation;
 use App\Entity\AffectationConfirme;
 use App\Entity\Annonce;
 use App\Entity\Specialite;
+use App\Entity\Abonnement;
+use App\Entity\ArticleBlog;
+use App\Entity\Artisan;
+use App\Entity\AttributAdd;
+use App\Entity\AttributAddRep;
+use App\Entity\Avis;
+use App\Entity\CategorieBlog;
+use App\Entity\Client;
+use App\Entity\Coupon;
+use App\Entity\Estimation;
+use App\Entity\Newsletter;
+use App\Entity\Pack;
+use App\Entity\SousSpecialite;
+use App\Entity\Transaction;
+use App\Entity\User;
 use App\Form\Annonce2Type;
 use App\Repository\ArticleBlogRepository;
 use App\Repository\CategorieBlogRepository;
@@ -20,6 +35,41 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/admin/dashboard", name="dashboard")
+     */
+    public function dashboard()
+    {
+        return $this->render('accueil.html.twig',[
+            'ab' => count($this->getDoctrine()->getRepository(Abonnement::class)->findAll()),
+            'ac' => count($this->getDoctrine()->getRepository(AffectationConfirme::class)->findAll()),
+            'af' => count($this->getDoctrine()->getRepository(Affectation::class)->findAll()),
+            'an' => count($this->getDoctrine()->getRepository(Annonce::class)->findAll()),
+            'art' => count($this->getDoctrine()->getRepository(ArticleBlog::class)->findAll()),
+            'ar' => count($this->getDoctrine()->getRepository(Artisan::class)->findAll()),
+            'aa' => count($this->getDoctrine()->getRepository(AttributAdd::class)->findAll()),
+            'aar' => count($this->getDoctrine()->getRepository(AttributAddRep::class)->findAll()),
+            'av' => count($this->getDoctrine()->getRepository(Avis::class)->findAll()),
+            'ca' => count($this->getDoctrine()->getRepository(CategorieBlog::class)->findAll()),
+            'cl' => count($this->getDoctrine()->getRepository(Client::class)->findAll()),
+            'co' => count($this->getDoctrine()->getRepository(Coupon::class)->findAll()),
+            'es' => count($this->getDoctrine()->getRepository(Estimation::class)->findAll()),
+            'ne' => count($this->getDoctrine()->getRepository(Newsletter::class)->findAll()),
+            'pa' => count($this->getDoctrine()->getRepository(Pack::class)->findAll()),
+            'ss' => count($this->getDoctrine()->getRepository(SousSpecialite::class)->findAll()),
+            'sp' => count($this->getDoctrine()->getRepository(Specialite::class)->findAll()),
+            'tr' => count($this->getDoctrine()->getRepository(Transaction::class)->findAll()),
+            'us' => count($this->getDoctrine()->getRepository(User::class)->findAll()),
+        ]);
+    }
+    /**
+     * @Route("/homepage", name="homepage")
+     */
+    public function homepage()
+    {
+        return $this->render('default/index.html.twig');
+    }
+
     /**
      * @Route("/", name="default")
      */

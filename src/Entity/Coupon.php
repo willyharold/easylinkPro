@@ -52,7 +52,10 @@ class Coupon
      * @ORM\OneToMany(targetEntity="App\Entity\Transaction", mappedBy="coupon")
      */
     private $transactions;
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->code.' | '.$this->reduction;
+    }
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
@@ -166,11 +169,5 @@ class Coupon
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        // TODO: Implement __toString() method.
-        return "".$this->getCode();
     }
 }

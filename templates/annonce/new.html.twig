@@ -1,0 +1,5 @@
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Annonce{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Annonce',table: 'annonce', cat: 'Devis/Anonce' }) }}
+{% endblock %}

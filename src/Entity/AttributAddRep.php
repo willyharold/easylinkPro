@@ -30,7 +30,10 @@ class AttributAddRep
      * @ORM\ManyToOne(targetEntity="App\Entity\Estimation", inversedBy="attributAddReps")
      */
     private $estimation;
-
+    public function __toString()
+    {
+        return $this->id.' | '.$this->reponse;
+    }
     public function getId(): ?int
     {
         return $this->id;

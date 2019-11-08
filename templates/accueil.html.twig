@@ -1,0 +1,431 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Accueil dashboard{% endblock %}
+
+{% block body %}
+		<div class="page-inner mt--5">
+			<div class="row mt--2">
+				<div class="col-md-12">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">Finance</div>
+							<div class="card-category">Statistiques sur les finances</div>
+							<div class="row">
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-handshake-o text-warning"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Abonnement</p>
+														<h4 class="card-title">{{ab}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-cog text-success"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Pack</p>
+														<h4 class="card-title">{{pa}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-percent text-danger"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Coupons</p>
+														<h4 class="card-title">{{co}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-refresh text-primary"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Transactions</p>
+														<h4 class="card-title">{{tr}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</div>
+			
+		</div>
+		<div class="page-inner mt--5">
+			<div class="row mt--2">
+				<div class="col-md-12">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">Blog</div>
+							<div class="card-category">Statistiques sur les blogs</div>
+							<div class="row">
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-list text-warning"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Catégorie blog</p>
+														<h4 class="card-title">{{ca}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-newspaper-o text-success"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Article blog</p>
+														<h4 class="card-title">{{art}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-comments text-danger"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Avis</p>
+														<h4 class="card-title">{{av}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</div>
+			
+		</div>
+		<div class="page-inner mt--5">
+			<div class="row mt--2">
+				<div class="col-md-12">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">Paramètres</div>
+							<div class="card-category">Statistiques sur les paramètres</div>
+							<div class="row">
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-user-secret text-warning"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Users</p>
+														<h4 class="card-title">{{us}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-user-plus text-danger"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Artisans</p>
+														<h4 class="card-title">{{ar}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-users text-primary"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Clients</p>
+														<h4 class="card-title">{{cl}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-th-large text-success"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Sous Spécialités</p>
+														<h4 class="card-title">{{ss}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-list text-danger"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Spécialités</p>
+														<h4 class="card-title">{{sp}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-plus-circle text-danger"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Attributs additionnel</p>
+														<h4 class="card-title">{{aa}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-list-ul text-primary"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Attributs additionnel rep</p>
+														<h4 class="card-title">{{aar}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-newspaper-o text-danger"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Newsletter</p>
+														<h4 class="card-title">{{ne}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</div>
+			
+		</div>
+		<div class="page-inner mt--5">
+			<div class="row mt--2">
+				<div class="col-md-12">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">Gestion dévis/annonce</div>
+							<div class="card-category">Statistiques sur les dévis/annonce</div>
+							<div class="row">
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-arrows text-warning"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Affectation</p>
+														<h4 class="card-title">{{af}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body ">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-file text-success"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Annonce</p>
+														<h4 class="card-title">{{an}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-dot-circle-o text-danger"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Estimation</p>
+														<h4 class="card-title">{{es}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<div class="card card-stats card-round">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-5">
+													<div class="icon-big text-center">
+														<i class="fa fa-check-square-o text-primary"></i>
+													</div>
+												</div>
+												<div class="col-7 col-stats">
+													<div class="numbers">
+														<p class="card-category">Affectation confirmés</p>
+														<h4 class="card-title">{{ac}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</div>
+			
+		</div>
+{% endblock %}

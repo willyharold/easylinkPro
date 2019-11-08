@@ -38,7 +38,11 @@ class AttributAdd
      * @ORM\OneToMany(targetEntity="App\Entity\AttributAddRep", mappedBy="attributAdd", cascade={"all"})
      */
     private $attributAddReps;
-
+    
+    public function __toString()
+    {
+        return $this->id.' | '.$this->nom;
+    }
     public function __construct()
     {
         $this->reponse = new ArrayCollection();

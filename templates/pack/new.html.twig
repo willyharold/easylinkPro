@@ -1,0 +1,6 @@
+
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Pack{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Pack',table: 'pack', cat: 'Finance' }) }}
+{% endblock %}

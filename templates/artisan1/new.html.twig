@@ -1,0 +1,5 @@
+{% extends 'template.html.twig' %}
+{% block title %}{{type}} Artisan{% endblock %}
+{% block body %}
+	{{ include('form/_form.html.twig', {type: type, texte: 'Artisan',table: 'artisan', cat: 'Paramètres' }) }}
+{% endblock %}

@@ -62,4 +62,4 @@ security:
     - { path: ^/client/specialite/, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/artisan/, role: ROLE_ARTISAN }
     - { path: ^/client, role: ROLE_CLIENT }
-    - { path: ^/admin/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/admin, role: IS_AUTHENTICATED_ANONYMOUSLY }
