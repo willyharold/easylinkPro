@@ -210,10 +210,10 @@
             </div>
             <div class="row mt-40">
                 <div class="owl-carousel owl-theme" id="blog-grid">
+                    {% for article in articles %}
                     <div class="blog-grid-simple">
-                        <h4><a href="#">Comment contacter un pro</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                        <h4><a href="#">{{ article.titre | slice(0,30) }}</a></h4>
+                        <p>{{ article.description |slice(0,100) }}</p>
                         <div class="blog-grid-simple-content">
                             <div class="row">
                                 <div class="blog-grid-simple-date">
@@ -221,7 +221,7 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     <div class="col-xs-5 pl-0">
-                                        <h5>Feb 20, 2018</h5>
+                                        <h5>{{ article.datePub | date }}</h5>
                                     </div>
                                 </div>
                                 <div class="col-xs-5 right-holder">
@@ -230,90 +230,8 @@
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
 
-                    <div class="blog-grid-simple">
-                        <h4><a href="#">Noter un artisan</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <div class="blog-grid-simple-content">
-                            <div class="row">
-                                <div class="blog-grid-simple-date">
-                                    <div class="col-xs-2 pr-0">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <div class="col-xs-5 pl-0">
-                                        <h5>Feb 20, 2018</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xs-5 right-holder">
-                                    <a href="#">Lire Article</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="blog-grid-simple">
-                        <h4><a href="#">Suivre son  projet</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <div class="blog-grid-simple-content">
-                            <div class="row">
-                                <div class="blog-grid-simple-date">
-                                    <div class="col-xs-2 pr-0">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <div class="col-xs-5 pl-0">
-                                        <h5>Feb 20, 2018</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xs-5 right-holder">
-                                    <a href="#">Lire Article</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="blog-grid-simple">
-                        <h4><a href="#">Comment contacter un pro</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <div class="blog-grid-simple-content">
-                            <div class="row">
-                                <div class="blog-grid-simple-date">
-                                    <div class="col-xs-2 pr-0">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <div class="col-xs-5 pl-0">
-                                        <h5>Feb 20, 2018</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xs-5 right-holder">
-                                    <a href="#">Lire Article</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="blog-grid-simple">
-                        <h4><a href="#">Comment contacter un pro</a></h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <div class="blog-grid-simple-content">
-                            <div class="row">
-                                <div class="blog-grid-simple-date">
-                                    <div class="col-xs-2 pr-0">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <div class="col-xs-5 pl-0">
-                                        <h5>Feb 20, 2018</h5>
-                                    </div>
-                                </div>
-                                <div class="col-xs-5 right-holder">
-                                    <a href="#">Lire Article</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
