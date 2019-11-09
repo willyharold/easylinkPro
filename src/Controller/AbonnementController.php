@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/abonnement")
+ * @Route("/admin/abonnement")
  */
 class AbonnementController extends Controller
 {

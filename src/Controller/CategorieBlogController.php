@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/categorie/blog")
+ * @Route("/admin/categorie/blog")
  */
 class CategorieBlogController extends Controller
 {

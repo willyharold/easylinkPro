@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/affectation/confirme")
+ * @Route("/admin/affectation/confirme")
  */
 class AffectationConfirmeController extends Controller
 {

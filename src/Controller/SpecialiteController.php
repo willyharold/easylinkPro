@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/specialite")
+ * @Route("/admin/specialite")
  */
 class SpecialiteController extends Controller
 {
