@@ -40,8 +40,8 @@
                 <td>{{ specialite.desLongue }}</td>
                 <td>{{ specialite.code }}</td>
                 <td>
-                    <a href="{{ path('specialite_show', {'id': specialite.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('specialite_edit', {'id': specialite.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('specialite_show', {'id': specialite.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('specialite_edit', {'id': specialite.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

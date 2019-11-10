@@ -34,8 +34,8 @@
                 <td>{{ affectation.id }}</td>
                 <td>{{ affectation.dateEn ? affectation.dateEn|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('affectation_show', {'id': affectation.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('affectation_edit', {'id': affectation.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('affectation_show', {'id': affectation.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('affectation_edit', {'id': affectation.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

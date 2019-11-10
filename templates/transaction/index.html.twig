@@ -26,13 +26,9 @@
                 <th>Id</th>
                 <th>Prix</th>
                 <th>Numero</th>
-                <th>DateEn</th>
                 <th>Start</th>
                 <th>End</th>
                 <th>Status</th>
-                <th>Token</th>
-                <th>Amount</th>
-                <th>Response</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -42,16 +38,12 @@
                 <td>{{ transaction.id }}</td>
                 <td>{{ transaction.prix }}</td>
                 <td>{{ transaction.numero }}</td>
-                <td>{{ transaction.dateEn ? transaction.dateEn|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ transaction.start ? transaction.start|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ transaction.end ? transaction.end|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ transaction.status }}</td>
-                <td>{{ transaction.token }}</td>
-                <td>{{ transaction.amount }}</td>
-                <td>{{ transaction.response ? transaction.response|join(', ') : '' }}</td>
                 <td>
-                    <a href="{{ path('transaction_show', {'id': transaction.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('transaction_edit', {'id': transaction.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('transaction_show', {'id': transaction.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('transaction_edit', {'id': transaction.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

@@ -42,8 +42,8 @@
                 <td>{{ article_blog.dateEn ? article_blog.dateEn|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ article_blog.datePub ? article_blog.datePub|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('article_blog_show', {'id': article_blog.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('article_blog_edit', {'id': article_blog.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('article_blog_show', {'id': article_blog.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('article_blog_edit', {'id': article_blog.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

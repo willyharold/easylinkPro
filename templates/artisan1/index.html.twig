@@ -28,10 +28,7 @@
                 <th>DateCreateAt</th>
                 <th>Fiscale</th>
                 <th>Siren</th>
-                <th>Adresse</th>
-                <th>CodePostal</th>
                 <th>Telephone</th>
-                <th>Telephone2</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -43,13 +40,10 @@
                 <td>{{ artisan.dateCreateAt ? artisan.dateCreateAt|date('Y-m-d') : '' }}</td>
                 <td>{{ artisan.fiscale }}</td>
                 <td>{{ artisan.siren }}</td>
-                <td>{{ artisan.adresse }}</td>
-                <td>{{ artisan.codePostal }}</td>
                 <td>{{ artisan.telephone }}</td>
-                <td>{{ artisan.telephone2 }}</td>
                 <td>
-                    <a href="{{ path('artisan_show', {'id': artisan.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('artisan_edit', {'id': artisan.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('artisan_show', {'id': artisan.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('artisan_edit', {'id': artisan.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

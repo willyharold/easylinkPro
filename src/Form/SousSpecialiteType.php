@@ -17,7 +17,6 @@ class SousSpecialiteType extends AbstractType
             ->add('desLongue')
             ->add('image')
             ->add('specialite')
-            ->add('artisans')
         ;
     }
 

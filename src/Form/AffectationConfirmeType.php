@@ -12,7 +12,12 @@ class AffectationConfirmeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('etat')
+        ->add('etat', ChoiceType::class, [
+            'choices' => [
+                'active' => true,
+                'inactive' => false
+            ]
+        ])
             ->add('annonce')
             ->add('artisan')
             ->add('artisanConfirme')

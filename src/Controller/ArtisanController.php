@@ -20,7 +20,7 @@ class ArtisanController extends Controller
      */
     public function index(ArtisanRepository $artisanRepository): Response
     {
-        return $this->render('artisan/index.html.twig', [
+        return $this->render('artisan1/index.html.twig', [
             'artisans' => $artisanRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class ArtisanController extends Controller
             return $this->redirectToRoute('artisan_index');
         }
 
-        return $this->render('artisan/new.html.twig', [
+        return $this->render('artisan1/new.html.twig', [
             'artisan' => $artisan,
             'form' => $form->createView(),
             'type' => "Ajouter",
@@ -54,7 +54,7 @@ class ArtisanController extends Controller
      */
     public function show(Artisan $artisan): Response
     {
-        return $this->render('artisan/show.html.twig', [
+        return $this->render('artisan1/show.html.twig', [
             'artisan' => $artisan,
         ]);
     }
@@ -73,7 +73,7 @@ class ArtisanController extends Controller
             return $this->redirectToRoute('artisan_index');
         }
 
-        return $this->render('artisan/new.html.twig', [
+        return $this->render('artisan1/new.html.twig', [
             'artisan' => $artisan,
             'form' => $form->createView(),
             'type' => "Modifier",

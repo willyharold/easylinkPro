@@ -14,7 +14,12 @@ class ArticleBlogType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('etat')
+            ->add('etat', ChoiceType::class, [
+                'choices' => [
+                    'active' => true,
+                    'inactive' => false
+                ]
+            ])
             ->add('dateEn')
             ->add('datePub')
             ->add('avatar')

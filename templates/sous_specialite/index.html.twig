@@ -38,8 +38,8 @@
                 <td>{{ sous_specialite.desCourte }}</td>
                 <td>{{ sous_specialite.desLongue }}</td>
                 <td>
-                    <a href="{{ path('sous_specialite_show', {'id': sous_specialite.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('sous_specialite_edit', {'id': sous_specialite.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('sous_specialite_show', {'id': sous_specialite.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('sous_specialite_edit', {'id': sous_specialite.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

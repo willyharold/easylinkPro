@@ -74,7 +74,7 @@ class AbonnementController extends Controller
             return $this->redirectToRoute('abonnement_index');
         }
 
-        return $this->render('abonnement/edit.html.twig', [
+        return $this->render('abonnement/new.html.twig', [
             'abonnement' => $abonnement,
             'form' => $form->createView(),
             'type' => "Modifier",

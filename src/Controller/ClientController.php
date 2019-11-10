@@ -23,7 +23,7 @@ class ClientController extends Controller
             ->getRepository(Client::class)
             ->findAll();
 
-        return $this->render('client/index.html.twig', [
+        return $this->render('client1/index.html.twig', [
             'clients' => $clients,
         ]);
     }
@@ -45,7 +45,7 @@ class ClientController extends Controller
             return $this->redirectToRoute('client_index');
         }
 
-        return $this->render('client/new.html.twig', [
+        return $this->render('client1/new.html.twig', [
             'client' => $client,
             'form' => $form->createView(),
             'type' => "Ajouter",
@@ -57,7 +57,7 @@ class ClientController extends Controller
      */
     public function show(Client $client): Response
     {
-        return $this->render('client/show.html.twig', [
+        return $this->render('client1/show.html.twig', [
             'client' => $client,
         ]);
     }
@@ -76,7 +76,7 @@ class ClientController extends Controller
             return $this->redirectToRoute('client_index');
         }
 
-        return $this->render('client/new.html.twig', [
+        return $this->render('client1/new.html.twig', [
             'client' => $client,
             'form' => $form->createView(),
             'type' => "Modifier",

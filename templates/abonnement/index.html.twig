@@ -40,8 +40,8 @@
                 <td>{{ abonnement.dateEn ? abonnement.dateEn|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ abonnement.dateExp ? abonnement.dateExp|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('abonnement_show', {'id': abonnement.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('abonnement_edit', {'id': abonnement.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('abonnement_show', {'id': abonnement.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('abonnement_edit', {'id': abonnement.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

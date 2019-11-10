@@ -72,8 +72,8 @@
                 <td>{{ user.adresse }}</td>
                 <td>{{ user.civilite }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}

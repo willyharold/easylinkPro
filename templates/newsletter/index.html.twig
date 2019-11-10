@@ -36,8 +36,8 @@
                 <td>{{ newsletter.email }}</td>
                 <td>{{ newsletter.dateEn ? newsletter.dateEn|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('newsletter_show', {'id': newsletter.id}) }}" class="btn btn-link btn-primary btn-lg" ><i class="fa fa-eye"></i> show</a>
-                    <a href="{{ path('newsletter_edit', {'id': newsletter.id}) }}" class="btn btn-link btn-danger" ><i class="fa fa-edit"></i> show</a>
+                    <a href="{{ path('newsletter_show', {'id': newsletter.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
+                    <a href="{{ path('newsletter_edit', {'id': newsletter.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}
