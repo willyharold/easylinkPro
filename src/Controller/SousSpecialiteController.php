@@ -64,10 +64,15 @@ class SousSpecialiteController extends Controller
      */
     public function edit(Request $request, SousSpecialite $sousSpecialite): Response
     {
+        $sousSpecialite2=$sousSpecialite;
         $form = $this->createForm(SousSpecialiteType::class, $sousSpecialite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($sousSpecialite->getImage()==null)
+            {
+                $sousSpecialite->setImage($sousSpecialite2->getImage());
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('sous_specialite_index');

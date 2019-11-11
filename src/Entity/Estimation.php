@@ -5,9 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EstimationRepository")
+ * @Vich\Uploadable
  */
 class Estimation
 {
@@ -84,7 +89,20 @@ class Estimation
      * @ORM\Column(type="string", length=255)
      */
     private $titre;
-
+/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+/**
+     * @Assert\File(
+     *     maxSizeMessage = "L'image ne doit pas dépasser 10Mb.",
+     *     maxSize = "10024k",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Les images doivent être au format JPG, GIF ou PNG."
+     * )
+     * @Vich\UploadableField(mapping="estimation_image", fileNameProperty="image")
+     */
+    private $fichierImage;
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Affectation", mappedBy="estimation", cascade={"persist", "remove"})
      */
@@ -105,6 +123,24 @@ class Estimation
         $this->attributAddReps = new ArrayCollection();
         $this->sousSpecialite = new ArrayCollection();
         $this->dateEn = new \DateTime();
+    }
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $fichierImage
+     *
+     * @return Estimation
+    */
+    public function setFichierImage(File $fichierImage = null)
+    {
+        $this->fichierImage = $fichierImage;
+        if ($fichierImage) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->dateEn = new \DateTime('now');
+        }
+    }
+
+    public function getFichierImage()
+    {
+        return $this->fichierImage;
     }
 
     public function getId(): ?int

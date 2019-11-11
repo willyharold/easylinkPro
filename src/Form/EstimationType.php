@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 class EstimationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -35,6 +35,7 @@ class EstimationType extends AbstractType
             ])
             ->add('ville')
             ->add('description')
+            ->add('fichierImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image' ])
             ->add('codepostal')
             ->add('specialite',null,["label"=>"Selectionnez le type de travaux à réaliser "])
             ->add('sousSpecialite',null,["label"=>"Précisez les Travaux à réaliser "])

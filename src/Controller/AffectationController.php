@@ -28,7 +28,7 @@ class AffectationController extends Controller
     /**
      * @Route("/new", name="affectation_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, \Swift_Mailer $mailer): Response
     {
         $affectation = new Affectation();
         $form = $this->createForm(AffectationType::class, $affectation);
@@ -38,6 +38,15 @@ class AffectationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($affectation);
             $entityManager->flush();
+            
+            foreach($affectation->getArtisan() as $artisan){
+                $message = (new \Swift_Message("Proposition de travail"))
+                    ->setFrom('support@easylink.com')
+                    ->setTo($artisan->getArtisanConfirme()->getEmail())
+                    ->setBody("Une annonce vous a été affectée. Veuillez vous connecter pour en savoir plus")
+                ;
+                $mailer->send($message);
+            }
 
             return $this->redirectToRoute('affectation_index');
         }

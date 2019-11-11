@@ -14,7 +14,6 @@ class TransactionType extends AbstractType
         $builder
             ->add('prix')
             ->add('numero')
-            ->add('dateEn')
             ->add('start')
             ->add('end')
             ->add('status')

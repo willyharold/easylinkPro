@@ -46,7 +46,7 @@
     <div class="card-action">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ path('pack_index') }}" class="btn btn-primary" >back to list</a>
+                <a href="{{ path('pack_index') }}" class="btn btn-primary" ><i class="fa fa-arrow-circle-left"></i> Retourner à la liste</a>
 
                 <a href="{{ path('pack_edit', {'id': pack.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
             </div>										
@@ -56,3 +56,13 @@
 
     {{ include('pack/_delete_form.html.twig') }}
 
+
+									
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			
+{% endblock %}

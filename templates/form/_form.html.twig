@@ -7,11 +7,11 @@
 									<div class="card-category">{{cat}} > {{texte}} > {{type}}</div>
 									{%if type == "Modifier" %}
 										{%if table == "client" %}
-											{{ include('/client1_delete_form.html.twig', {type: type, texte: 'Estimation',table: 'estimation', cat: 'Devis/Annonce' }) }}
-										{%elseif table == "artisan"%}
-											{{ include('artisan1/_delete_form.html.twig', {type: type, texte: 'Estimation',table: 'estimation', cat: 'Devis/Annonce' }) }}
+											{{ include('/client1_delete_form.html.twig') }}
+										{%elseif table == "artisan" %}
+											{{ include('artisan1/_delete_form.html.twig') }}
 										{%else%}
-											{{ include(table~'/_delete_form.html.twig', {type: type, texte: 'Estimation',table: 'estimation', cat: 'Devis/Annonce' }) }}
+											{{ include(table~'/_delete_form.html.twig') }}
 										
 										{%endif%}
 									{%endif%}

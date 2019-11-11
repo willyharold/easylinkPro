@@ -1,0 +1,45 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        user_image:
+            uri_prefix: /images/user
+            upload_destination: '%kernel.project_dir%/public/images/user'
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+            
+        specialite_image:
+            uri_prefix: /images/specialite
+            upload_destination: '%kernel.project_dir%/public/images/specialite'
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true    
+            
+        sous_specialite_image:
+            uri_prefix: /images/sous_specalite
+            upload_destination: '%kernel.project_dir%/public/images/sous_specialite'
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true    
+            
+        estimation_image:
+            uri_prefix: /images/estimation
+            upload_destination: '%kernel.project_dir%/public/images/estimation'
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true    
+            
+        article_image:
+            uri_prefix: /images/article
+            upload_destination: '%kernel.project_dir%/public/images/article'
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true 
+            
+        

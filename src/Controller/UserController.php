@@ -64,10 +64,15 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user): Response
     {
+        $user2 = $user;
         $form = $this->createForm(User1Type::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($user->getAvatar()==null)
+            {
+                $user->setAvatar($user2->getAvatar());
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index');

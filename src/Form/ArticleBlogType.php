@@ -6,6 +6,8 @@ use App\Entity\ArticleBlog;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ArticleBlogType extends AbstractType
 {
@@ -20,9 +22,8 @@ class ArticleBlogType extends AbstractType
                     'inactive' => false
                 ]
             ])
-            ->add('dateEn')
             ->add('datePub')
-            ->add('avatar')
+            ->add('avatarImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image' ])
             ->add('categorieBlog')
         ;
     }

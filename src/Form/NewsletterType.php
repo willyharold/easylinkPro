@@ -13,7 +13,6 @@ class NewsletterType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('dateEn')
         ;
     }
 

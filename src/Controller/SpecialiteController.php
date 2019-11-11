@@ -64,10 +64,15 @@ class SpecialiteController extends Controller
      */
     public function edit(Request $request, Specialite $specialite): Response
     {
+        $specialite2=$specialite;
         $form = $this->createForm(SpecialiteType::class, $specialite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($specialite->getImage()==null)
+            {
+                $specialite->setImage($specialite2->getImage());
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('specialite_index');

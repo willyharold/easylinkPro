@@ -6,6 +6,7 @@ use App\Entity\Specialite;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class SpecialiteType extends AbstractType
 {
@@ -16,7 +17,7 @@ class SpecialiteType extends AbstractType
             ->add('desCourte')
             ->add('desLongue')
             ->add('code')
-            ->add('image')
+            ->add('fichierImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image' ])
         ;
     }
 

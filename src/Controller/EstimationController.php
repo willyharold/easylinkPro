@@ -64,10 +64,16 @@ class EstimationController extends Controller
      */
     public function edit(Request $request, Estimation $estimation): Response
     {
+        $estimation2 = $estimation;
         $form = $this->createForm(EstimationType::class, $estimation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($estimation->getImage()==null)
+            {
+                $estimation->setImage($estimation2->getImage());
+            }
+            
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('estimation_index');

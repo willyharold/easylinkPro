@@ -36,6 +36,25 @@ security:
                 lifetime: 604800
                 path: /artisan
 
+        admin:
+            pattern: ^/admin
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                login_path: fos_user_security_admin_login
+                check_path: fos_user_security_admin_check
+                always_use_default_target_path: true
+                default_target_path: /admin/dashboard
+
+            logout:
+                path: fos_user_security_admin_logout
+
+            anonymous:    true
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /admin
+
         client:
             pattern: ^/
             form_login:
@@ -62,4 +81,5 @@ security:
     - { path: ^/client/specialite/, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/artisan/, role: ROLE_ARTISAN }
     - { path: ^/client, role: ROLE_CLIENT }
-    - { path: ^/admin, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/admin, role: ROLE_ADMIN }

@@ -25,6 +25,10 @@
             <tr>
                 <th>Id</th>
                 <th>Etat</th>
+                <th>Annonce</th>
+                <th>Estimation</th>
+                <th>Artisan Confirme</th>
+                <th>Etat</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -33,6 +37,9 @@
             <tr>
                 <td>{{ affectation_confirme.id }}</td>
                 <td>{{ affectation_confirme.etat ? 'Yes' : 'No' }}</td>
+                <td>{{ affectation_confirme.annonce }}</td>
+                <td>{{ affectation_confirme.estimation }}</td>
+                <td>{{ affectation_confirme.artisanConfirme }}</td>
                 <td>
                     <a href="{{ path('affectation_confirme_show', {'id': affectation_confirme.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
                     <a href="{{ path('affectation_confirme_edit', {'id': affectation_confirme.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>

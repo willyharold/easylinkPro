@@ -15,7 +15,6 @@ class CouponType extends AbstractType
             ->add('code')
             ->add('number')
             ->add('reduction')
-            ->add('dateEn')
             ->add('dateExp')
             ->add('etat')
         ;

@@ -14,12 +14,15 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Table(name="user")
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
@@ -75,7 +78,16 @@ class User extends BaseUser
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
-
+/**
+     * @Assert\File(
+     *     maxSizeMessage = "L'image ne doit pas dépasser 10Mb.",
+     *     maxSize = "10024k",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Les images doivent être au format JPG, GIF ou PNG."
+     * )
+     * @Vich\UploadableField(mapping="user_image", fileNameProperty="avatar")
+     */
+    private $avatarImage;
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="client")
      */
@@ -138,6 +150,24 @@ class User extends BaseUser
         $this->civilite = "HOMME";
         $this->estimations = new ArrayCollection();
         $this->transactions = new ArrayCollection();
+    }
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $avatarImage
+     *
+     * @return User
+    */
+    public function setAvatarImage(File $avatarImage = null)
+    {
+        $this->avatarImage = $avatarImage;
+        if ($avatarImage) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->dateEnreg = new \DateTime('now');
+        }
+    }
+
+    public function getAvatarImage()
+    {
+        return $this->avatarImage;
     }
 
     public function getNom(): ?string

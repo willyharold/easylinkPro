@@ -20,8 +20,6 @@ class AbonnementType extends AbstractType
                     'inactive' => false
                 ]
             ])
-            ->add('dateEn')
-            ->add('dateExp')
             ->add('transaction')
         ;
     }

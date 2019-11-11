@@ -5,9 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SousSpecialiteRepository")
+ * @Vich\Uploadable
  */
 class SousSpecialite
 {
@@ -37,7 +42,16 @@ class SousSpecialite
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
-
+/**
+     * @Assert\File(
+     *     maxSizeMessage = "L'image ne doit pas dépasser 10Mb.",
+     *     maxSize = "10024k",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Les images doivent être au format JPG, GIF ou PNG."
+     * )
+     * @Vich\UploadableField(mapping="sous_specialite_image", fileNameProperty="image")
+     */
+    private $fichierImage;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Specialite", inversedBy="sousSpecialites")
      * @ORM\JoinColumn(nullable=false)
@@ -49,7 +63,22 @@ class SousSpecialite
      */
     private $artisans;
 
+/**
+     * @ORM\Column(type="datetime",nullable=true)
+     */
+    private $dateEn;
 
+    public function getDateEn(): ?\DateTimeInterface
+    {
+        return $this->dateEn;
+    }
+
+    public function setDateEn(\DateTimeInterface $dateEn): self
+    {
+        $this->dateEn = $dateEn;
+
+        return $this;
+    }
 
 
 
@@ -58,6 +87,25 @@ class SousSpecialite
         $this->annonces = new ArrayCollection();
         $this->artisans = new ArrayCollection();
         $this->estimations = new ArrayCollection();
+        $this->dateEn = new \DateTime();
+    }
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $fichierImage
+     *
+     * @return SousSpecialite
+    */
+    public function setFichierImage(File $fichierImage = null)
+    {
+        $this->fichierImage = $fichierImage;
+        if ($fichierImage) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->dateEn = new \DateTime('now');
+        }
+    }
+
+    public function getFichierImage()
+    {
+        return $this->fichierImage;
     }
 
     public function getId(): ?int

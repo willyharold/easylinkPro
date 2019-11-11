@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleBlogRepository")
+ * @Vich\Uploadable
  */
 class ArticleBlog
 {
@@ -45,7 +50,16 @@ class ArticleBlog
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
-
+/**
+     * @Assert\File(
+     *     maxSizeMessage = "L'image ne doit pas dépasser 10Mb.",
+     *     maxSize = "10024k",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Les images doivent être au format JPG, GIF ou PNG."
+     * )
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="avatar")
+     */
+    private $avatarImage;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CategorieBlog", inversedBy="articleBlogs")
      * @ORM\JoinColumn(nullable=false)
@@ -61,6 +75,24 @@ class ArticleBlog
         $this->etat = false;
     }
 
+/**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $avatarImage
+     *
+     * @return ArticleBlog
+    */
+    public function setAvatarImage(File $avatarImage = null)
+    {
+        $this->avatarImage = $avatarImage;
+        if ($avatarImage) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->dateEn = new \DateTime('now');
+        }
+    }
+
+    public function getAvatarImage()
+    {
+        return $this->avatarImage;
+    }
 
 
     public function getId(): ?int

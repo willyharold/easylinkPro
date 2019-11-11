@@ -12,7 +12,6 @@ class AffectationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateEn')
             ->add('annonce')
             ->add('artisan')
             ->add('estimation')

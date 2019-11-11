@@ -42,7 +42,7 @@ class Affectation
     private $estimation;
     public function __toString()
     {
-        return $this->id;
+        return ''.$this->id;
     }
     public function __construct()
     {

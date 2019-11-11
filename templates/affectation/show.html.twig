@@ -17,7 +17,16 @@
                 <td>{{ affectation.id }}</td>
             </tr>
             <tr>
-                <th>DateEn</th>
+                <th>Annonce</th>
+                <td>{{ affectation.annonce }}</td>
+            </tr>
+             <tr>
+                <th>Estimation</th>
+                <td>{{ affectation.estimation }}</td>
+            </tr>
+            
+            <tr>
+                <th>Date En</th>
                 <td>{{ affectation.dateEn ? affectation.dateEn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
@@ -26,13 +35,23 @@
     <div class="card-action">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ path('affection_index') }}" class="btn btn-primary" >back to list</a>
+                <a href="{{ path('affectation_index') }}" class="btn btn-primary" ><i class="fa fa-arrow-circle-left"></i> Retourner à la liste</a>
 
-                <a href="{{ path('affection_edit', {'id': affection.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
+                <a href="{{ path('affectation_edit', {'id': affectation.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
             </div>										
         </div>
     </div>
    
 
-    {{ include('affection/_delete_form.html.twig') }}
+    {{ include('affectation/_delete_form.html.twig') }}
 
+
+									
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			
+{% endblock %}

@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -27,6 +29,7 @@ class UserType extends AbstractType
             ])
 
             ->add('artisan',ArtisanType::class)
+            ->add('avatarImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image' ])
             ->add('plainPassword', RepeatedType::class,['type' => PasswordType::class,])
         ;
     }

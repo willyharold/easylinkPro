@@ -6,6 +6,8 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class User1Type extends AbstractType
 {
@@ -13,30 +15,18 @@ class User1Type extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('usernameCanonical')
             ->add('email')
-            ->add('emailCanonical')
-            ->add('enabled')
-            ->add('salt')
             ->add('password')
-            ->add('lastLogin')
-            ->add('confirmationToken')
-            ->add('passwordRequestedAt')
-            ->add('roles')
             ->add('nom')
             ->add('prenom')
             ->add('dateNaissance')
             ->add('telephone')
-            ->add('dateEnreg')
             ->add('ville')
             ->add('codePostale')
             ->add('adresse')
             ->add('civilite')
-            ->add('avatar')
+            ->add('avatarImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image' ])
             ->add('annonce')
-            ->add('artisan')
-            ->add('affectations')
-            ->add('affectationConfirmes')
         ;
     }
 

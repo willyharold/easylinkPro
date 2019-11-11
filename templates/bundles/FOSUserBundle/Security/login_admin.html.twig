@@ -1,13 +1,14 @@
+{% trans_default_domain 'FOSUserBundle' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Login</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="{{asset('easy/assets/img/icon.ico')}}" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
-	<script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+	<script src="{{asset('easy/assets/js/plugin/webfont/webfont.min.js')}}"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
@@ -19,40 +20,51 @@
 	</script>
 	
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../assets/css/atlantis.css">
+	<link rel="stylesheet" href="{{asset('easy/assets/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('easy/assets/css/atlantis.css')}}">
 </head>
 <body class="login">
 	<div class="wrapper wrapper-login">
 		<div class="container container-login animated fadeIn">
 			<h3 class="text-center">Sign In To Admin</h3>
+			<form role="form"  class="contact-form" action="{{ path("fos_user_security_admin_check") }}" method="post" autocomplete="off">
 			<div class="login-form">
+						{% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
 				<div class="form-group">
 					<label for="username" class="placeholder"><b>Username</b></label>
-					<input id="username" name="username" type="text" class="form-control" required>
+					<input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required"  placeholder="{{ 'security.login.username'|trans }}">
+
 				</div>
 				<div class="form-group">
 					<label for="password" class="placeholder"><b>Password</b></label>
-					<a href="#" class="link float-right">Forget Password ?</a>
+					<a href="{{ path('fos_user_resetting_request') }}" class="link float-right">Forget Password ?</a>
 					<div class="position-relative">
-						<input id="password" name="password" type="password" class="form-control" required>
+						<input class="form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}">
+
 						<div class="show-password">
 							<i class="icon-eye"></i>
 						</div>
 					</div>
+					<div class="col-md-12 col-lg-12 col-sm-12" id="html_element"></div>
 				</div>
 				<div class="form-group form-action-d-flex mb-3">
+				
 					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="rememberme">
-						<label class="custom-control-label m-0" for="rememberme">Remember Me</label>
+						<input type="checkbox" id="remember_me" name="_remember_me" value="on" class="custom-control-input" />
+						<label class="custom-control-label m-0" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 					</div>
-					<a href="#" class="btn btn-primary col-md-5 float-right mt-3 mt-sm-0 fw-bold">Sign In</a>
+					{% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        {% endif %}
+						
+					<button type="submit" disabled id="google-recaptcha" name="_submit" class="btn btn-primary col-md-5 float-right mt-3 mt-sm-0 fw-bold">{{ 'security.login.submit'|trans }}</button>
 				</div>
-				<div class="login-account">
-					<span class="msg">Don't have an account yet ?</span>
-					<a href="#" id="show-signup" class="link">Sign Up</a>
-				</div>
+				
+				
 			</div>
+			</form>
 		</div>
 
 		<div class="container container-signup animated fadeIn">
@@ -101,10 +113,25 @@
 			</div>
 		</div>
 	</div>
-	<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="../assets/js/core/popper.min.js"></script>
-	<script src="../assets/js/core/bootstrap.min.js"></script>
-	<script src="../assets/js/atlantis.min.js"></script>
+	<script src="{{asset('easy/assets/js/core/jquery.3.2.1.min.js')}}"></script>
+	<script src="{{asset('easy/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+	<script src="{{asset('easy/assets/js/core/popper.min.js')}}"></script>
+	<script src="{{asset('easy/assets/js/core/bootstrap.min.js')}}"></script>
+	<script src="{{asset('easy/assets/js/atlantis.min.js')}}"></script>
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+<script>
+    var onloadCallback = function() {
+        grecaptcha.render('html_element', {
+            'sitekey' : '6Lf2_7QUAAAAACkX6mLQulYWya_kZ-AMLOSlbL1S',
+            'callback' : verifyCallback,
+        });
+    };
+    var verifyCallback = function(response) {
+        $("#google-recaptcha").attr("disabled",false);
+    };
+</script>
 </body>
 </html>

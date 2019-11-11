@@ -17,6 +17,22 @@
                 <td>{{ affectation_confirme.id }}</td>
             </tr>
             <tr>
+                <th>Annonce</th>
+                <td>{{ affectation_confirme.annonce }}</td>
+            </tr>
+            <tr>
+                <th>Estimation</th>
+                <td>{{ affectation_confirme.estimation }}</td>
+            </tr>
+            <tr>
+                <th>Artisan confirmé</th>
+                <td>{{ affectation_confirme.artisanConfirme }}</td>
+            </tr>
+            <tr>
+                <th>Artisan sélectionnée</th>
+                <td>{% for af in affectation_confirme.artisan %} {{af.artisan}} <br/> {% endfor %}</td>
+            </tr>
+            <tr>
                 <th>Etat</th>
                 <td>{{ affectation_confirme.etat ? 'Yes' : 'No' }}</td>
             </tr>
@@ -26,13 +42,23 @@
     <div class="card-action">
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ path('affection_confirme_index') }}" class="btn btn-primary" >back to list</a>
+                <a href="{{ path('affectation_confirme_index') }}" class="btn btn-primary" ><i class="fa fa-arrow-circle-left"></i> Retourner à la liste</a>
 
-                <a href="{{ path('affection_confirme_edit', {'id': affection_confirme.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
+                <a href="{{ path('affectation_confirme_edit', {'id': affectation_confirme.id}) }}" class="btn btn-warning" ><i class="fa fa-edit"></i> Modifier</a>
             </div>										
         </div>
     </div>
    
 
-    {{ include('affection_confirme/_delete_form.html.twig') }}
+    {{ include('affectation_confirme/_delete_form.html.twig') }}
 
+
+									
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			
+{% endblock %}

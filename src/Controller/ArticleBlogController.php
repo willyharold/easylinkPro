@@ -64,10 +64,15 @@ class ArticleBlogController extends Controller
      */
     public function edit(Request $request, ArticleBlog $articleBlog): Response
     {
+        $article2 = $articleBlog;
         $form = $this->createForm(ArticleBlogType::class, $articleBlog);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($articleBlog->getAvatar()==null)
+            {
+                $articleBlog->setAvatar($article2->getAvatar());
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article_blog_index');

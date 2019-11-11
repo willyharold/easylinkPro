@@ -9,3 +9,11 @@ fos_user_security_artisan_logout:
   path: /artisan/logout
   defaults: { _controller: "FOSUserBundle:Security:logout" }
 
+fos_user_security_admin_logout:
+  path: /admin/logout
+  defaults: { _controller: "FOSUserBundle:Security:logout" }
+
+
+fos_user_security_admin_check:
+  path: /admin/check
+  defaults: { _controller: "FOSUserBundle:Security:check" }
