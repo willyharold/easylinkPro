@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Affectation;
+use App\Entity\ArtisanEtat;
 use App\Form\AffectationType;
 use App\Repository\AffectationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,16 +38,25 @@ class AffectationController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($affectation);
-            $entityManager->flush();
-            
+
+
             foreach($affectation->getArtisan() as $artisan){
                 $message = (new \Swift_Message("Proposition de travail"))
                     ->setFrom('support@easylink.com')
-                    ->setTo($artisan->getArtisanConfirme()->getEmail())
+                    ->setTo($artisan->getEmail())
                     ->setBody("Une annonce vous a été affectée. Veuillez vous connecter pour en savoir plus")
                 ;
                 $mailer->send($message);
+
+                $artisanEtat = new ArtisanEtat();
+                $artisanEtat->setEtat("En attente");
+                $artisanEtat->setAnnonce($affectation->getAnnonce());
+                $artisanEtat->setEstimation($affectation->getEstimation());
+                $artisanEtat->setArtisan($artisan);
+                $entityManager->persist($artisanEtat);
             }
+            $entityManager->flush();
+
 
             return $this->redirectToRoute('affectation_index');
         }

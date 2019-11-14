@@ -4,4 +4,4 @@ beelab_paypal:
     signature: "AnvV9leb2hxXC1GpSXnr1tGl1hINA1U2RqGixjKkrShYLpaX.8qFoMrw"
     return_route: "success_payment"
     cancel_route: "error_payment"
-    test_mode: "%kernel.debug%"
+    test_mode: true

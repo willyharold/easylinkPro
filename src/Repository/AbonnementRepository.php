@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Abonnement;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -47,4 +48,21 @@ class AbonnementRepository extends ServiceEntityRepository
         ;
     }
     */
+     /**
+     * @return Abonnement[] Returns an array of Abonnement objects
+     */
+    public function finduserabo($user)
+    {
+        return  $this->createQueryBuilder('a')
+                     ->leftJoin('a.transaction','t')
+                     ->leftJoin('t.artisan','u')
+                     ->Where('u =:val')
+                     ->andWhere('a.etat = true')
+                     ->setParameter('val',$user)
+                     ->orderBy('a.dateExp','DESC')
+                     ->setMaxResults(1)
+                    ->getQuery()
+                    ->getResult()
+            ;
+    }
 }

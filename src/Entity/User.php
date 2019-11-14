@@ -150,6 +150,7 @@ class User extends BaseUser
         $this->civilite = "HOMME";
         $this->estimations = new ArrayCollection();
         $this->transactions = new ArrayCollection();
+        $this->addRole("ROLE_CLIENT");
     }
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $avatarImage

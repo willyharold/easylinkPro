@@ -103,9 +103,10 @@ class DefaultController extends Controller
     /**
      * @Route("/trouverUnPro", name="trouverUnPro")
      */
-    public function trouverUnPro()
+    public function trouverUnPro(ArticleBlogRepository $articleBlogRepository)
     {
-        return $this->render('default/trouverunpro.html.twig', []);
+        $art = $articleBlogRepository->lastArticle();
+        return $this->render('default/trouverunpro.html.twig', ["articles"=>$art]);
     }
 
     /**

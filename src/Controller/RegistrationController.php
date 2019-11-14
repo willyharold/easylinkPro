@@ -2,17 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\SpecialiteRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +31,7 @@ class RegistrationController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $user->addRole("ROLE_ARTISAN");
+                $user->removeRole("ROLE_CLIENT");
                 $user->setConfirmationToken($tokenGenerator->generateToken());
 
                 $usermanager->updateUser($user);

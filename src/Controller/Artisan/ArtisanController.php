@@ -2,12 +2,15 @@
 
 namespace App\Controller\Artisan;
 
+use App\Entity\Abonnement;
 use App\Entity\Affectation;
 use App\Entity\AffectationConfirme;
 use App\Entity\Annonce;
 use App\Entity\ArtisanEtat;
 use App\Entity\Estimation;
+use App\Entity\Pack;
 use App\Entity\Transaction;
+use App\Repository\AbonnementRepository;
 use App\Repository\AffectationConfirmeRepository;
 use App\Repository\AffectationRepository;
 use App\Repository\AnnonceRepository;
@@ -17,6 +20,7 @@ use App\Repository\PackRepository;
 use Beelab\PaypalBundle\Paypal\Exception;
 use Beelab\PaypalBundle\Paypal\Service;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use Knp\Component\Pager\PaginatorInterface;
 use phpDocumentor\Reflection\Types\Resource_;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -129,7 +133,7 @@ class ArtisanController extends Controller
     {
 
         /**
-         * @var Annonce $annonce
+         * @var Estimation $estimation
          */
         $estimation = $estimationRepository->findOneBy(["id"=>$id]);
 
@@ -233,26 +237,21 @@ class ArtisanController extends Controller
     /**
      * @Route("/abonement", name="artisan_abonement")
      */
-    public function abonement(PackRepository $packRepository, Service $service, Request $request){
+    public function abonement(PackRepository $packRepository, Request $request,AbonnementRepository $abonnementRepository){
         $pack = $packRepository->findAll();
-        $tra = new Transaction();
-        $form = $this->createForm(FormType::class,$tra);
-        
-        return $this->render('artisan/abonement/abonement.html.twig', [
-            'packs' => $pack,'form'=>$form->createView()
-        ]);
+        $abonnements = $abonnementRepository->finduserabo($this->getUser());
+        return $this->render('artisan/abonement/abonement.html.twig', ['packs' => $pack,'abonnements'=>$abonnements]);
     }
 
     /**
-     * @Route("/initier_paiement", name="initier_paiement")
+     * @Route("/initier_paiement/{id}", name="initier_paiement")
      */
-    public function initier_paiement(PackRepository $packRepository, Service $service, Request $request){
-        $p = $packRepository->find($request->request->get('form-prix'));
-        $transaction = new Transaction($p->getPrix());
-        $transaction->setPrix((float)$p->getPrix());
+    public function initier_paiement(Pack $id,PackRepository $packRepository, Service $service, Request $request){
+        $transaction = new Transaction($id->getPrix());
+        $transaction->setPrix((float)$id->getPrix());
         $transaction->setNumero(11999944);
         $transaction->setDateEn(new \DateTime());
-        $transaction->setPack($p);
+        $transaction->setPack($id);
         $transaction->setArtisan($this->getUser());
         
         try {
@@ -263,33 +262,54 @@ class ArtisanController extends Controller
         } catch (Exception $e) {
             throw new HttpException(503, 'Payment error', $e);
         }
-        /*$params = array(
-            'cancelUrl' => 'http://localhost/error_payment',
-            'returnUrl' => 'http://localhost/success_payment', // in your case             //  you have registered in the routes 'payment_success'
-            'amount' => '4',
-        );
-        $gateway = Omnipay::create('PayPal_Express');
-        $gateway->setUsername('laetitia.mogoun_api1.gmail.com');
-        $gateway->setPassword('6Q97PF36VM868SKW');
-        $gateway->setSignature('ATbMU602flG3KAfxoD5cPh9QHE1jANt0nir6YNeoDtes8y4p4ayB8tnS'); // and the signature for the account
-        $gateway->setTestMode(true);
-        $response = $gateway->purchase($params)->send();
-        if ($response->isRedirect()) {
-            // redirect to offsite payment gateway
-            $response->redirect();
-        }
-        else {
-            // payment failed: display message to customer
-            echo $response->getMessage();
-        }*/
-            
         
     }
 
     /**
      * @Route("/success_payment", name="success_payment")
+     * @throws \Exception
      */
-    public function success_payment(PackRepository $packRepository, Service $service, Request $request){
+    public function success_payment(PackRepository $packRepository, Service $service, Request $request, AbonnementRepository $abonnementRepository,ObjectManager $em, \Swift_Mailer $mailer){
+        $token = $request->query->get('token');
+        /**
+         * @var Transaction $transaction
+         */
+        /**
+         * @var \DateTime $date
+         */
+        $transaction = $this->getDoctrine()->getRepository('App:Transaction')->findOneByToken($token);
+        if (null === $transaction) {
+            throw $this->createNotFoundException(sprintf('Transaction with token %s not found.', $token));
+        }
+        $service->setTransaction($transaction)->complete();
+        $this->getDoctrine()->getManager()->flush();
+        if (!$transaction->isOk()) {
+            return []; // or a Response (in case of error)
+        }
+        // j'enregistre l'abonnement
+        $abonnement = new Abonnement();
+        $abonnement->setEtat(true);
+        $abonnement->setTransaction($transaction);
+        $date  = $abonnement->getDateExp();
+        $interval = new \DateInterval('P'.$transaction->getPack()->getDuree().'M');
+        $date->add($interval);
+        $abonnement->setDateExp($date);
+        $abonnement->setEtat(true);
+        $em->persist($abonnement);
+        $em->flush();
+
+        $user = $this->getUser();
+        $message = (new \Swift_Message("Information du paiement "))
+            ->setFrom('support@easylink.com')
+            ->setTo($user->getEmail())
+            ->setBody("email pour informer le client que son abonnement a réussi")
+        ;
+        $mailer->send($message);
+
+
+
+        $session = new Session();
+        $session->getFlashBag()->add('paiementReussi',"Votre abonnement a été effectué avec success");
 
         return $this->redirectToRoute("artisan_abonement");
     }
@@ -298,8 +318,15 @@ class ArtisanController extends Controller
      * @Route("/error_payment", name="error_payment")
      */
     public function error_payment(PackRepository $packRepository, Service $service, Request $request){
-
-
+        $token = $request->query->get('token');
+        $transaction = $this->getDoctrine()->getRepository('App:Transaction')->findOneByToken($token);
+        if (null === $transaction) {
+            throw $this->createNotFoundException(sprintf('Transaction with token %s not found.', $token));
+        }
+        $transaction->cancel(null);
+        $this->getDoctrine()->getManager()->flush();
+        $session = new Session();
+        $session->getFlashBag()->add('paiementError',"Impossible de terminer votre abonnement");
         return $this->redirectToRoute("artisan_abonement");
     }
 
