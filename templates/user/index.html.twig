@@ -23,54 +23,40 @@
 										<table id="add-row" class="display table table-striped table-hover" >
         <thead>
             <tr>
-                <th>Username</th>
-                <th>UsernameCanonical</th>
-                <th>Email</th>
-                <th>EmailCanonical</th>
-                <th>Enabled</th>
-                <th>Salt</th>
-                <th>Password</th>
-                <th>LastLogin</th>
-                <th>ConfirmationToken</th>
-                <th>PasswordRequestedAt</th>
-                <th>Roles</th>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Prenom</th>
+                <th>Username</th>
+                <th>Email</th>
                 <th>DateNaissance</th>
                 <th>Telephone</th>
-                <th>DateEnreg</th>
                 <th>Ville</th>
                 <th>CodePostale</th>
                 <th>Adresse</th>
                 <th>Civilite</th>
+                <th>Enabled</th>
+                <th>Password</th>
+                <th>Roles</th>
+                <th>DateEnreg</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.usernameCanonical }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.emailCanonical }}</td>
-                <td>{{ user.enabled ? 'Yes' : 'No' }}</td>
-                <td>{{ user.salt }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.lastLogin ? user.lastLogin|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.confirmationToken }}</td>
-                <td>{{ user.passwordRequestedAt ? user.passwordRequestedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
-                <td>{{ user.id }}</td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
                 <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
                 <td>{{ user.telephone }}</td>
-                <td>{{ user.dateEnreg ? user.dateEnreg|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.ville }}</td>
                 <td>{{ user.codePostale }}</td>
                 <td>{{ user.adresse }}</td>
                 <td>{{ user.civilite }}</td>
+                <td>{{ user.enabled ? 'Oui' : 'Non' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                <td>{{ user.dateEnreg ? user.dateEnreg|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
