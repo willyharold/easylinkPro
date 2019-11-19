@@ -25,30 +25,6 @@ class AbonnementController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/new", name="abonnement_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $abonnement = new Abonnement();
-        $form = $this->createForm(AbonnementType::class, $abonnement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($abonnement);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('abonnement_index');
-        }
-
-        return $this->render('abonnement/new.html.twig', [
-            'abonnement' => $abonnement,
-            'form' => $form->createView(),
-            'type' => "Ajouter",
-
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="abonnement_show", methods={"GET"})

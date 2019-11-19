@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UserRepository;
 
 /**
  * @Route("/admin/affectation")
@@ -29,8 +30,9 @@ class AffectationController extends Controller
     /**
      * @Route("/new", name="affectation_new", methods={"GET","POST"})
      */
-    public function new(Request $request, \Swift_Mailer $mailer): Response
+    public function new(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository): Response
     {
+
         $affectation = new Affectation();
         $form = $this->createForm(AffectationType::class, $affectation);
         $form->handleRequest($request);
@@ -39,6 +41,16 @@ class AffectationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($affectation);
 
+            if($affectation->getAnnonce()!=null)
+            {
+                $annonce = $affectation->getAnnonce();
+                $annonce->setValider(true);
+            }
+            if($affectation->getEstimation()!=null)
+            {
+                $estimation = $affectation->getEstimation();
+                $estimation->setValider(true);
+            }
 
             foreach($affectation->getArtisan() as $artisan){
                 $message = (new \Swift_Message("Proposition de travail"))

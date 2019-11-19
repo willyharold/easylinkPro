@@ -165,7 +165,7 @@ class DefaultController extends Controller
      */
     public function annuaire()
     {
-        return $this->render('default/contact.html.twig');
+        return $this->render('default/annuaire.html.twig');
     }
 
 

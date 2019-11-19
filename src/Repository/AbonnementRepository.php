@@ -6,6 +6,7 @@ use App\Entity\Abonnement;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @method Abonnement|null find($id, $lockMode = null, $lockVersion = null)
@@ -65,4 +66,25 @@ class AbonnementRepository extends ServiceEntityRepository
                     ->getResult()
             ;
     }
+    
+     /**
+     * @return Artisan[] Returns an array of Abonnement objects
+     */
+    public function findArtisan()
+    {
+         
+        $abs = $this->createQueryBuilder('a')
+                     ->leftJoin('a.transaction','t')
+                     ->Where('a.etat = true')
+                     ->getQuery()
+                     ->getResult()
+            ;
+        $tab = new ArrayCollection();
+        foreach($abs as $ab){
+            $tab->add($ab->getTransaction()->getArtisan());
+            //array_push($tab, $ab->getTransaction()->getArtisan());
+        }
+        return $tab;
+    }
+
 }

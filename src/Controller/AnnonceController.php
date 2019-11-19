@@ -25,29 +25,7 @@ class AnnonceController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/new", name="annonce_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $annonce = new Annonce();
-        $form = $this->createForm(Annonce1Type::class, $annonce);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($annonce);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('annonce_index');
-        }
-
-        return $this->render('annonce/new.html.twig', [
-            'annonce' => $annonce,
-            'form' => $form->createView(),
-            'type' => "Ajouter",
-        ]);
-    }
+    
 
     /**
      * @Route("/{id}", name="annonce_show", methods={"GET"})

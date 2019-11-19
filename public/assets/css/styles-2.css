@@ -6778,7 +6778,74 @@ Grid Classic Style
     transition: all .4s ease;
     margin-top: 15px;
 }
+.contact-form2 button{
+    display: inline-block;
+    background: #2193f1;
+    color: #fff;
+    font-size: 14px;
+    width: 100%;
+    font-weight: 500;
+    border-radius: 10px;     
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    transition: all .4s ease;
+}
+.contact-form2 input{
+    font-weight: 500 !important;
+    border-radius: 5px;
+    font-size: 13px;
+    border: 1px solid #f6f7f8;
+    background: #f6f7f8;
+    color: #777 !important;
+    outline: none;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0px;   
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.contact-form2 select{
+	font-weight: 500 !important;
+	border-radius: 5px;
+	font-size: 13px;
+	border: 1px solid #f6f7f8;
+	background: #f6f7f8;
+	color: #777 !important;
+	outline: none;
+	width: 100%;
+	padding: 14px;
+	margin: 10px 0px;
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+ .contact-form2 textarea{
+    font-weight: 500 !important;
+    border-radius: 5px;
+    font-size: 13px;
+    border: 1px solid #f6f7f8;
+    background: #f6f7f8;
+    color: #777 !important;
+    outline: none;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0px;
+    margin-bottom: 5px;   
+    min-height: 200px;
+    overflow: hidden;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s; 
+ }
+.contact-form2 input:focus, .contact-form textarea:focus, .contact-form select:focus{
+    background: #fff;
+    border-color: #ececec;
+}
+
+
 .contact-form button:hover{
+    background: #38c5a7;
+}
+.contact-form2 button:hover{
     background: #38c5a7;
 }
 
@@ -6873,7 +6940,48 @@ Grid Classic Style
 }
 
 .contact-box span{
-	color: #999;
+	color: #222;
+	font-size: 14px;
+}
+
+.contact-box2{
+	text-align: left;
+	background: #fff;
+	border: 1px solid #ececec;
+	border-radius: 2px;
+	-webkit-box-shadow: 0 20px 80px rgba(0,0,0,0.12);
+    box-shadow: 0 20px 80px rgba(0,0,0,0.12);
+	-webkit-transition-duration: .3s;
+	margin: 10px 0px 10px 0px;
+	padding: 20px;
+}
+
+.contact-box2 i{
+	color: #2193f1;
+	font-size: 35px;
+	margin: 10px 0px 20px 0px;
+}
+.contact-box2 em{
+	color: #fff;
+	font-size: 35px;
+	margin: 10px 0px 10px 0px;
+}
+
+.contact-box2 h4{
+	color: #111;
+	font-size: 18px;
+	font-weight: 500;
+	margin: 0px 0px 5px 0px;
+}
+.contact-box2 h5{
+	color: #222;
+	font-size: 18px;
+	font-weight: 500;
+	margin: 0px 0px 5px 0px;
+}
+
+.contact-box2 span{
+	color: #333;
 	font-size: 14px;
 }
 

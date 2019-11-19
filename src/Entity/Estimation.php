@@ -44,6 +44,10 @@ class Estimation
      * @ORM\Column(type="string", length=255)
      */
     private $etat;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $valider;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -181,6 +185,18 @@ class Estimation
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getValider(): ?bool
+    {
+        return $this->valider;
+    }
+
+    public function setValider(bool $valider): self
+    {
+        $this->valider = $valider;
 
         return $this;
     }

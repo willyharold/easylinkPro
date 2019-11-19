@@ -25,29 +25,7 @@ class EstimationController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/new", name="estimation_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $estimation = new Estimation();
-        $form = $this->createForm(EstimationType::class, $estimation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($estimation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('estimation_index');
-        }
-
-        return $this->render('estimation/new.html.twig', [
-            'estimation' => $estimation,
-            'form' => $form->createView(),
-            'type' => "Ajouter",
-        ]);
-    }
+    
 
     /**
      * @Route("/{id}", name="estimation_show", methods={"GET"})

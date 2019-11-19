@@ -1,0 +1,135 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+
+    <!-- Preloader Start-->
+    <div id="preloader">
+        <div class="row loader">
+            <div class="loader-icon"></div>
+        </div>
+    </div>
+    <!-- Preloader End ici qu'il faut rajouter le menu -->
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::menu')) }}
+
+    <!-- Page Title START -->
+    <div class="page-title-section" style="background-image:url({{ asset('img/banniere.jpg') }});">
+        <div class="container">
+            <h1>Notre annuaire</h1>
+            <ul>
+                <li><a href="{{ path('default') }}">Accueil</a></li>
+                <li><a href="{{ path('annuaire') }}">Annuaire</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page Title END -->
+
+
+    <!-- Contact Section START -->
+    <div class="section-block-grey">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row contact-box2">
+                       <form class="contact-form2">
+                            <div class="col-md-2">
+                               <i class="fa fa-filter"></i> <h4 style="display:inline-block;">Filtre: </h4> 
+                            </div>
+                            <div class="col-md-5 ">
+                                <select type="text" name="name" placeholder="Name">
+                                <option>Catégorie:</option>
+                                <option>Catégorie1</option>
+                                <option>Catégorie2</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="name" placeholder="Name">
+                            </div>
+                            <div class="col-md-1">
+                                <button type="submit"><em class="fa fa-search white"></em></button>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
+                    <div class="col-md-6 ">
+                    
+                        <h4>Revêtement sols et mur </h4>
+                        <h5>MANAI MONCEF</h5>
+                        <span>83720 Trans-en-Provence (Var)</span><br/>
+                        <b>Spécialité : Création complète de salle de bains</b>
+                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
+                    </div>
+                    <div class="col-md-6">
+                    <img style="float:right; width:200px; height:150px;" src="{{ asset('img/banniere.jpg') }}" />
+                    
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
+                    <div class="col-md-6 ">
+                    
+                        <h4>Revêtement sols et mur </h4>
+                        <h5>MANAI MONCEF</h5>
+                        <span>83720 Trans-en-Provence (Var)</span><br/>
+                        <b>Spécialité : Création complète de salle de bains</b>
+                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
+                    </div>
+                    <div class="col-md-6">
+                    <img style="float:right; width:200px; height:150px;" src="{{ asset('img/banniere.jpg') }}" />
+                    
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
+                    <div class="col-md-6 ">
+                    
+                        <h4>Revêtement sols et mur </h4>
+                        <h5>MANAI MONCEF</h5>
+                        <span>83720 Trans-en-Provence (Var)</span><br/>
+                        <b>Spécialité : Création complète de salle de bains</b>
+                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
+                    </div>
+                    <div class="col-md-6">
+                    <img style="float:right; width:200px; height:150px;" src="{{ asset('img/banniere.jpg') }}" />
+                    
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
+                    <div class="col-md-6 ">
+                    
+                        <h4>Revêtement sols et mur </h4>
+                        <h5>MANAI MONCEF</h5>
+                        <span>83720 Trans-en-Provence (Var)</span><br/>
+                        <b>Spécialité : Création complète de salle de bains</b>
+                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
+                    </div>
+                    <div class="col-md-6">
+                    <img style="float:right; width:200px; height:150px;" src="{{ asset('img/banniere.jpg') }}" />
+                    
+                    </div>
+                </div>
+                
+            </div>
+            <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+        </div>
+    </div>
+    <!-- Contact Section END -->
+
+
+    {{ render(controller('App\\Controller\\Index\\DefaultController::footer')) }}
+
+
+    <!-- Scroll to top button Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    <!-- Scroll to top button End -->
+
+{% endblock %}

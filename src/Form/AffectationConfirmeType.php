@@ -8,8 +8,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+use App\Repository\AnnonceRepository;
+use App\Repository\EstimationRepository;
+
 class AffectationConfirmeType extends AbstractType
 {
+    private $annonce;
+    private $estimation;
+
+    public function __construct(AnnonceRepository $AnnonceRepository,EstimationRepository $EstimationRepository)
+    {
+        $this->annonce=$AnnonceRepository->findByValider(true);
+        $this->estimation=$EstimationRepository->findByValider(true);
+    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -19,10 +30,14 @@ class AffectationConfirmeType extends AbstractType
                 'inactive' => false
             ]
         ])
-            ->add('annonce')
+        ->add('annonce', null, [
+            'choices' => $this->annonce,
+        ])
             ->add('artisan')
             ->add('artisanConfirme')
-            ->add('estimation')
+            ->add('estimation', null, [
+                'choices' => $this->estimation,
+            ])
         ;
     }
 
