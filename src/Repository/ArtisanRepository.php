@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Artisan;
+use App\Entity\Specialite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -48,5 +49,42 @@ class ArtisanRepository extends ServiceEntityRepository
     }
     */
 
-    
+    public function getWithSearchQueryBuilder1()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.dateCreateAt','DESC')
+            ;
+    }
+
+    public function getWithSearchQueryBuilder2(Specialite $specialite, $codepostal)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.codePostal = :val1')
+            ->setParameter('val1',$codepostal)
+            ->leftJoin('a.sousSpecialite','ss')
+            ->leftJoin('ss.specialite','s')
+            ->andWhere('s.id = :val2')
+            ->setParameter('val2',$specialite->getId())
+            ->orderBy('a.dateCreateAt','DESC')
+            ;
+    }
+    public function getWithSearchQueryBuilder3(Specialite $specialite)
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.sousSpecialite','ss')
+            ->leftJoin('ss.specialite','s')
+            ->andWhere('s.id = :val2')
+            ->setParameter('val2',$specialite->getId())
+            ->orderBy('a.dateCreateAt','DESC')
+            ;
+    }
+
+    public function getWithSearchQueryBuilder4($codepostal)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.codePostal = :val1')
+            ->setParameter('val1',$codepostal)
+            ->orderBy('a.dateCreateAt','DESC')
+            ;
+    }
 }

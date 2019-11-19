@@ -44,8 +44,8 @@ class SousSpecialite
     private $image;
 /**
      * @Assert\File(
-     *     maxSizeMessage = "L'image ne doit pas dépasser 10Mb.",
-     *     maxSize = "10024k",
+     *     maxSizeMessage = "L'image ne doit pas dépasser 2Mb.",
+     *     maxSize = "2048K",
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
      *     mimeTypesMessage = "Les images doivent être au format JPG, GIF ou PNG."
      * )
@@ -91,8 +91,6 @@ class SousSpecialite
     }
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $fichierImage
-     *
-     * @return SousSpecialite
     */
     public function setFichierImage(File $fichierImage = null)
     {

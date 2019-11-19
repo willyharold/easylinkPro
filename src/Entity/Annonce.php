@@ -85,6 +85,7 @@ class Annonce
     {
         $this->sousSpectialite = new ArrayCollection();
         $this->dateEnreg = new \DateTime();
+        $this->valider = false;
     }
 
     public function getId(): ?int

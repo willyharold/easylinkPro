@@ -22,7 +22,9 @@ use App\Entity\SousSpecialite;
 use App\Entity\Transaction;
 use App\Entity\User;
 use App\Form\Annonce2Type;
+use App\Repository\AnnonceRepository;
 use App\Repository\ArticleBlogRepository;
+use App\Repository\ArtisanRepository;
 use App\Repository\CategorieBlogRepository;
 use App\Repository\SpecialiteRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -163,9 +165,48 @@ class DefaultController extends Controller
     /**
      * @Route("/annuaire", name="annuaire")
      */
-    public function annuaire()
+    public function annuaire(ArtisanRepository $artisanRepository, PaginatorInterface $paginator, Request $request, SpecialiteRepository $specialiteRepository)
     {
-        return $this->render('default/annuaire.html.twig');
+        $specialites = $specialiteRepository->findAll();
+        $queryBuilder = $artisanRepository->getWithSearchQueryBuilder1();
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            7/*limit per page*/
+        );
+
+        return $this->render('default/annuaire.html.twig', ['pagination' => $pagination,'specialites'=>$specialites]);
+    }
+
+    /**
+     * @Route("/annuaire/rechercher", name="rechercher")
+     */
+    public function rechercher(ArtisanRepository $artisanRepository, PaginatorInterface $paginator, Request $request, SpecialiteRepository $specialiteRepository)
+    {
+        $category  = $request->get("category");
+        $codepostal  = $request->get("codepostal");
+        $queryBuilder = $artisanRepository->getWithSearchQueryBuilder1();
+
+        if($category && $codepostal){
+            $category = $specialiteRepository->find($category);
+            $queryBuilder = $artisanRepository->getWithSearchQueryBuilder2($category,$codepostal);
+        }
+        if($category){
+            $category = $specialiteRepository->find($category);
+            $queryBuilder = $artisanRepository->getWithSearchQueryBuilder3($category);
+        }
+
+        if($codepostal){
+            $queryBuilder = $artisanRepository->getWithSearchQueryBuilder4($codepostal);
+        }
+        $specialites = $specialiteRepository->findAll();
+        $pagination = $paginator->paginate(
+            $queryBuilder, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            7/*limit per page*/
+        );
+
+        return $this->render('default/annuaire.html.twig', ['pagination' => $pagination,'specialites'=>$specialites]);
     }
 
 

@@ -26,7 +26,6 @@ class User1Type extends AbstractType
             ->add('adresse')
             ->add('civilite')
             ->add('avatarImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image' ])
-            ->add('annonce')
         ;
     }
 

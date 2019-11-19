@@ -127,6 +127,8 @@ class Estimation
         $this->attributAddReps = new ArrayCollection();
         $this->sousSpecialite = new ArrayCollection();
         $this->dateEn = new \DateTime();
+        $this->valider = false;
+
     }
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $fichierImage

@@ -32,19 +32,20 @@
             <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row contact-box2">
-                       <form class="contact-form2">
+                       <form class="contact-form2" action="{{ path('rechercher') }}" method="get">
                             <div class="col-md-2">
                                <i class="fa fa-filter"></i> <h4 style="display:inline-block;">Filtre: </h4> 
                             </div>
                             <div class="col-md-5 ">
-                                <select type="text" name="name" placeholder="Name">
-                                <option>Catégorie:</option>
-                                <option>Catégorie1</option>
-                                <option>Catégorie2</option>
+                                <select type="text" name="category">
+                                <option value="0">Toutes les catégories</option>
+                                    {% for specialite in specialites %}
+                                <option value="{{ specialite.id }}">{{ specialite.nom }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" name="name" placeholder="Name">
+                                <input type="number" name="codepostal" max="99999"  placeholder="Code postal">
                             </div>
                             <div class="col-md-1">
                                 <button type="submit"><em class="fa fa-search white"></em></button>
@@ -53,73 +54,31 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
-                    <div class="col-md-9 ">
-                    
-                        <h4>Revêtement sols et mur </h4>
-                        <h5>MANAI MONCEF</h5>
-                        <span>83720 Trans-en-Provence (Var)</span><br/>
-                        <b>Spécialité : Création complète de salle de bains</b>
-                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
+                {% for artisan in pagination %}
+                    <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
+                        <div class="col-md-9 ">
+
+                            <h4>{{artisan.sousSpecialite[0].specialite.nom}}</h4>
+                            <h5>{{ artisan.nom | upper}}</h5>
+                            <span>{{artisan.codePostal}} {{artisan.adresse}}</span><br/>
+                            <b>Spécialité : {% for souspecialite in artisan.sousSpecialite %} {{ souspecialite.nom }} | {% else %} nothing {% endfor %}</b>
+                            <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 {{ artisan.telephone }} | </p>
+                        </div>
+                        <div class="col-md-3">
+                            <img style="width:100%;" src="{{ asset('img/banniere.jpg') }}" />
+
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                    <img style="width:100%;" src="{{ asset('img/banniere.jpg') }}" />
-                    
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
-                    <div class="col-md-9 ">
-                    
-                        <h4>Revêtement sols et mur </h4>
-                        <h5>MANAI MONCEF</h5>
-                        <span>83720 Trans-en-Provence (Var)</span><br/>
-                        <b>Spécialité : Création complète de salle de bains</b>
-                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
-                    </div>
-                    <div class="col-md-3">
-                    <img style="width:100%;" src="{{ asset('img/banniere.jpg') }}" />
-                    
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
-                    <div class="col-md-9 ">
-                    
-                        <h4>Revêtement sols et mur </h4>
-                        <h5>MANAI MONCEF</h5>
-                        <span>83720 Trans-en-Provence (Var)</span><br/>
-                        <b>Spécialité : Création complète de salle de bains</b>
-                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
-                    </div>
-                    <div class="col-md-3">
-                    <img style="width:100%;" src="{{ asset('img/banniere.jpg') }}" />
-                    
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 contact-box2">
-                    <div class="col-md-9 ">
-                    
-                        <h4>Revêtement sols et mur </h4>
-                        <h5>MANAI MONCEF</h5>
-                        <span>83720 Trans-en-Provence (Var)</span><br/>
-                        <b>Spécialité : Création complète de salle de bains</b>
-                        <p><i class="fa fa-phone-square"></i> <i class="fa fa-envelope "></i> +33 01 12 45 78 96 | contact@easylink.com</p>
-                    </div>
-                    <div class="col-md-3">
-                    <img style="width:100%;" src="{{ asset('img/banniere.jpg') }}" />
-                    
-                    </div>
-                </div>
-                
+                    {% else %}
+                    Pas d'artisan
+                {% endfor %}
+
             </div>
             <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
+                <div class="navigation" style="float: right">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </nav>
         </div>
     </div>
     <!-- Contact Section END -->
