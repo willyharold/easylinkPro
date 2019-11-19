@@ -32,7 +32,11 @@
         <div class="latest-posts">
             <div class="row">
                 <div class="col-md-5 col-sm-5 col-xs-4 latest-posts-img">
-                    <img src="{% path article.avatar , 'small' %}" alt="blog-img">
+                    <img src="{{asset('/images/article/')}}{{ article.avatar }}"
+                         alt="{{ article.avatar }}"
+                         height="80"
+                         width="110"
+                    />
                 </div>
 
                 <div class="col-md-7 col-sm-7 col-xs-8 latest-posts-text pl-0">

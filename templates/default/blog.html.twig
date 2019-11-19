@@ -35,7 +35,11 @@
                     <!-- Post Start -->
                     {% for articleBlog in pagination %}
                     <div class="blog-list-left">
-                        <img src="{% path articleBlog.avatar , 'big' %}" alt="img">
+                        <img src="{{asset('/images/article/')}}{{ articleBlog.avatar }}"
+                             alt="{{ articleBlog.avatar }}"
+                             height="847"
+                             width="566"
+                        />
                         <div class="data-box">
                             <h4>23</h4>
                             <strong>Mar</strong>
