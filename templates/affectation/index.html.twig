@@ -10,10 +10,7 @@
 								<div class="card-header">
 									<div class="d-flex align-items-center">
 										<h4 class="card-title">Liste des affectation</h4>
-										<a href="{{ path('affectation_new') }}" class="btn btn-primary btn-round ml-auto">
-											<i class="fa fa-plus"></i>
-											Faire une affectation
-										</a>
+
 									</div>
 								</div>
 								<div class="card-body">
@@ -40,6 +37,8 @@
                 <td>
                     <a href="{{ path('affectation_show', {'id': affectation.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
                     <a href="{{ path('affectation_edit', {'id': affectation.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>
+                    <a href="{{ path('affectation_new', {'id': affectation.id}) }}" class="btn btn-success" title="Affecter"><i class="fa fa-check"></i></a>
+
                 </td>
             </tr>
         {% else %}

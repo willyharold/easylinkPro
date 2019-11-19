@@ -28,15 +28,10 @@ class AffectationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('annonce', null, [
-                'choices' => $this->annonce,
-            ])
             ->add('artisan', null, [
                 'choices' => $this->artisans,
             ])
-            ->add('estimation', null, [
-                'choices' => $this->estimation,
-            ])
+
         ;
     }
 

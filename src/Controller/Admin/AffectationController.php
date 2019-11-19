@@ -23,23 +23,23 @@ class AffectationController extends Controller
     public function index(AffectationRepository $affectationRepository): Response
     {
         return $this->render('affectation/index.html.twig', [
-            'affectations' => $affectationRepository->findAll(),
+            'affectations' => $affectationRepository->findByEtat(true),
         ]);
     }
 
     /**
-     * @Route("/new", name="affectation_new", methods={"GET","POST"})
+     * @Route("/affecter/{id}", name="affectation_new", methods={"GET","POST"})
      */
-    public function new(Request $request, \Swift_Mailer $mailer, UserRepository $userRepository): Response
+    public function new(Affectation $id, Request $request, \Swift_Mailer $mailer, UserRepository $userRepository): Response
     {
 
-        $affectation = new Affectation();
+        $affectation = $id;
         $form = $this->createForm(AffectationType::class, $affectation);
         $form->handleRequest($request);
-
+        $affectation->setEtat(false);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($affectation);
+            $entityManager->merge($affectation);
 
             if($affectation->getAnnonce()!=null)
             {

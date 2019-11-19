@@ -40,6 +40,10 @@ class Affectation
      * @ORM\JoinColumn(nullable=true)
      */
     private $estimation;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $etat;
     public function __toString()
     {
         return ''.$this->id;
@@ -48,6 +52,7 @@ class Affectation
     {
         $this->artisan = new ArrayCollection();
         $this->dateEn = new \DateTime();
+        $this->etat = true;
     }
 
     public function getId(): ?int
@@ -66,7 +71,17 @@ class Affectation
 
         return $this;
     }
+    public function getEtat(): ?bool
+    {
+        return $this->etat;
+    }
 
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
 
     public function getDateEn(): ?\DateTimeInterface
     {
