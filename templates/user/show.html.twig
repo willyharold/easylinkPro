@@ -77,6 +77,14 @@
                 <td>{{ user.telephone }}</td>
             </tr>
             <tr>
+                <th>Avatar</th>
+                <td><img src="{{asset('/images/user/')}}{{ user.avatar }}"
+                                        alt="{{ user.avatar }}"
+                                        height="80"
+                                        width="110"
+                    /></td>
+            </tr>
+            <tr>
                 <th>DateEnreg</th>
                 <td>{{ user.dateEnreg ? user.dateEnreg|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

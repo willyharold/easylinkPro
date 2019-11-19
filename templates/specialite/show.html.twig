@@ -32,6 +32,14 @@
                 <th>Code</th>
                 <td>{{ specialite.code }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{asset('/images/specialite/')}}{{ specialite.image }}"
+                                        alt="{{ specialite.image }}"
+                                        height="80"
+                                        width="110"
+                    /></td>
+            </tr>
         </tbody>
     </table>
 </div>

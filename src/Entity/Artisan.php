@@ -4,10 +4,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArtisanRepository")
+ * @Vich\Uploadable
  */
 class Artisan
 {
@@ -67,6 +72,22 @@ class Artisan
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="artisan", cascade={"persist", "remove"})
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+/**
+     * @Assert\File(
+     *     maxSizeMessage = "L'image ne doit pas dépasser 10Mb.",
+     *     maxSize = "10024k",
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/gif", "image/png"},
+     *     mimeTypesMessage = "Les images doivent être au format JPG, GIF ou PNG."
+     * )
+     * @Vich\UploadableField(mapping="artisan_image", fileNameProperty="avatar")
+     */
+    private $avatarImage;
+    
 
     public function __construct()
     {
@@ -177,6 +198,35 @@ class Artisan
         $this->telephone2 = $telephone2;
 
         return $this;
+    }
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(string $avatar=null): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $avatarImage
+     *
+     * @return User
+    */
+    public function setAvatarImage(File $avatarImage = null)
+    {
+        $this->avatarImage = $avatarImage;
+        if ($avatarImage) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->dateEnreg = new \DateTime('now');
+        }
+    }
+
+    public function getAvatarImage()
+    {
+        return $this->avatarImage;
     }
 
     /**

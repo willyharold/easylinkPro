@@ -71,7 +71,11 @@ class ArticleBlogController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             if($articleBlog->getAvatar()==null)
             {
-                $articleBlog->setAvatar($article2->getAvatar());
+                if($article2->getAvatar()==null)
+                {
+                    $articleBlog->setAvatar($article2->getAvatar());
+                }
+                
             }
             $this->getDoctrine()->getManager()->flush();
 

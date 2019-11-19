@@ -17,6 +17,10 @@
                 <td>{{ estimation.id }}</td>
             </tr>
             <tr>
+                <th>Titre</th>
+                <td>{{ estimation.titre }}</td>
+            </tr>
+            <tr>
                 <th>DateEn</th>
                 <td>{{ estimation.dateEn ? estimation.dateEn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
@@ -48,9 +52,14 @@
                 <th>Codepostal</th>
                 <td>{{ estimation.codepostal }}</td>
             </tr>
+            
             <tr>
-                <th>Titre</th>
-                <td>{{ estimation.titre }}</td>
+                <th>Image</th>
+                <td><img src="{{asset('/images/estimation/')}}{{ estimation.image }}"
+                                        alt="{{ estimation.image }}"
+                                        height="80"
+                                        width="110"
+                    /></td>
             </tr>
         </tbody>
     </table>

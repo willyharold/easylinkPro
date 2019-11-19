@@ -28,6 +28,14 @@
                 <th>DesLongue</th>
                 <td>{{ sous_specialite.desLongue }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{asset('/images/sous_specialite/')}}{{ sous_specialite.image }}"
+                                        alt="{{ sous_specialite.image }}"
+                                        height="80"
+                                        width="110"
+                    /></td>
+            </tr>
         </tbody>
     </table>
 </div>

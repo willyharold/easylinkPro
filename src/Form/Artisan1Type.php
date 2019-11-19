@@ -6,6 +6,8 @@ use App\Entity\Artisan;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class Artisan1Type extends AbstractType
 {
@@ -21,6 +23,7 @@ class Artisan1Type extends AbstractType
             ->add('telephone')
             ->add('telephone2')
             ->add('sousSpecialite')
+            ->add('avatarImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image de profil' ])
             ->add('user')
         ;
     }

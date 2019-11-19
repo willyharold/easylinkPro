@@ -25,6 +25,14 @@
                 <td>{{ article_blog.description }}</td>
             </tr>
             <tr>
+                <th>Image</th>
+                <td><img src="{{asset('/images/article/')}}{{ article_blog.avatar }}"
+                                        alt="{{ article_blog.avatar }}"
+                                        height="80"
+                                        width="110"
+                    /></td>
+            </tr>
+            <tr>
                 <th>Etat</th>
                 <td>{{ article_blog.etat ? 'Yes' : 'No' }}</td>
             </tr>

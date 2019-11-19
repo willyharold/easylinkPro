@@ -21,15 +21,12 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Titre</th>
                 <th>DateEn</th>
                 <th>Etat</th>
                 <th>TypeBien</th>
                 <th>DebutTravaux</th>
                 <th>Ville</th>
-                <th>Addresse</th>
-                <th>Description</th>
-                <th>Codepostal</th>
-                <th>Titre</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -37,15 +34,12 @@
         {% for estimation in estimations %}
             <tr>
                 <td>{{ estimation.id }}</td>
+                <td>{{ estimation.titre }}</td>
                 <td>{{ estimation.dateEn ? estimation.dateEn|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ estimation.etat }}</td>
                 <td>{{ estimation.typeBien }}</td>
                 <td>{{ estimation.debutTravaux }}</td>
                 <td>{{ estimation.ville }}</td>
-                <td>{{ estimation.addresse }}</td>
-                <td>{{ estimation.description }}</td>
-                <td>{{ estimation.codepostal }}</td>
-                <td>{{ estimation.titre }}</td>
                 <td>
                     <a href="{{ path('estimation_show', {'id': estimation.id}) }}" class="btn btn-primary" title="Consulter" ><i class="fa fa-eye"></i> </a>
                     <a href="{{ path('estimation_edit', {'id': estimation.id}) }}" class="btn btn-warning" title="Modifier"><i class="fa fa-edit"></i></a>

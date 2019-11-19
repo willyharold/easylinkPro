@@ -40,6 +40,14 @@ vich_uploader:
 
             inject_on_load:     false
             delete_on_update:   true
+            delete_on_remove:   true
+         
+        artisan_image:
+            uri_prefix: /images/artisan
+            upload_destination: '%kernel.project_dir%/public/images/artisan'
+
+            inject_on_load:     false
+            delete_on_update:   true
             delete_on_remove:   true 
             
         

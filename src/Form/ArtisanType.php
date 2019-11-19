@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class ArtisanType extends AbstractType
 {
@@ -32,6 +34,8 @@ class ArtisanType extends AbstractType
             ->add('telephone',TelType::class, ["attr"=>["placeholder"=>"Numero Téléphone"]])
             ->add('telephone2',TelType::class, ["attr"=>["placeholder"=>"Numero Téléphone 2"]])
             ->add('sousSpecialite')
+            ->add('avatarImage', FileType::class, ['required'=> false,'label'=> 'Entrer votre image de profil' ])
+            
         ;
     }
 

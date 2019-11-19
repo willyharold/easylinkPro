@@ -177,7 +177,7 @@ class ArticleBlog
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): self
+    public function setAvatar(string $avatar=null): self
     {
         $this->avatar = $avatar;
 
