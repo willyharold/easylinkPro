@@ -38,7 +38,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/admin/dashboard", name="dashboard")
+     * @Route("/admin", name="admin")
      */
     public function dashboard()
     {
@@ -70,13 +70,6 @@ class DefaultController extends Controller
     public function homepage()
     {
         return $this->render('default/index.html.twig');
-    }
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function admin()
-    {
-        return $this->redirectToRoute("dashboard");
     }
 
     /**
